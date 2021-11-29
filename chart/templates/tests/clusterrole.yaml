@@ -1,0 +1,52 @@
+{{- if .Values.bbtests }}
+{{- if .Values.bbtests.enabled }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  labels:
+    helm-test: enabled
+    {{- include "kyverno.labels" . | nindent 4 }}
+  name: kyverno-test-pod-role
+rules:
+- apiGroups:
+  - ""
+  - "kyverno.io"
+  resources:
+  - pods
+  - pods/log
+  - secrets
+  - namespaces
+  - clusterpolicies
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    helm-test: enabled
+    {{- include "kyverno.labels" . | nindent 4 }}
+  name: test-service-account
+  namespace: {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    helm-test: enabled
+    {{- include "kyverno.labels" . | nindent 4 }}
+  name: kyverno-test-pod-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kyverno-test-pod-role
+subjects:
+- kind: ServiceAccount
+  name: test-service-account
+  namespace: {{ .Release.Namespace }}
+{{- end }}
+{{- end }}
