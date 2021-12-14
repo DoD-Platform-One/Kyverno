@@ -11,5 +11,5 @@ metadata:
   labels:
     {{- include "kyverno.test-labels" . | nindent 4 }}
 spec:
-  serviceAccountName: {{ template "kyverno.fullname" . }}-bbtest-account
+  serviceAccountName: {{ template "kyverno.name" . }}-bbtest-account
 {{- end }}
