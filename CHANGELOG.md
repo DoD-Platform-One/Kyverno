@@ -2,6 +2,13 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.1.3-bb.1] - 2021-12-14
+
+### Changed
+
+- Added namespaces to test resources
+- Updated dashboard to fix JSON syntax
+
 ## [2.1.3-bb.0] - 2021-12-07
 
 ### Added

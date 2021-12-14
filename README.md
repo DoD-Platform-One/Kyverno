@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 2.1.3-bb.0](https://img.shields.io/badge/Version-2.1.3--bb.0-informational?style=flat-square) ![AppVersion: v1.5.1](https://img.shields.io/badge/AppVersion-v1.5.1-informational?style=flat-square)
+![Version: 2.1.3-bb.1](https://img.shields.io/badge/Version-2.1.3--bb.1-informational?style=flat-square) ![AppVersion: v1.5.1](https://img.shields.io/badge/AppVersion-v1.5.1-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -69,13 +69,14 @@ helm install kyverno chart/
 | envVarsInit | object | `{}` |  |
 | envVars | object | `{}` |  |
 | extraArgs | list | `[]` |  |
+| resources.limits.cpu | string | `"100m"` |  |
 | resources.limits.memory | string | `"256Mi"` |  |
 | resources.requests.cpu | string | `"100m"` |  |
-| resources.requests.memory | string | `"50Mi"` |  |
+| resources.requests.memory | string | `"256Mi"` |  |
 | initResources.limits.cpu | string | `"100m"` |  |
 | initResources.limits.memory | string | `"256Mi"` |  |
-| initResources.requests.cpu | string | `"10m"` |  |
-| initResources.requests.memory | string | `"64Mi"` |  |
+| initResources.requests.cpu | string | `"100m"` |  |
+| initResources.requests.memory | string | `"256Mi"` |  |
 | livenessProbe.httpGet.path | string | `"/health/liveness"` |  |
 | livenessProbe.httpGet.port | int | `9443` |  |
 | livenessProbe.httpGet.scheme | string | `"HTTPS"` |  |

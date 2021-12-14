@@ -5,7 +5,7 @@ metadata:
 upstream:
   type: git
   git:
-    commit: 9cd60bf30887aed083248536fc2258059f10196f
+    commit: 155c4bdf389a8c241c1dde29f4e32fe5675a882c
     repo: https://github.com/kyverno/grafana-dashboard
     directory: grafana
-    ref: 1.4.3
+    ref: master
