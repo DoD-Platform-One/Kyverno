@@ -16,14 +16,14 @@ rbac:
 image:
   repository: registry1.dso.mil/ironbank/nirmata/kyverno
   # Defaults to appVersion in Chart.yaml if omitted
-  tag: v1.5.1 
+  tag: v1.5.1
   pullPolicy: IfNotPresent
   pullSecrets: []
   # - secretName
 initImage:
   repository: registry1.dso.mil/ironbank/nirmata/kyvernopre
   # If initImage.tag is missing, defaults to image.tag
-  tag: v1.5.1 
+  tag: v1.5.1
   # If initImage.pullPolicy is missing, defaults to image.pullPolicy
   pullPolicy:
   # No pull secrets just for initImage; just add to image.pullSecrets
@@ -84,11 +84,11 @@ extraArgs: []
 
 resources:
   limits:
-    cpu: 500m
-    memory: 200Mi
+    cpu: 100m
+    memory: 256Mi
   requests:
-    cpu: 500m
-    memory: 200Mi
+    cpu: 100m
+    memory: 256Mi
 
 initResources:
   limits:
@@ -208,6 +208,30 @@ metricsService:
   ##
   annotations: {}
 
+# Service Monitor to collect Prometheus Metrics
+serviceMonitor:
+  enabled: false
+  # Additional labels
+  additionalLabels:
+    # key: value
+  # Override namespace (default is same than kyverno)
+  namespace:
+
+  # Interval to scrape metrics
+  interval: 30s
+  # Timeout if metrics can't be retrieved in given time interval
+  scrapeTimeout: 25s
+  # Is TLS required for endpoint
+  secure: false
+  # TLS Configuration for endpoint
+  tlsConfig: {}
+  ## Added by Big Bang
+  dashboards:
+    # Namespace to put Dashboard (default is same as kyverno)
+    namespace:
+    # Label to apply to dashboard for Grafana to pick it up
+    label: grafana_dashboard
+
 # Kyverno requires a certificate key pair and corresponding certificate authority
 # to properly register its webhooks. This can be done in one of 3 ways:
 # 1) Use kube-controller-manager to generate a CA-signed certificate (preferred)
@@ -220,9 +244,27 @@ metricsService:
 # If letting Kyverno create its own CA or providing your own, make createSelfSignedCert is false
 createSelfSignedCert: false
 
-# Bigbang Additions
-monitoring:
+# Whether to have Helm install the Kyverno CRDs
+# If the CRDs are not installed by Helm, they must be added
+# before policies can be created
+installCRDs: true
+
+# When true, use a NetworkPolicy to allow ingress to the webhook
+# This is useful on clusters using Calico and/or native k8s network
+# policies in a default-deny setup.
+networkPolicy:
   enabled: false
+  namespaceExpressions: [{}]
+  namespaceLabels: {}
+  podExpressions: [{}]
+  podLabels: {}
+
+## Bigbang Additions
+
+## Use serviceMonitor instead
+# monitoring:
+#   enabled: false
+
 networkPolicies:
   enabled: false
   # See `kubectl cluster-info` and then resolve to IP
