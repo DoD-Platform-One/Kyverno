@@ -1,0 +1,15 @@
+{{- include "gluon.tests.script-configmap.overrides" (list . "kyverno-bbtest.script-configmap") -}}
+{{- define "kyverno-bbtest.script-configmap" -}}
+metadata:
+  labels:
+    {{- include "kyverno.test-labels" . | nindent 4 }}
+{{- end }}
+---
+{{- include "gluon.tests.script-runner.overrides" (list . "kyverno-bbtest.script-runner") -}}
+{{- define "kyverno-bbtest.script-runner" -}}
+metadata:
+  labels:
+    {{- include "kyverno.test-labels" . | nindent 4 }}
+spec:
+  serviceAccountName: {{ template "kyverno.fullname" . }}-bbtest-account
+{{- end }}
