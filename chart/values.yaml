@@ -29,9 +29,9 @@ initImage:
   # No pull secrets just for initImage; just add to image.pullSecrets
 testImage:
   # testImage.repository defaults to "busybox" if omitted
-  repository: registry.dso.mil/platform-one/big-bang/apps/sandbox/kyverno/busybox
+  repository: registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal
   # testImage.tag defaults to "latest" if omitted
-  tag: 1.33.1
+  tag: 8.5
   # testImage.pullPolicy defaults to image.pullPolicy if omitted
   pullPolicy:
 
@@ -272,3 +272,15 @@ networkPolicies:
 istio:
   enabled: false
 openshift: false
+
+bbtests:
+  enabled: false
+  scripts:
+    image: registry1.dso.mil/ironbank/opensource/kubernetes-1.21/kubectl:v1.21.5
+    additionalVolumeMounts:
+      - name: "kyverno-bbtest-manifest"
+        mountPath: /yaml
+    additionalVolumes:
+      - name: "kyverno-bbtest-manifest"
+        configMap:
+          name: "kyverno-bbtest-manifest"
