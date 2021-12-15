@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 2.1.3-bb.1](https://img.shields.io/badge/Version-2.1.3--bb.1-informational?style=flat-square) ![AppVersion: v1.5.1](https://img.shields.io/badge/AppVersion-v1.5.1-informational?style=flat-square)
+![Version: 2.1.3-bb.2](https://img.shields.io/badge/Version-2.1.3--bb.2-informational?style=flat-square) ![AppVersion: v1.5.1](https://img.shields.io/badge/AppVersion-v1.5.1-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -52,8 +52,8 @@ helm install kyverno chart/
 | initImage.repository | string | `"registry1.dso.mil/ironbank/nirmata/kyvernopre"` |  |
 | initImage.tag | string | `"v1.5.1"` |  |
 | initImage.pullPolicy | string | `nil` |  |
-| testImage.repository | string | `"registry.dso.mil/platform-one/big-bang/apps/sandbox/kyverno/busybox"` |  |
-| testImage.tag | string | `"1.33.1"` |  |
+| testImage.repository | string | `"registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal"` |  |
+| testImage.tag | float | `8.5` |  |
 | testImage.pullPolicy | string | `nil` |  |
 | replicaCount | int | `1` |  |
 | podLabels | object | `{}` |  |

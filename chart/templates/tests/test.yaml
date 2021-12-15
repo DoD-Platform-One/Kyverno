@@ -9,20 +9,23 @@ metadata:
     "helm.sh/hook": test
 spec:
   restartPolicy: Never
+  {{- with .Values.image.pullSecrets }}
+  imagePullSecrets: {{ tpl (toYaml .) $ | nindent 8 }}
+  {{- end }}
   containers:
-    - name: wget
+    - name: curl
       image: {{ .Values.testImage.repository | default "busybox" }}{{- if .Values.testImage.tag }}:{{ .Values.testImage.tag }}{{- end }}
       imagePullPolicy: {{ default .Values.image.pullPolicy .Values.testImage.pullPolicy }}
       command:
         - /bin/sh
         - -c
         - |
-          sleep 20 ; wget -O- -S --no-check-certificate https://{{ template "kyverno.serviceName" . }}:{{ .Values.service.port }}/health/liveness
-    - name: wget-metrics
+          sleep 20 ; curl -sL -v -k https://{{ template "kyverno.serviceName" . }}:{{ .Values.service.port }}/health/liveness
+    - name: curl-metrics
       image: {{ .Values.testImage.repository | default "busybox" }}{{- if .Values.testImage.tag }}:{{ .Values.testImage.tag }}{{- end }}
       imagePullPolicy: {{ default .Values.image.pullPolicy .Values.testImage.pullPolicy }}
       command:
         - /bin/sh
         - -c
         - |
-          sleep 20 ; wget -O- -S --no-check-certificate http://{{ template "kyverno.serviceName" . }}-metrics:{{ .Values.metricsService.port }}/metrics
+          sleep 20 ; curl -sL -v -k http://{{ template "kyverno.serviceName" . }}-metrics:{{ .Values.metricsService.port }}/metrics

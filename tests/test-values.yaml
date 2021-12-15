@@ -1,18 +1,8 @@
-replicas: 1
 image:
   pullSecrets:
   - name: private-registry
 bbtests:
   enabled: true
-  scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes-1.21/kubectl:v1.21.5
-    additionalVolumeMounts:
-      - name: "kyverno-bbtest-manifest"
-        mountPath: /yaml
-    additionalVolumes:
-      - name: "kyverno-bbtest-manifest"
-        configMap:
-          name: "kyverno-bbtest-manifest"
 networkPolicies:
   enabled: true
   controlPlaneCidr: 172.16.0.0/12

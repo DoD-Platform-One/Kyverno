@@ -2,6 +2,13 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.1.3-bb.2] - 2021-12-14
+
+### Changed
+
+- Adjusted Helm test to use curl so Iron Bank base image could be used
+- Moved Helm test configuration (`bbtest`) to values.yaml
+
 ## [2.1.3-bb.1] - 2021-12-14
 
 ### Changed
