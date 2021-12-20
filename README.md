@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 2.1.3-bb.2](https://img.shields.io/badge/Version-2.1.3--bb.2-informational?style=flat-square) ![AppVersion: v1.5.1](https://img.shields.io/badge/AppVersion-v1.5.1-informational?style=flat-square)
+![Version: 2.1.3-bb.3](https://img.shields.io/badge/Version-2.1.3--bb.3-informational?style=flat-square) ![AppVersion: v1.5.1](https://img.shields.io/badge/AppVersion-v1.5.1-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -70,9 +70,9 @@ helm install kyverno chart/
 | envVars | object | `{}` |  |
 | extraArgs | list | `[]` |  |
 | resources.limits.cpu | string | `"100m"` |  |
-| resources.limits.memory | string | `"256Mi"` |  |
+| resources.limits.memory | string | `"384Mi"` |  |
 | resources.requests.cpu | string | `"100m"` |  |
-| resources.requests.memory | string | `"256Mi"` |  |
+| resources.requests.memory | string | `"384Mi"` |  |
 | initResources.limits.cpu | string | `"100m"` |  |
 | initResources.limits.memory | string | `"256Mi"` |  |
 | initResources.requests.cpu | string | `"100m"` |  |
@@ -148,6 +148,12 @@ helm install kyverno chart/
 | networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
 | istio.enabled | bool | `false` |  |
 | openshift | bool | `false` |  |
+| bbtests.enabled | bool | `false` |  |
+| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes-1.21/kubectl:v1.21.5"` |  |
+| bbtests.scripts.additionalVolumeMounts[0].name | string | `"kyverno-bbtest-manifest"` |  |
+| bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/yaml"` |  |
+| bbtests.scripts.additionalVolumes[0].name | string | `"kyverno-bbtest-manifest"` |  |
+| bbtests.scripts.additionalVolumes[0].configMap.name | string | `"kyverno-bbtest-manifest"` |  |
 
 ## Contributing
 
