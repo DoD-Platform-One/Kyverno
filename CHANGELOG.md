@@ -2,6 +2,12 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.1.3-bb.3] - 2021-12-15
+
+### Changed
+
+- Updated Memory and CPU resources for kyverno in values.yaml
+
 ## [2.1.3-bb.2] - 2021-12-14
 
 ### Changed
