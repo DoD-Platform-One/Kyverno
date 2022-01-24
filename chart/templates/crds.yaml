@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/managed-by: Kustomize
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: latest
+    app.kubernetes.io/version: v1.5.5
   name: clusterpolicies.kyverno.io
 spec:
   group: kyverno.io
@@ -1313,7 +1313,7 @@ metadata:
     app.kubernetes.io/managed-by: Kustomize
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: latest
+    app.kubernetes.io/version: v1.5.5
   name: clusterpolicyreports.wgpolicyk8s.io
 spec:
   group: wgpolicyk8s.io
@@ -1397,7 +1397,7 @@ spec:
                             description: key is the label key that the selector applies to.
                             type: string
                           operator:
-                            description: operator represents a key's relationship to a set of values. Valid operators are In, AnyIn, AllIn, NotIn, AnyNotIn, AllNotIn Exists and DoesNotExist.
+                            description: operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
                             type: string
                           values:
                             description: values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
@@ -1506,7 +1506,7 @@ spec:
                       description: key is the label key that the selector applies to.
                       type: string
                     operator:
-                      description: operator represents a key's relationship to a set of values. Valid operators are In, AnyIn, AllIn, NotIn, AnyNotIn, AllNotIn Exists and DoesNotExist.
+                      description: operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
                       type: string
                     values:
                       description: values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
@@ -1618,7 +1618,7 @@ spec:
                             description: key is the label key that the selector applies to.
                             type: string
                           operator:
-                            description: operator represents a key's relationship to a set of values. Valid operators are In, AnyIn, AllIn, NotIn, AnyNotIn, AllNotIn Exists and DoesNotExist.
+                            description: operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
                             type: string
                           values:
                             description: values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
@@ -1745,7 +1745,7 @@ spec:
                       description: key is the label key that the selector applies to.
                       type: string
                     operator:
-                      description: operator represents a key's relationship to a set of values. Valid operators are In, AnyIn, AllIn, NotIn, AnyNotIn, AllNotIn Exists and DoesNotExist.
+                      description: operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
                       type: string
                     values:
                       description: values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
@@ -1806,7 +1806,7 @@ metadata:
     app.kubernetes.io/managed-by: Kustomize
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: latest
+    app.kubernetes.io/version: v1.5.5
   name: clusterreportchangerequests.kyverno.io
 spec:
   group: kyverno.io
@@ -2299,7 +2299,7 @@ metadata:
     app.kubernetes.io/managed-by: Kustomize
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: latest
+    app.kubernetes.io/version: v1.5.5
   name: generaterequests.kyverno.io
 spec:
   group: kyverno.io
@@ -2480,7 +2480,7 @@ metadata:
     app.kubernetes.io/managed-by: Kustomize
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: latest
+    app.kubernetes.io/version: v1.5.5
   name: policies.kyverno.io
 spec:
   group: kyverno.io
@@ -3781,7 +3781,7 @@ metadata:
     app.kubernetes.io/managed-by: Kustomize
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: latest
+    app.kubernetes.io/version: v1.5.5
   name: policyreports.wgpolicyk8s.io
 spec:
   group: wgpolicyk8s.io
@@ -3865,7 +3865,7 @@ spec:
                             description: key is the label key that the selector applies to.
                             type: string
                           operator:
-                            description: operator represents a key's relationship to a set of values. Valid operators are In, AnyIn, AllIn, NotIn, AnyNotIn, AllNotIn Exists and DoesNotExist.
+                            description: operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
                             type: string
                           values:
                             description: values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
@@ -3974,7 +3974,7 @@ spec:
                       description: key is the label key that the selector applies to.
                       type: string
                     operator:
-                      description: operator represents a key's relationship to a set of values. Valid operators are In, AnyIn, AllIn, NotIn, AnyNotIn, AllNotIn Exists and DoesNotExist.
+                      description: operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
                       type: string
                     values:
                       description: values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
@@ -4086,7 +4086,7 @@ spec:
                             description: key is the label key that the selector applies to.
                             type: string
                           operator:
-                            description: operator represents a key's relationship to a set of values. Valid operators are In, AnyIn, AllIn, NotIn, AnyNotIn, AllNotIn Exists and DoesNotExist.
+                            description: operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
                             type: string
                           values:
                             description: values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
@@ -4213,7 +4213,7 @@ spec:
                       description: key is the label key that the selector applies to.
                       type: string
                     operator:
-                      description: operator represents a key's relationship to a set of values. Valid operators are In, AnyIn, AllIn, NotIn, AnyNotIn, AllNotIn Exists and DoesNotExist.
+                      description: operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
                       type: string
                     values:
                       description: values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
@@ -4274,7 +4274,7 @@ metadata:
     app.kubernetes.io/managed-by: Kustomize
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: latest
+    app.kubernetes.io/version: v1.5.5
   name: reportchangerequests.kyverno.io
 spec:
   group: kyverno.io

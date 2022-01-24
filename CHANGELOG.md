@@ -2,6 +2,13 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.1.7-bb.0] - 2021-01-21
+
+### Changed
+
+- Bumped chart to Kyverno version 1.5.5
+- Increased CPU to 0.5 default for main pod to handle larger number of policies
+
 ## [2.1.3-bb.3] - 2021-12-15
 
 ### Changed
