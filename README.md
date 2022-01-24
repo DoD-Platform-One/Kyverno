@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 2.1.3-bb.3](https://img.shields.io/badge/Version-2.1.3--bb.3-informational?style=flat-square) ![AppVersion: v1.5.1](https://img.shields.io/badge/AppVersion-v1.5.1-informational?style=flat-square)
+![Version: 2.1.7-bb.0](https://img.shields.io/badge/Version-2.1.7--bb.0-informational?style=flat-square) ![AppVersion: v1.5.5](https://img.shields.io/badge/AppVersion-v1.5.5-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -46,11 +46,11 @@ helm install kyverno chart/
 | rbac.serviceAccount.name | string | `nil` |  |
 | rbac.serviceAccount.annotations | object | `{}` |  |
 | image.repository | string | `"registry1.dso.mil/ironbank/nirmata/kyverno"` |  |
-| image.tag | string | `"v1.5.1"` |  |
+| image.tag | string | `"v1.5.5"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
 | initImage.repository | string | `"registry1.dso.mil/ironbank/nirmata/kyvernopre"` |  |
-| initImage.tag | string | `"v1.5.1"` |  |
+| initImage.tag | string | `"v1.5.5"` |  |
 | initImage.pullPolicy | string | `nil` |  |
 | testImage.repository | string | `"registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal"` |  |
 | testImage.tag | float | `8.5` |  |
@@ -69,9 +69,9 @@ helm install kyverno chart/
 | envVarsInit | object | `{}` |  |
 | envVars | object | `{}` |  |
 | extraArgs | list | `[]` |  |
-| resources.limits.cpu | string | `"100m"` |  |
+| resources.limits.cpu | string | `"500m"` |  |
 | resources.limits.memory | string | `"384Mi"` |  |
-| resources.requests.cpu | string | `"100m"` |  |
+| resources.requests.cpu | string | `"500m"` |  |
 | resources.requests.memory | string | `"384Mi"` |  |
 | initResources.limits.cpu | string | `"100m"` |  |
 | initResources.limits.memory | string | `"256Mi"` |  |
@@ -140,9 +140,9 @@ helm install kyverno chart/
 | createSelfSignedCert | bool | `false` |  |
 | installCRDs | bool | `true` |  |
 | networkPolicy.enabled | bool | `false` |  |
-| networkPolicy.namespaceExpressions[0] | object | `{}` |  |
+| networkPolicy.namespaceExpressions | list | `[]` |  |
 | networkPolicy.namespaceLabels | object | `{}` |  |
-| networkPolicy.podExpressions[0] | object | `{}` |  |
+| networkPolicy.podExpressions | list | `[]` |  |
 | networkPolicy.podLabels | object | `{}` |  |
 | networkPolicies.enabled | bool | `false` |  |
 | networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
