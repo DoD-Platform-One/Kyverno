@@ -2,6 +2,14 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.1.7-bb.1] - 2021-01-27
+
+### Changed
+
+- Bumped chart to Kyverno version 1.5.7
+- Fix deployment for Helm release name overrides causing kyverno-pre to fail
+- Updated test library (gluon) to 0.2.5
+
 ## [2.1.7-bb.0] - 2021-01-21
 
 ### Changed
