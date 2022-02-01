@@ -1,0 +1,43 @@
+{
+    "baseBranches": ["main"],
+    "configWarningReuseIssue": false,
+    "dependencyDashboard": true,
+    "dependencyDashboardHeader": "- [ ] Sync upstream helm chart version with updated dependencies.",
+    "dependencyDashboardTitle": "Renovate: Upgrade Kyverno Package Dependencies",
+    "draftPR": true,
+    "enabledManagers": ["helm-values","regex"],
+    "ignorePaths": ["chart/charts/**"],
+    "labels": ["kyverno","renovate"],
+    "packageRules": [
+        {
+            "matchDatasources": ["docker"],
+            "groupName": "Ironbank"
+        }
+    ],
+    "regexManagers": [
+        {
+            "fileMatch": ["^chart/values\\.yaml$"],
+            "matchStrings": [
+                "repository\\S*:\\s*(?<depName>\\S+).*\n\\s+tag:\\s*(?<currentValue>.+)"
+            ],
+            "datasourceTemplate": "docker"
+        },
+        {
+            "fileMatch": ["^chart/values\\.yaml$"],
+            "matchStrings": [
+                "image\\S*:\\s*(?<depName>\\S+):\\s*(?<currentValue>.+)"
+            ],
+            "datasourceTemplate": "docker"
+        },
+        {
+            "fileMatch": ["^chart/Chart\\.yaml$"],
+            "matchStrings": [
+                "- Kyverno:\\s*(?<currentValue>.+)"
+            ],
+            "depNameTemplate": "ironbank/nirmata/kyverno",
+            "datasourceTemplate": "docker",
+            "registryUrlTemplate": "https://registry1.dso.mil"
+        }
+    ],
+    "separateMajorMinor": false
+}
