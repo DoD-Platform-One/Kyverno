@@ -2,6 +2,11 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.1.7-bb.2] - 2021-01-27
+
+### Changed
+- Update Chart.yaml to follow new standardization for release automation
+
 ## [2.1.7-bb.1] - 2021-01-27
 
 ### Changed
