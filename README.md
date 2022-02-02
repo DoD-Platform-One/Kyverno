@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 2.1.7-bb.2](https://img.shields.io/badge/Version-2.1.7--bb.2-informational?style=flat-square) ![AppVersion: v1.5.7](https://img.shields.io/badge/AppVersion-v1.5.7-informational?style=flat-square)
+![Version: 2.1.10-bb.0](https://img.shields.io/badge/Version-2.1.10--bb.0-informational?style=flat-square) ![AppVersion: v1.5.8](https://img.shields.io/badge/AppVersion-v1.5.8-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -46,11 +46,11 @@ helm install kyverno chart/
 | rbac.serviceAccount.name | string | `nil` |  |
 | rbac.serviceAccount.annotations | object | `{}` |  |
 | image.repository | string | `"registry1.dso.mil/ironbank/nirmata/kyverno"` |  |
-| image.tag | string | `"v1.5.7"` |  |
+| image.tag | string | `"v1.5.8"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
 | initImage.repository | string | `"registry1.dso.mil/ironbank/nirmata/kyvernopre"` |  |
-| initImage.tag | string | `"v1.5.7"` |  |
+| initImage.tag | string | `"v1.5.8"` |  |
 | initImage.pullPolicy | string | `nil` |  |
 | testImage.repository | string | `"registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal"` |  |
 | testImage.tag | float | `8.5` |  |
