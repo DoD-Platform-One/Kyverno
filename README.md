@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 2.1.10-bb.0](https://img.shields.io/badge/Version-2.1.10--bb.0-informational?style=flat-square) ![AppVersion: v1.5.8](https://img.shields.io/badge/AppVersion-v1.5.8-informational?style=flat-square)
+![Version: 2.2.0-bb.0](https://img.shields.io/badge/Version-2.2.0--bb.0-informational?style=flat-square) ![AppVersion: v1.6.0](https://img.shields.io/badge/AppVersion-v1.6.0-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -19,7 +19,7 @@ Kubernetes Native Policy Management
 * Kubernetes config installed in `~/.kube/config`
 * Helm installed
 
-Kubernetes: `>=1.10.0-0`
+Kubernetes: `>=1.16.0-0`
 
 Install Helm
 
@@ -46,11 +46,11 @@ helm install kyverno chart/
 | rbac.serviceAccount.name | string | `nil` |  |
 | rbac.serviceAccount.annotations | object | `{}` |  |
 | image.repository | string | `"registry1.dso.mil/ironbank/nirmata/kyverno"` |  |
-| image.tag | string | `"v1.5.8"` |  |
+| image.tag | string | `"v1.6.0"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
 | initImage.repository | string | `"registry1.dso.mil/ironbank/nirmata/kyvernopre"` |  |
-| initImage.tag | string | `"v1.5.8"` |  |
+| initImage.tag | string | `"v1.6.0"` |  |
 | initImage.pullPolicy | string | `nil` |  |
 | testImage.repository | string | `"registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal"` |  |
 | testImage.tag | float | `8.5` |  |
@@ -59,9 +59,16 @@ helm install kyverno chart/
 | podLabels | object | `{}` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
+| priorityClassName | string | `""` |  |
 | antiAffinity.enable | bool | `true` |  |
-| antiAffinity.topologyKey | string | `"kubernetes.io/hostname"` |  |
-| podDisruptionBudget.enabled | bool | `false` |  |
+| podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].weight | int | `1` |  |
+| podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].key | string | `"app.kubernetes.io/name"` |  |
+| podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].operator | string | `"In"` |  |
+| podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].values[0] | string | `"kyverno"` |  |
+| podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.topologyKey | string | `"kubernetes.io/hostname"` |  |
+| podAffinity | object | `{}` |  |
+| nodeAffinity | object | `{}` |  |
+| podDisruptionBudget.minAvailable | int | `1` |  |
 | nodeSelector | object | `{}` |  |
 | tolerations | list | `[]` |  |
 | hostNetwork | bool | `false` |  |
@@ -149,7 +156,7 @@ helm install kyverno chart/
 | istio.enabled | bool | `false` |  |
 | openshift | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |
-| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes-1.21/kubectl:v1.21.5"` |  |
+| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].name | string | `"kyverno-bbtest-manifest"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/yaml"` |  |
 | bbtests.scripts.additionalVolumes[0].name | string | `"kyverno-bbtest-manifest"` |  |
