@@ -2,6 +2,12 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.2.0-bb.0] - 2021-02-09
+
+### Changed
+
+- Bumped chart to v2.2.0, which contains Kyverno version 1.6.0
+
 ## [2.1.10-bb.0] - 2021-01-28
 
 ### Changed
