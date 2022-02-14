@@ -291,7 +291,7 @@ openshift: false
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.22.2
     additionalVolumeMounts:
       - name: "kyverno-bbtest-manifest"
         mountPath: /yaml
