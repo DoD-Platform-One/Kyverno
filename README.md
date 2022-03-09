@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 2.2.0-bb.2](https://img.shields.io/badge/Version-2.2.0--bb.2-informational?style=flat-square) ![AppVersion: v1.6.0](https://img.shields.io/badge/AppVersion-v1.6.0-informational?style=flat-square)
+![Version: 2.2.0-bb.3](https://img.shields.io/badge/Version-2.2.0--bb.3-informational?style=flat-square) ![AppVersion: v1.6.0](https://img.shields.io/badge/AppVersion-v1.6.0-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -75,7 +75,8 @@ helm install kyverno chart/
 | dnsPolicy | string | `"ClusterFirst"` |  |
 | envVarsInit | object | `{}` |  |
 | envVars | object | `{}` |  |
-| extraArgs | list | `[]` |  |
+| extraArgs[0] | string | `"--clientRateLimitQPS=25"` |  |
+| extraArgs[1] | string | `"--clientRateLimitBurst=50"` |  |
 | resources.limits.cpu | string | `"500m"` |  |
 | resources.limits.memory | string | `"384Mi"` |  |
 | resources.requests.cpu | string | `"500m"` |  |
