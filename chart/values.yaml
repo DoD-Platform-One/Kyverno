@@ -94,7 +94,9 @@ envVarsInit: {}
 # env variables for containers
 envVars: {}
 
-extraArgs: []
+extraArgs:
+- --clientRateLimitQPS=25
+- --clientRateLimitBurst=50
 # - --webhookTimeout=4
 
 resources:

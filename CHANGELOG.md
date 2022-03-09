@@ -2,6 +2,12 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.2.0-bb.3] - 2021-03-08
+
+### Changed
+
+- Increase default QPS and burst rates to eliminate client throttling
+
 ## [2.2.0-bb.2] - 2021-02-17
 
 ### Changed
