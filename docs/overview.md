@@ -32,7 +32,7 @@ helm repo update
 # Install the Kyverno Helm chart into a new namespace called "kyverno"
 helm -n kyverno --create-namespace install kyverno kyverno/kyverno  
 
-# Verify that Kyveno pods are running
+# Verify that Kyverno pods are running
 kubectl -n kyverno get pods
 ```
 
