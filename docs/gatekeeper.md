@@ -1,4 +1,4 @@
-# Migration from Gatekeeper to Kyveno
+# Migration from Gatekeeper to Kyverno
 
 Refer to the following document for the policies implemented in Big Bang under Gatekeeper and the corresponding policy in Kyverno:
 
@@ -21,7 +21,7 @@ kyvernopolicies:
   enabled: true
 ```
 
-## Verify that Kyveno pods are running
+## Verify that Kyverno pods are running
 
 kubectl -n kyverno get pods
 
@@ -43,4 +43,4 @@ clusterAuditor:
   enabled: false
 ```
 
-Note that when gatekeeper is disabled using the helm upgrade process, the Gaekeeper webhook (gatekeeper-validating-webhook-configuration), Gatekeeper CRDs, Gatekeeper Contraint CRDs along with any contraint resources are also removed automatically.
+Note that when gatekeeper is disabled using the helm upgrade process, the Gatekeeper webhook (gatekeeper-validating-webhook-configuration), Gatekeeper CRDs, Gatekeeper Constraint CRDs along with any constraint resources are also removed automatically.
