@@ -2,6 +2,12 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.2.0-bb.5] - 2022-04-11
+
+### Added
+
+- OSCAL documentation with initial 800-53b controls satisfied
+
 ## [2.2.0-bb.4] - 2022-03-22
 
 ### Changed
