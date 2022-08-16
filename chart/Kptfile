@@ -5,7 +5,7 @@ metadata:
 upstream:
   type: git
   git:
-    commit: 5b4d4c266353981a559fe210b4e85100fa3bf397
+    commit: 420ac57541a3767f052d57044f636b17d9e0c346
     repo: https://github.com/kyverno/kyverno
     directory: charts/kyverno
-    ref: helm-chart-v2.2.0
+    ref: v1.7.2
