@@ -1,11 +1,11 @@
 apiVersion: kpt.dev/v1alpha1
 kind: Kptfile
 metadata:
-  name: chart
+  name: dashboards
 upstream:
   type: git
   git:
-    commit: 155c4bdf389a8c241c1dde29f4e32fe5675a882c
+    commit: 5a9c7af84a92f4d4e310be89b15af5bc8af98848
     repo: https://github.com/kyverno/grafana-dashboard
     directory: grafana
     ref: master

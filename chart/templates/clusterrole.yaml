@@ -33,6 +33,8 @@ rules:
     - clusterpolicies/status
     - generaterequests
     - generaterequests/status
+    - updaterequests
+    - updaterequests/status
     - reportchangerequests
     - reportchangerequests/status
     - clusterreportchangerequests
@@ -104,6 +106,8 @@ rules:
       - namespaces
       - configmaps
       - secrets
+      - resourcequotas
+      - limitranges
     verbs:
       - create
       - update
@@ -119,28 +123,18 @@ rules:
       - update
       - patch
       - delete
+  {{- if .Values.generatecontrollerExtraResources }}
   - apiGroups:
-      - "quota"
+      - "*"
     resources:
-      - resourcequotas
-      - limitranges
+    {{- range .Values.generatecontrollerExtraResources }}
+      - {{ . }}
+    {{- end }}
     verbs:
       - create
       - update
-      - patch
       - delete
-{{- if .Values.generatecontrollerExtraResources }}
-- apiGroups:
-    - "*"
-  resources:
-  {{- range .Values.generatecontrollerExtraResources }}
-  - {{ . }}
   {{- end }}
-  verbs:
-    - create
-    - update
-    - delete
-{{- end }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
