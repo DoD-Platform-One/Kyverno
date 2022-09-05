@@ -8,6 +8,7 @@
     "enabledManagers": ["helm-values","regex"],
     "ignorePaths": ["chart/charts/**"],
     "labels": ["kyverno","renovate"],
+    "commitMessagePrefix": "SKIP UPDATE CHECK",
     "packageRules": [
         {
             "matchDatasources": ["docker"],
