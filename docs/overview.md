@@ -30,7 +30,7 @@ helm repo add kyverno https://kyverno.github.io/kyverno/
 helm repo update
 
 # Install the Kyverno Helm chart into a new namespace called "kyverno"
-helm -n kyverno --create-namespace install kyverno kyverno/kyverno  
+helm -n kyverno --create-namespace install kyverno kyverno/kyverno
 
 # Verify that Kyverno pods are running
 kubectl -n kyverno get pods
@@ -38,7 +38,7 @@ kubectl -n kyverno get pods
 
 Create a Policy Resource as shown below. The validation rule is implemented using a regex expression match against te tier label in metadata section of Pod spec. Validation fails if the label is missing.
 
-When this is applied in the kubernetes cluster, the Kyverno custom controller that is watching ClusterPolicy objects updates its configuration to check for the label tier during the creation request for a new Pod. If the label is missing, request is denied by the admission control. 
+When this is applied in the kubernetes cluster, the Kyverno custom controller that is watching ClusterPolicy objects updates its configuration to check for the label tier during the creation request for a new Pod. If the label is missing, request is denied by the admission control.
 
 ```
 apiVersion: kyverno.io/v1
@@ -63,7 +63,7 @@ spec:
 
 Verify the require-tier-label ClusterPolicy resource as follows:
 
-kubectl desrcibe cpol require-tier-label
+kubectl describe cpol require-tier-label
 
 ```
   rules:
@@ -96,16 +96,18 @@ kubectl desrcibe cpol require-tier-label
 
 ```
 
-Note that Kyverno has automatically included DaemonSet, Deployment, StatefulSet and Job in addition to Pod to apply the policy, as these resources also create a Pod. 
+Note that Kyverno has automatically included DaemonSet, Deployment, StatefulSet and Job in addition to Pod to apply the policy, as these resources also create a Pod.
 
 Try to create a Pod as follows:
 
+```
 kubectl run nginx --image=nginx:latest
+```
 
 The request is denied with the following message as expected because the label tier is missing.
 
 ```
-Error from server: admission webhook "validate.kyverno.svc-fail" denied the request: 
+Error from server: admission webhook "validate.kyverno.svc-fail" denied the request:
 
 resource Pod/default/nginx was blocked due to the following policies
 
@@ -116,7 +118,9 @@ require-tier-label:
 
 Now try to create the Pod as follows and the request is successful:
 
+```
 kubectl run nginx --image=nginx:latest --labels tier=web
+```
 
 ## Notes for Uninstall
 
