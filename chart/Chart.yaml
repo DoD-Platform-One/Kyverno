@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: kyverno
-version: 2.5.3-bb.0
+version: 2.5.3-bb.1
 appVersion: v1.7.3
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
@@ -20,7 +20,7 @@ maintainers:
 kubeVersion: ">=1.16.0-0"
 dependencies:
   - name: gluon
-    version: 0.2.10
+    version: 0.3.1
     repository: oci://registry.dso.mil/platform-one/big-bang/apps/library-charts/gluon
 annotations:
   bigbang.dev/applicationVersions: |

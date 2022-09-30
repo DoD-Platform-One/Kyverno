@@ -2,6 +2,13 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.5.3-bb.1] - 2022-09-28
+
+### Changed
+
+- Updated kubectl to v1.25.2
+- Update gluon to 0.3.1
+
 ## [2.5.3-bb.0] - 2022-08-30
 
 ### Changed
