@@ -73,7 +73,7 @@ helm install kyverno chart/
 | dnsPolicy | string | `"ClusterFirst"` | `dnsPolicy` determines the manner in which DNS resolution happens in the cluster. In case of `hostNetwork: true`, usually, the `dnsPolicy` is suitable to be `ClusterFirstWithHostNet`. For further reference: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy. |
 | envVarsInit | object | `{}` | Env variables for initContainers. |
 | envVars | object | `{}` | Env variables for containers. |
-| extraArgs | list | `["--clientRateLimitQPS=25","--clientRateLimitBurst=50","--autogenInternals=false"]` | Extra arguments to give to the binary. |
+| extraArgs | list | `["--clientRateLimitQPS=25","--clientRateLimitBurst=50","--autogenInternals=false","--imagePullSecrets=private-registry"]` | Extra arguments to give to the binary. |
 | imagePullSecrets | object | `{}` | Image pull secrets for image verify and imageData policies. This will define the `--imagePullSecrets` Kyverno argument. |
 | resources.limits | object | `{"cpu":"500m","memory":"512Mi"}` | Pod resource limits |
 | resources.requests | object | `{"cpu":"500m","memory":"512Mi"}` | Pod resource requests |

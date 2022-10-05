@@ -2,6 +2,12 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.5.3-bb.2] - 2022-10-5-28
+
+### Added
+
+- Added pull policy arg to kyverno deployment for kyverno policy
+
 ## [2.5.3-bb.1] - 2022-09-28
 
 ### Changed
