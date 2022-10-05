@@ -147,7 +147,7 @@ extraArgs:
   - --clientRateLimitQPS=25
   - --clientRateLimitBurst=50
   - --autogenInternals=false
-
+  - --imagePullSecrets=private-registry
 # -- Image pull secrets for image verify and imageData policies.
 # This will define the `--imagePullSecrets` Kyverno argument.
 imagePullSecrets:
