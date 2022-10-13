@@ -1,6 +1,19 @@
 # kyverno
 
-![Version: 2.5.3-bb.0](https://img.shields.io/badge/Version-2.5.3--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.7.3](https://img.shields.io/badge/AppVersion-v1.7.3-informational?style=flat-square)
+Kubernetes Native Policy Management
+
+![Version: v2.5.4](https://img.shields.io/badge/Version-v2.5.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.7.4](https://img.shields.io/badge/AppVersion-v1.7.4-informational?style=flat-square)
+
+## About
+
+[Kyverno](https://kyverno.io) is a Kubernetes Native Policy Management engine.
+
+It allows you to:
+- Manage policies as Kubernetes resources (no new language required.)
+- Validate, mutate, and generate resource configurations.
+- Select resources based on labels and wildcards.
+- View policy enforcement as events.
+- Scan existing resources for violations.
 
 Kubernetes Native Policy Management
 
