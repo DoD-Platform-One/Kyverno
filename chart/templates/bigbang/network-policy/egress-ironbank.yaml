@@ -11,9 +11,8 @@ spec:
   egress:
     - to:
       - ipBlock:
-          cidr:
           #Allow egress to ironbank
-          - 15.205.173.153/32
+          cidr: 15.205.173.153/32
   policyTypes:
     - Egress
 {{- end }}
