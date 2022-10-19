@@ -6,7 +6,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### Added
 
-- Added pull policy arg to kyverno deployment for kyverno policy
+- Added pull policy arg to kyverno deployment and network policy for iornbank
 
 ## [2.5.3-bb.1] - 2022-09-28
 
