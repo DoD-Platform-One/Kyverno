@@ -12,7 +12,7 @@ spec:
     - to:
       - ipBlock:
           #Allow egress to registry
-          cidr: {{ .Values.registries.imagePullSecret.cidr }}
+          cidr: {{ .Values.registries.cidr }}
   policyTypes:
     - Egress
 {{- end }}
