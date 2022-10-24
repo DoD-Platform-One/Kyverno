@@ -95,7 +95,7 @@ spec:
             {{- if .Values.extraArgs -}}
               {{ tpl (toYaml .Values.extraArgs) . | nindent 12 }}
             {{- end }}
-            {{- if .Values.imagePullSecrets }}
+            {{- if .Values.registries.imagePullSecret }}
             - --imagePullSecrets= {{ Values.registries.imagePullSecret }}
             {{- end }}
           {{- end }}
