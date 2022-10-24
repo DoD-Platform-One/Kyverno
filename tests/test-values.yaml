@@ -1,8 +1,11 @@
 image:
   pullSecrets:
-  - name: private-registry
+    - name: private-registry
 bbtests:
   enabled: true
 networkPolicies:
   enabled: true
   controlPlaneCidr: 172.16.0.0/12
+registries:
+  - imagePullSecret: private-registry
+    cidr: 15.205.173.153/32
