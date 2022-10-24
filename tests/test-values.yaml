@@ -7,5 +7,4 @@ networkPolicies:
   enabled: true
   controlPlaneCidr: 172.16.0.0/12
 registries:
-  - imagePullSecret: private-registry
-    cidr: 15.205.173.153/32
+  cidr: 15.205.173.153/32
