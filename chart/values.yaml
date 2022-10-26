@@ -391,7 +391,7 @@ webhooksCleanup:
 
 # -- A writable volume to use for the TUF root initialization
 tufRootMountPath: /.sigstore
-# -- Ability to configure the
+# -- Ability to configure the private registry
 registries:
   cidr: 0.0.0.0/0
   #- imagePullSecret: my-registry
