@@ -2,6 +2,13 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.6.0-bb.0] - 2022-10-19
+
+### Changed
+
+- Updated Helm chart to v2.6.0
+- Updated Kyverno to v1.8.0
+
 ## [2.5.4-bb.0] - 2022-10-06
 
 ### Changed
