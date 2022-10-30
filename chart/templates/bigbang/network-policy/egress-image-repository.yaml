@@ -10,9 +10,11 @@ spec:
   podSelector: {}
   egress:
     - to:
-      - ipBlock:
-          #Allow egress to registry
-          cidr: {{ .Values.registries.cidr }}
+      - ports: {{ - range .Values.registries.ports | default 443 }}
+          # ONLY Block requests to cloud metadata IP
+          except:
+          - 169.254.169.254/32
+          {{- end }}
   policyTypes:
     - Egress
 {{- end }}
