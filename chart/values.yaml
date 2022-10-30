@@ -147,7 +147,21 @@ extraArgs:
   - --clientRateLimitQPS=25
   - --clientRateLimitBurst=50
   - --autogenInternals=false
-  - --imagePullSecrets=private-registry
+
+# -- Array of extra init containers
+extraInitContainers: []
+# Example:
+# - name: init-container
+#   image: busybox
+#   command: ['sh', '-c', 'echo Hello']
+
+# -- Array of extra containers to run alongside kyverno
+extraContainers: []
+# Example:
+# - name: myapp-container
+#   image: busybox
+#   command: ['sh', '-c', 'echo Hello && sleep 3600']
+
 # -- Image pull secrets for image verify and imageData policies.
 # This will define the `--imagePullSecrets` Kyverno argument.
 imagePullSecrets:
@@ -213,15 +227,18 @@ readinessProbe:
   failureThreshold: 6
   successThreshold: 1
 
-# TODO(mbarrien): Should we just list all resources for the
-# generatecontroller in here rather than having defaults hard-coded?
-generatecontrollerExtraResources:
+# -- Additional resources to be added to controller RBAC permissions.
+generatecontrollerExtraResources: []
 # - ResourceA
 # - ResourceB
 
 # -- Exclude Kyverno namespace
 # Determines if default Kyverno namespace exclusion is enabled for webhooks and resourceFilters
 excludeKyvernoNamespace: true
+
+# -- resourceFilter namespace exclude
+# Namespaces to exclude from the default resourceFilters
+resourceFiltersExcludeNamespaces: []
 
 config:
   # -- Resource types to be skipped by the Kyverno policy engine.
@@ -240,8 +257,10 @@ config:
     - "[SelfSubjectAccessReview,*,*]"
     - "[Binding,*,*]"
     - "[ReplicaSet,*,*]"
-    - "[ReportChangeRequest,*,*]"
-    - "[ClusterReportChangeRequest,*,*]"
+    - "[AdmissionReport,*,*]"
+    - "[ClusterAdmissionReport,*,*]"
+    - "[BackgroundScanReport,*,*]"
+    - "[ClusterBackgroundScanReport,*,*]"
     # exclude resources from the chart
     - '[ClusterRole,*,{{ template "kyverno.fullname" . }}:*]'
     - '[ClusterRoleBinding,*,{{ template "kyverno.fullname" . }}:*]'
@@ -366,7 +385,7 @@ serviceMonitor:
 # 2) Provide your own CA and cert.
 #    In this case, you will need to create a certificate with a specific name and data structure.
 #    As long as you follow the naming scheme, it will be automatically picked up.
-#    kyverno-svc.(namespace).svc.kyverno-tls-ca (with data entry named rootCA.crt)
+#    kyverno-svc.(namespace).svc.kyverno-tls-ca (with data entries named tls.key and tls.crt)
 #    kyverno-svc.kyverno.svc.kyverno-tls-pair (with data entries named tls.key and tls.crt)
 # 3) Let Helm generate a self signed cert, by setting createSelfSignedCert true
 # If letting Kyverno create its own CA or providing your own, make createSelfSignedCert is false

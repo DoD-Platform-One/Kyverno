@@ -2,11 +2,25 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [2.5.3-bb.2] - 2022-10-5-28
+## [2.6.0-bb.1] - 2022-10-5-28
 
 ### Added
 
-- Added pull policy arg to kyverno deployment and network policy for iornbank
+- Added pull policy arg to kyverno deployment and network policy for container registries
+
+## [2.6.0-bb.0] - 2022-10-19
+
+### Changed
+
+- Updated Helm chart to v2.6.0
+- Updated Kyverno to v1.8.0
+
+## [2.5.4-bb.0] - 2022-10-06
+
+### Changed
+
+- Updated Helm chart to v2.5.4
+- Updated Kyverno to v1.7.4
 
 ## [2.5.3-bb.1] - 2022-09-28
 
