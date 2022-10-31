@@ -10,7 +10,7 @@ spec:
   podSelector: {}
   egress:
     - to:
-      - ports: {{ - range .Values.registries.ports | default 443 }}
+      - ports: {{- range .Values.registries.ports | default 443 }}
           # ONLY Block requests to cloud metadata IP
           except:
           - 169.254.169.254/32
