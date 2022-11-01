@@ -106,7 +106,7 @@ spec:
               {{ tpl (toYaml .Values.extraArgs) . | nindent 12 }}
             {{- end }}
            {{- if  .Values.image.pullSecrets }}
-            - --imagePullSecrets={{ join "," .Values.imagePullSecrets  .Values.image.pullSecrets | quote }}
+            - --imagePullSecrets={{ join "," .Values.imagePullSecrets  .Values.image.pullSecrets  }}
             {{- end }}
           {{- end }}
           {{- with .Values.resources }}
