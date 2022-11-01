@@ -20,7 +20,6 @@ spec:
           # ONLY Block requests to cloud metadata IP
         except:
         - 169.254.169.254/32
-      {{- end }}
   podSelector: 
     matchLabels: {{ include "kyverno.labels" . | nindent 8 }}
   policyTypes:
