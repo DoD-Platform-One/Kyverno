@@ -7,14 +7,19 @@ metadata:
   labels: {{ include "kyverno.labels" . | nindent 4 }}
     app: kyverno
 spec:
-  podSelector: {}
   egress:
     - to:
-      - ports: {{- range .Values.registries.ports | default 443 }}
+      - namespaceSelector: 
+          matchLabels:
+            app.kubernetes.io/name: kyverno
+      {{- range .Values.registries.ports }}
+      ports: {{ .ports }}
           # ONLY Block requests to cloud metadata IP
-          except:
-          - 169.254.169.254/32
-          {{- end }}
+      except:
+      - 169.254.169.254/32
+      {{- end }}
+  podSelector: 
+    matchLabels: {{ include "kyverno.labels" . | nindent 8 }}
   policyTypes:
-    - Egress
+  - Egress
 {{- end }}

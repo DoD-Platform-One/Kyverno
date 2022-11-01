@@ -412,9 +412,9 @@ webhooksCleanup:
 tufRootMountPath: /.sigstore
 # -- A list of registry ports to be accepted
 registries:
-  ports: []
-  #- imagePullSecret: my-registry
-  #  cidr: 2.3.4.5/16
+  ports:
+    - port: 443
+      protocol: TCP
 ## Bigbang Additions
 
 ## Use serviceMonitor instead
