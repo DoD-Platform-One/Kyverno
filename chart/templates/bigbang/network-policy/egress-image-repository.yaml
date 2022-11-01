@@ -23,5 +23,5 @@ spec:
   podSelector: 
     matchLabels: {{ include "kyverno.labels" . | nindent 8 }}
   policyTypes:
-  - Egress
+    - Egress
 {{- end }}
