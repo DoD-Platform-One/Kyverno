@@ -12,7 +12,11 @@ spec:
       - namespaceSelector: 
           matchLabels:
             app.kubernetes.io/name: kyverno
-      {{- range .Values.registries.ports }}
+      ports:
+      {{- range $key, $value := $.Values.registries.ports }}
+          {{ $key }}: 
+            {{ toYaml $value }}
+      {{- end }}
       ports: {{ .ports }}
           # ONLY Block requests to cloud metadata IP
         except:
