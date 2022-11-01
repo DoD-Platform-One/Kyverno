@@ -15,12 +15,13 @@ spec:
       ports:
       {{- range $key, $value := .Values.registries.ports }}
           {{ $key }}: 
-            {{ toYaml $value }}
+            {{ $value }}
       {{- end }}
           # ONLY Block requests to cloud metadata IP
         except:
         - 169.254.169.254/32
-  podSelector: {}
+  podSelector: 
+    matchLabels: {{ include "kyverno.labels" . | nindent 8 }}
   policyTypes:
     - Egress
 {{- end }}
