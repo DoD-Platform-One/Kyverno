@@ -105,8 +105,8 @@ spec:
             {{- if .Values.extraArgs -}}
               {{ tpl (toYaml .Values.extraArgs) . | nindent 12 }}
             {{- end }}
-           {{- if  .Values.image.pullSecrets }}
-             --imagePullSecrets: {{ list (include "kyverno.pullsecretlist" . ) | join "," }}
+            {{- if  .Values.image.pullSecrets }}
+            --imagePullSecrets: {{ list (include "kyverno.pullsecretlist" . ) | join "," }}
             {{- end }}
           {{- end }}
           {{- with .Values.resources }}
