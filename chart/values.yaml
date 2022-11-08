@@ -32,9 +32,8 @@ image:
   # -- Image pull policy
   pullPolicy: IfNotPresent
   # -- Image pull secrets
-  pullSecrets: []
-  # - secretName
-
+  pullSecrets:
+    - secretName
 initImage:
   # -- Image repository
   repository: registry1.dso.mil/ironbank/nirmata/kyvernopre
@@ -147,7 +146,7 @@ extraArgs:
   - --clientRateLimitQPS=25
   - --clientRateLimitBurst=50
   - --autogenInternals=false
-
+  - --imagePullSecrets=regcred,testing2
 # -- Array of extra init containers
 extraInitContainers: []
 # Example:
