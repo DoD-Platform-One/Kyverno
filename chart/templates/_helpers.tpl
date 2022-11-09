@@ -71,13 +71,13 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 
 {{/* Get the pull secret list. */}}
 {{- define "kyverno.pullsecretlist" -}}
-{{- range $idx, $val := $.Values.image.pullSecrets -}}
-{{- if $idx }}
-{{- print ", "  -}} 
+{{- $pullsecrets := list -}}
+{{- range .Values.image.pullSecrets -}}
+{{-   $pullsecrets = .name | append $pullsecrets -}}
+{{- end }}
+{{- join "," (concat (keys .Values.imagePullSecrets) $pullsecrets) -}}
 {{- end -}}
-{{- $val -}}
-{{- end -}}
-{{- end -}}
+
 
 {{/* Get the namespace name. */}}
 {{- define "kyverno.namespace" -}}

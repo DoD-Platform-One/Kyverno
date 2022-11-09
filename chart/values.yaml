@@ -33,7 +33,8 @@ image:
   pullPolicy: IfNotPresent
   # -- Image pull secrets
   pullSecrets:
-    - secretName
+    - name: private-registry
+
 initImage:
   # -- Image repository
   repository: registry1.dso.mil/ironbank/nirmata/kyvernopre
@@ -146,7 +147,6 @@ extraArgs:
   - --clientRateLimitQPS=25
   - --clientRateLimitBurst=50
   - --autogenInternals=false
-  - --imagePullSecrets=regcred,testing2
 # -- Array of extra init containers
 extraInitContainers: []
 # Example:
@@ -163,8 +163,7 @@ extraContainers: []
 
 # -- Image pull secrets for image verify and imageData policies.
 # This will define the `--imagePullSecrets` Kyverno argument.
-imagePullSecrets:
-  {}
+imagePullSecrets: {}
   # Define two image pull secrets
   # imagePullSecrets:
   #   regcred:
