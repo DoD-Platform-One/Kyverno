@@ -32,8 +32,7 @@ image:
   # -- Image pull policy
   pullPolicy: IfNotPresent
   # -- Image pull secrets
-  pullSecrets:
-    - name: private-registry
+  pullSecrets: []
 
 initImage:
   # -- Image repository
