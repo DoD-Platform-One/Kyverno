@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 2.6.0-bb.1](https://img.shields.io/badge/Version-2.6.0--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.8.0](https://img.shields.io/badge/AppVersion-v1.8.0-informational?style=flat-square)
+![Version: 2.6.0-bb.2](https://img.shields.io/badge/Version-2.6.0--bb.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.8.0](https://img.shields.io/badge/AppVersion-v1.8.0-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -120,6 +120,7 @@ helm install kyverno chart/
 | webhooksCleanup.enable | bool | `false` | Create a helm pre-delete hook to cleanup webhooks. |
 | webhooksCleanup.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.25.3"` | `kubectl` image to run commands for deleting webhooks. |
 | tufRootMountPath | string | `"/.sigstore"` | A writable volume to use for the TUF root initialization |
+| registries | object | `{"ports":[{"port":443,"protocol":"TCP"}]}` | A list of registry ports to be accepted |
 | networkPolicies.enabled | bool | `false` |  |
 | networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
 | istio.enabled | bool | `false` |  |

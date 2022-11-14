@@ -2,6 +2,12 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.6.0-bb.2] - 2022-10-5-28
+
+### Added
+
+- Added pull policy arg to kyverno deployment and network policy for container registries
+
 ## [2.6.0-bb.1] - 2022-11-01
 
 ### Changed
