@@ -24,6 +24,11 @@ rbac:
       # example.com/annotation: value
 
 image:
+  # -- Image registry
+  registry:
+  # If you want to manage the registry you should remove it from the repository
+  # registry: ghcr.io
+  # repository: kyverno/kyverno
   # -- Image repository
   repository: registry1.dso.mil/ironbank/nirmata/kyverno
   # -- Image tag
@@ -35,6 +40,11 @@ image:
   pullSecrets: []
 
 initImage:
+  # -- Image registry
+  registry:
+  # If you want to manage the registry you should remove it from the repository
+  # registry: ghcr.io
+  # repository: kyverno/kyvernopre
   # -- Image repository
   repository: registry1.dso.mil/ironbank/nirmata/kyvernopre
   # -- Image tag
@@ -44,7 +54,15 @@ initImage:
   # If initImage.pullPolicy is missing, defaults to image.pullPolicy
   pullPolicy:
 
+initContainer:
+  # -- Extra arguments to give to the kyvernopre binary.
+  extraArgs:
+    - --loggingFormat=text
+
+
 testImage:
+  # -- Image registry
+  registry:
   # -- Image repository
   # Defaults to `busybox` if omitted
   repository: registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal
@@ -73,6 +91,20 @@ podSecurityContext: {}
 
 # -- Security context for the containers
 securityContext:
+  runAsNonRoot: true
+  privileged: false
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
+  seccompProfile:
+    type: RuntimeDefault
+
+# -- Security context for the test containers
+testSecurityContext:
+  runAsUser: 65534
+  runAsGroup: 65534
   runAsNonRoot: true
   privileged: false
   allowPrivilegeEscalation: false
@@ -146,6 +178,7 @@ extraArgs:
   - --clientRateLimitQPS=25
   - --clientRateLimitBurst=50
   - --autogenInternals=false
+#    --loggingFormat=text
 # -- Array of extra init containers
 extraInitContainers: []
 # Example:
@@ -193,6 +226,29 @@ initResources:
   requests:
     cpu: 100m
     memory: 256Mi
+
+testResources:
+  # -- Pod resource limits
+  limits:
+    cpu: 100m
+    memory: 256Mi
+  # -- Pod resource requests
+  requests:
+    cpu: 10m
+    memory: 64Mi
+
+# -- Startup probe.
+# The block is directly forwarded into the deployment, so you can use whatever startupProbes configuration you want.
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
+# @default -- See [values.yaml](values.yaml)
+startupProbe:
+  httpGet:
+    path: /health/liveness
+    port: 9443
+    scheme: HTTPS
+  failureThreshold: 12
+  initialDelaySeconds: 30
+  periodSeconds: 10
 
 # -- Liveness probe.
 # The block is directly forwarded into the deployment, so you can use whatever livenessProbe configuration you want.
