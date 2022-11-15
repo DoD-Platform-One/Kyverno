@@ -2,6 +2,15 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.6.0-bb.0] - 2022-11-15
+
+### Changed
+
+- Updated Helm chart to v2.6.1
+- Updated Kyverno image to v1.8.1
+- Updated kubectl image to v1.25.4
+- Updated ubi image to 8.7
+
 ## [2.6.0-bb.2] - 2022-10-5-28
 
 ### Added
