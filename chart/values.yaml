@@ -68,7 +68,7 @@ testImage:
   repository: registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal
   # -- Image tag
   # Defaults to `latest` if omitted
-  tag: 8.6
+  tag: 8.7
   # -- Image pull policy
   # Defaults to image.pullPolicy if omitted
   pullPolicy:
