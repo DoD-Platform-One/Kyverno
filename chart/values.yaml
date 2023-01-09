@@ -246,9 +246,9 @@ startupProbe:
     path: /health/liveness
     port: 9443
     scheme: HTTPS
-  failureThreshold: 12
-  initialDelaySeconds: 30
-  periodSeconds: 10
+  failureThreshold: 20
+  initialDelaySeconds: 2
+  periodSeconds: 6
 
 # -- Liveness probe.
 # The block is directly forwarded into the deployment, so you can use whatever livenessProbe configuration you want.
@@ -334,6 +334,9 @@ config:
 
   # -- Name of an existing config map (ignores default/provided resourceFilters)
   existingConfig: ""
+  # -- Additional annotations to add to the configmap
+  annotations: {}
+    # example.com/annotation: foo
   # -- Exclude group role
   excludeGroupRole:
   # - ''
@@ -364,6 +367,9 @@ config:
   # -- Metrics config.
   metricsConfig:
     namespaces: { "include": [], "exclude": [] }
+    # -- Additional annotations to add to the metricsconfigmap
+    annotations: {}
+      # example.com/annotation: foo
     # 'namespaces.include': list of namespaces to capture metrics for. Default: metrics being captured for all namespaces except excludeNamespaces.
     # 'namespaces.exclude': list of namespaces to NOT capture metrics for. Default: []
 
@@ -448,6 +454,12 @@ createSelfSignedCert: false
 # If the CRDs are not installed by Helm, they must be added before policies can be created.
 installCRDs: true
 
+crds:
+  # -- Additional CRDs annotations.
+  annotations: {}
+    # argocd.argoproj.io/sync-options: Replace=true
+    # strategy.spinnaker.io/replace: 'true'
+
 networkPolicy:
   # -- When true, use a NetworkPolicy to allow ingress to the webhook
   # This is useful on clusters using Calico and/or native k8s network policies in a default-deny setup.
@@ -459,9 +471,9 @@ webhooksCleanup:
   # -- Create a helm pre-delete hook to cleanup webhooks.
   enable: false
   # -- `kubectl` image to run commands for deleting webhooks.
-  image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.25.4
+  image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.25.5
 
-# -- A writable volume to use for the TUF root initialization
+# -- A writable volume to use for the TUF root initialization.
 tufRootMountPath: /.sigstore
 # -- A list of registry ports to be accepted
 registries:
@@ -485,7 +497,7 @@ openshift: false
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.25.4
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.25.5
     additionalVolumeMounts:
       - name: "kyverno-bbtest-manifest"
         mountPath: /yaml
@@ -493,3 +505,11 @@ bbtests:
       - name: "kyverno-bbtest-manifest"
         configMap:
           name: "kyverno-bbtest-manifest"
+grafana:
+  # -- Enable grafana dashboard creation.
+  enabled: false
+  # -- Namespace to create the grafana dashboard configmap.
+  # If not set, it will be created in the same namespace where the chart is deployed.
+  namespace:
+  # -- Grafana dashboard configmap annotations.
+  annotations: {}

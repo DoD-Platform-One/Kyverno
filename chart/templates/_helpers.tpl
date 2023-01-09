@@ -169,3 +169,9 @@ maxUnavailable: {{ .Values.podDisruptionBudget.maxUnavailable }}
 {{- end }}
 {{- $newWebhook | toJson }}
 {{- end }}
+
+{{- define "kyverno.crdAnnotations" -}}
+{{- range $key, $value := .Values.crds.annotations }}
+{{ $key }}: {{ $value | quote }}
+{{- end }}
+{{- end }}
