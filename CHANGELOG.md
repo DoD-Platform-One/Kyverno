@@ -10,7 +10,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Updated Helm chart to v2.6.5
 - Updated appVersion to v1.8.5
 
-## [2.6.0-bb.0] - 2022-11-15
+## [2.6.1-bb.0] - 2022-11-15
 
 ### Changed
 
