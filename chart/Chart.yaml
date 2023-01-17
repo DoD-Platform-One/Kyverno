@@ -25,6 +25,16 @@ dependencies:
 annotations:
   bigbang.dev/applicationVersions: |
     - Kyverno: v1.8.5
+  # Kubectl image is used if webhooksCleanup.enable or bbtests.enabled
+  helm.sh/images: |
+    - name: kyverno
+      image: registry1.dso.mil/ironbank/nirmata/kyverno:v1.8.5
+    - name: kyvernopre
+      image: registry1.dso.mil/ironbank/nirmata/kyvernopre:v1.8.5
+    - name: kubectl
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.25.5
+    - name: ubi8-minimal
+      image: registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.7
   artifacthub.io/operator: "false"
   artifacthub.io/prerelease: "false"
   artifacthub.io/links: |
