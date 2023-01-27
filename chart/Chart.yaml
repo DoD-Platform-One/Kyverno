@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: kyverno
-version: 2.6.5-bb.0
+version: 2.6.5-bb.1
 appVersion: v1.8.5
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
@@ -21,7 +21,7 @@ kubeVersion: ">=1.16.0-0"
 dependencies:
   - name: gluon
     version: 0.3.1
-    repository: oci://registry.dso.mil/platform-one/big-bang/apps/library-charts/gluon
+    repository: oci://registry1.dso.mil/bigbang
 annotations:
   bigbang.dev/applicationVersions: |
     - Kyverno: v1.8.5
@@ -32,7 +32,7 @@ annotations:
     - name: kyvernopre
       image: registry1.dso.mil/ironbank/nirmata/kyvernopre:v1.8.5
     - name: kubectl
-      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.25.5
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.25.6
     - name: ubi8-minimal
       image: registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.7
   artifacthub.io/operator: "false"
