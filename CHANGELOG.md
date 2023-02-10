@@ -2,12 +2,17 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+---
 
-## [2.6.5-bb.1] - 2022-01-26
+## [2.6.5-bb.2] - 2023-02-07
+### Changed
+- Updated kubectl to v1.26.1
+
+## [2.6.5-bb.1] - 2023-01-26
 ### Changed
 - Updated kubectl to v1.25.6
 
-## [2.6.5-bb.0] - 2022-01-06
+## [2.6.5-bb.0] - 2023-01-06
 ### Changed
 - Updated kubectl to v1.25.5
 - Updated Helm chart to v2.6.5
