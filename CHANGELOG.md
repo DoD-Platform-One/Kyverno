@@ -4,6 +4,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [2.6.5-bb.3] - 2023-03-13
+### Changed
+- Updated kubectl to v1.26.2
+
 ## [2.6.5-bb.2] - 2023-02-07
 ### Changed
 - Updated kubectl to v1.26.1
