@@ -1,8 +1,8 @@
 apiVersion: v2
 type: application
 name: kyverno
-version: 2.6.5-bb.3
-appVersion: v1.8.5
+version: 2.7.2-bb.0
+appVersion: v1.9.2
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
 keywords:
@@ -24,15 +24,15 @@ dependencies:
     repository: oci://registry1.dso.mil/bigbang
 annotations:
   bigbang.dev/applicationVersions: |
-    - Kyverno: v1.8.5
+    - Kyverno: v1.9.2
   # Kubectl image is used if webhooksCleanup.enable or bbtests.enabled
   helm.sh/images: |
     - name: kyverno
-      image: registry1.dso.mil/ironbank/nirmata/kyverno:v1.8.5
+      image: registry1.dso.mil/ironbank/nirmata/kyverno:v1.9.2
     - name: kyvernopre
-      image: registry1.dso.mil/ironbank/nirmata/kyvernopre:v1.8.5
+      image: registry1.dso.mil/ironbank/nirmata/kyvernopre:v1.9.2
     - name: kubectl
-      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.26.2
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.26.4
     - name: ubi8-minimal
       image: registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.7
   artifacthub.io/operator: "false"
@@ -42,29 +42,7 @@ annotations:
       url: https://kyverno.io/docs
   # valid kinds are: added, changed, deprecated, removed, fixed and security
   artifacthub.io/changes: |
-    - kind: added
-      description: Added possibility to define additional init and sidecar container.
-    - kind: added
-      description: Added ability to remove namespaces from default resourceFilters list.
-    - kind: added
-      description: Prevent installing Kyverno in namespace kube-system.
-    - kind: fixed
-      description: Docs for generatecontrollerExtraResources.
     - kind: changed
-      description: Enable autogen internals by default.
+      description: Syntax change for webhooksCleanup switch to match with the rest of the file
     - kind: fixed
-      description: Self signed certificates not using SANs.
-    - kind: added
-      description: Extra args support for init container.
-    - kind: added
-      description: Allow overriding of test security context and resource block.
-    - kind: added
-      description: Added possibility to define custom image registries
-    - kind: added
-      description: Enable adding optional annotations to configmaps
-    - kind: added
-      description: Add startup probes support
-    - kind: added
-      description: Support extra CRD annotations
-    - kind: added
-      description: Grafana dashboard.
+      description: Handle multiple extraArgs in init container

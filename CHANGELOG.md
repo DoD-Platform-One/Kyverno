@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [2.7.2-bb.0] - 2023-04-17
+### Changed
+- Updated to latest image 1.9.2
+- Updated to latest chart 2.7.2
 
 ## [2.6.5-bb.3] - 2023-03-13
 ### Changed
