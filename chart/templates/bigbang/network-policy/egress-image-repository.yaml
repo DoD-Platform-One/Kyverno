@@ -4,7 +4,7 @@ kind: NetworkPolicy
 metadata:
   name: allow-egress-container-registry
   namespace: {{ .Release.Namespace }}
-  labels: {{ include "kyverno.labels" . | nindent 4 }}
+  labels: {{- include "kyverno.labels.merge" (list (include "kyverno.labels.common" .) (include "kyverno.matchLabels.common" .)) | nindent 4 }}
     app: kyverno
 spec:
   egress:
@@ -15,7 +15,7 @@ spec:
           - 169.254.169.254/32
       ports: {{ toYaml .Values.registries.ports | nindent 6 }}
   podSelector: 
-    matchLabels: {{ include "kyverno.labels" . | nindent 8 }}
+    matchLabels: {{- include "kyverno.labels.merge" (list (include "kyverno.labels.common" .) (include "kyverno.matchLabels.common" .)) | nindent 8 }}
   policyTypes:
     - Egress
 {{- end }}

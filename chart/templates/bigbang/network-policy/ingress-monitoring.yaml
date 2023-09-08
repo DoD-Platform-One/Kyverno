@@ -1,4 +1,4 @@
-{{- if and .Values.networkPolicies.enabled .Values.serviceMonitor.enabled}}
+{{- if and .Values.networkPolicies.enabled .Values.admissionController.serviceMonitor.enabled}}
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -17,7 +17,7 @@ spec:
         - port: 8000
           protocol: TCP
   podSelector:
-      matchLabels: {{ include "kyverno.labels" . | nindent 8 }}
+      matchLabels: {{- include "kyverno.labels.merge" (list (include "kyverno.labels.common" .) (include "kyverno.matchLabels.common" .)) | nindent 8 }}
   policyTypes:
     - Ingress
 {{- end }}
