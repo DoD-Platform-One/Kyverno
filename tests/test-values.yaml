@@ -1,6 +1,5 @@
-image:
-  pullSecrets:
-    - name: private-registry
+#existingImagePullSecrets:
+#  - private-registry
 bbtests:
   enabled: true
 networkPolicies:

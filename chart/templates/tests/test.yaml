@@ -9,35 +9,35 @@ metadata:
     "helm.sh/hook": test
 spec:
   restartPolicy: Never
-  {{- with .Values.image.pullSecrets }}
+  {{- with .Values.test.imagePullSecrets }}
   imagePullSecrets: {{ tpl (toYaml .) $ | nindent 8 }}
   {{- end }}
   containers:
     - name: curl
-      image: {{ .Values.testImage.repository | default "busybox" }}{{- if .Values.testImage.tag }}:{{ .Values.testImage.tag }}{{- end }}
-      imagePullPolicy: {{ default .Values.image.pullPolicy .Values.testImage.pullPolicy }}
-      {{- with .Values.testResources }}
+      image: {{ .Values.test.image.registry}}/{{ .Values.test.image.repository | default "busybox" }}{{- if .Values.test.image.tag }}:{{ .Values.test.image.tag }}{{- end }}
+      imagePullPolicy: {{ .Values.test.image.pullPolicy }}
+      {{- with .Values.test.resources }}
       resources: {{ tpl (toYaml .) $ | nindent 8 }}
       {{- end }}
-      {{- if .Values.testSecurityContext }}
-      securityContext: {{ include "kyverno.testSecurityContext" . | nindent 8 }}
+      {{- if .Values.test.securityContext }}
+      securityContext: {{ tpl (toYaml .) $ | nindent 8 }}
       {{- end }}
       command:
         - /bin/sh
         - -c
         - |
-          sleep 20 ; curl -sL -v -k https://{{ template "kyverno.serviceName" . }}:{{ .Values.service.port }}/health/liveness
+          sleep 20 ; curl -sL -v -k https://{{ template "kyverno.admission-controller.serviceName" . }}:{{ .Values.admissionController.service.port }}/health/liveness
     - name: curl-metrics
-      image: {{ .Values.testImage.repository | default "busybox" }}{{- if .Values.testImage.tag }}:{{ .Values.testImage.tag }}{{- end }}
-      imagePullPolicy: {{ default .Values.image.pullPolicy .Values.testImage.pullPolicy }}
-      {{- with .Values.testResources }}
+      image: {{ .Values.test.image.registry}}/{{ .Values.test.image.repository | default "busybox" }}{{- if .Values.test.image.tag }}:{{ .Values.test.image.tag }}{{- end }}
+      imagePullPolicy: {{ .Values.test.image.pullPolicy }}
+      {{- with .Values.test.resources }}
       resources: {{ tpl (toYaml .) $ | nindent 8 }}
       {{- end }}
-      {{- if .Values.testSecurityContext }}
-      securityContext: {{ include "kyverno.testSecurityContext" . | nindent 8 }}
+      {{- if .Values.test.securityContext }}
+      securityContext: {{ tpl (toYaml .) $ | nindent 8 }}
       {{- end }}
       command:
         - /bin/sh
         - -c
         - |
-          sleep 20 ; curl -sL -v -k http://{{ template "kyverno.serviceName" . }}-metrics:{{ .Values.metricsService.port }}/metrics
+          sleep 20 ; curl -sL -v -k http://{{ template "kyverno.admission-controller.serviceName" . }}-metrics:{{ .Values.admissionController.metricsService.port }}/metrics

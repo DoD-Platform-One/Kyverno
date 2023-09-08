@@ -1,8 +1,8 @@
 apiVersion: v2
 type: application
 name: kyverno
-version: 2.7.2-bb.0
-appVersion: v1.9.2
+version: 3.0.0-bb.0
+appVersion: v1.10.0
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
 keywords:
@@ -24,17 +24,23 @@ dependencies:
     repository: oci://registry1.dso.mil/bigbang
 annotations:
   bigbang.dev/applicationVersions: |
-    - Kyverno: v1.9.2
+    - Kyverno: v1.9.3
   # Kubectl image is used if webhooksCleanup.enable or bbtests.enabled
   helm.sh/images: |
     - name: kyverno
-      image: registry1.dso.mil/ironbank/nirmata/kyverno:v1.9.2
+      image: registry1.dso.mil/ironbank/opensource/kyverno:v1.10.3
     - name: kyvernopre
-      image: registry1.dso.mil/ironbank/nirmata/kyvernopre:v1.9.2
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.10.3
     - name: kubectl
-      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.26.4
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:1.27.5
     - name: ubi8-minimal
-      image: registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.7
+      image: registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.8
+    - name: reports-controller
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:1.10.3
+    - name: background-controller
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:1.10.3
+    - name: cleanup-controller
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.10.3
   artifacthub.io/operator: "false"
   artifacthub.io/prerelease: "false"
   artifacthub.io/links: |
@@ -42,7 +48,19 @@ annotations:
       url: https://kyverno.io/docs
   # valid kinds are: added, changed, deprecated, removed, fixed and security
   artifacthub.io/changes: |
+    - kind: added
+      description: make sigstore volume configurable
     - kind: changed
-      description: Syntax change for webhooksCleanup switch to match with the rest of the file
+      description: no deployments can run with 0 replicas
+    - kind: changed
+      description: change dashboard title of kyverno grafana dashboard
+    - kind: added
+      description: view aggregated cluster role support
+    - kind: added
+      description: support for webhook annotations in config map
+    - kind: added
+      description: allow overriding PDB api version
     - kind: fixed
-      description: Handle multiple extraArgs in init container
+      description: missing image pull secrets in helm hooks
+    - kind: added
+      description: support `excludeRoles` and `excludeClusterRoles` in config

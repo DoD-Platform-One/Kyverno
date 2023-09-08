@@ -4,7 +4,7 @@ kind: NetworkPolicy
 metadata:
   name: egress-default-deny
   namespace: "{{ .Release.Namespace }}"
-  labels: {{ include "kyverno.labels" . | nindent 4 }}
+  labels: {{- include "kyverno.labels.merge" (list (include "kyverno.labels.common" .) (include "kyverno.matchLabels.common" .)) | nindent 4 }}
     app: kyverno
 spec:
   podSelector: {}
