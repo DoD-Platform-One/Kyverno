@@ -13,7 +13,7 @@ spec:
         - port: 9443
           protocol: TCP
   podSelector:
-    matchLabels: {{- include "kyverno.labels.merge" (list (include "kyverno.labels.common" .) (include "kyverno.matchLabels.common" .)) | nindent 8 }}
+    matchLabels: {{- include "kyverno.labels.merge" (list (include "kyverno.labels.common" .) (include "kyverno.admission-controller.matchLabels" .)) | nindent 8 }}
   policyTypes:
     - Ingress
 {{- end }}

@@ -424,7 +424,7 @@ cleanupJobs:
     # -- Security context for the pod
     podSecurityContext:
       runAsUser: 1000
-      runASNonRoot: true
+      runAsNonRoot: true
 
     # -- Security context for the containers
     securityContext:
