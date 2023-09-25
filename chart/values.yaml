@@ -424,10 +424,13 @@ cleanupJobs:
     # -- Security context for the pod
     podSecurityContext:
       runAsUser: 1000
+      runAsGroup: 1000
       runAsNonRoot: true
 
     # -- Security context for the containers
     securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
       runAsNonRoot: true
       privileged: false
       allowPrivilegeEscalation: false
@@ -471,10 +474,15 @@ cleanupJobs:
       failure: 1
 
     # -- Security context for the pod
-    podSecurityContext: {}
+    podSecurityContext: 
+      runAsUser: 1000
+      runAsGroup: 1000
+      runAsNonRoot: true
 
     # -- Security context for the containers
     securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
       runAsNonRoot: true
       privileged: false
       allowPrivilegeEscalation: false
@@ -632,6 +640,7 @@ admissionController:
   # -- Security context for the pod
   podSecurityContext:
     runAsUser: 10001
+    runAsGroup: 10001
     runAsNonRoot: true
 
   podDisruptionBudget:
@@ -681,6 +690,7 @@ admissionController:
     securityContext:
       runAsNonRoot: true
       runAsUser: 10001
+      runAsGroup: 10001
       privileged: false
       allowPrivilegeEscalation: false
       readOnlyRootFilesystem: true
@@ -727,6 +737,7 @@ admissionController:
     securityContext:
       runAsNonRoot: true
       runAsUser: 10001
+      runAsGroup: 10001
       privileged: false
       allowPrivilegeEscalation: false
       readOnlyRootFilesystem: true
@@ -950,12 +961,14 @@ backgroundController:
   # -- Security context for the pod
   podSecurityContext:
     runAsUser: 1000
+    runAsGroup: 1000
     runAsNonRoot: true
 
   # -- Security context for the containers
   securityContext:
     runAsNonRoot: true
     runAsUser: 1000
+    runAsgroup: 1000
     privileged: false
     allowPrivilegeEscalation: false
     readOnlyRootFilesystem: true
@@ -1207,10 +1220,13 @@ cleanupController:
   # -- Security context for the pod
   podSecurityContext:
     runAsUser: 1000
+    runAsGroup: 1000
     runAsNonRoot: true
 
   # -- Security context for the containers
   securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
     runAsNonRoot: true
     privileged: false
     allowPrivilegeEscalation: false
@@ -1427,12 +1443,14 @@ reportsController:
   # -- Security context for the pod
   podSecurityContext:
     runAsUser: 1000
+    runAsGroup: 1000
     runAsNonRoot: true
 
   # -- Security context for the containers
   securityContext:
     runAsNonRoot: true
     runAsUser: 1000
+    runAsGroup: 1000
     privileged: false
     allowPrivilegeEscalation: false
     readOnlyRootFilesystem: true

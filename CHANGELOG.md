@@ -3,9 +3,17 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.0.0-bb.4] - 2023-09-20
+### Changed
+- Modified runAsGroup securityContext for kyverno containers
+
 ## [3.0.0-bb.3] - 2023-09-19
 ### Changed
 - Set controlPlaneCidr to 0.0.0.0/0 for package test
+
+## [3.0.0-bb.2] - 2023-09-14
+### Changed
+- Made test resources conditional on bbtests.enabled
 
 ## [3.0.0-bb.2] - 2023-09-14
 ### Changed
