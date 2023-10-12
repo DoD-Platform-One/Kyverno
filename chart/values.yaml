@@ -366,9 +366,9 @@ features:
       # - PolicySkipped
   policyExceptions:
     # -- Enables the feature
-    enabled: false
+    enabled: true
     # -- Restrict policy exceptions to a single namespace
-    namespace: ''
+    namespace: 'kyverno'
   protectManagedResources:
     # -- Enables the feature
     enabled: false
