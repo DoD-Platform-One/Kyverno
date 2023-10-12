@@ -3,6 +3,11 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.0.0-bb.5] - 2023-10-11
+### Changed
+- Modified `features.policyExceptions.enabled` to true
+- Restricted new `policyExceptions` to the kyerno `namespace`
+
 ## [3.0.0-bb.4] - 2023-09-20
 ### Changed
 - Modified runAsGroup securityContext for kyverno containers

@@ -296,8 +296,8 @@ The chart values are organised per component.
 | features.logging.format | string | `"text"` | Logging format |
 | features.logging.verbosity | int | `2` | Logging verbosity |
 | features.omitEvents.eventTypes | list | `[]` | Events which should not be emitted (possible values `PolicyViolation`, `PolicyApplied`, `PolicyError`, and `PolicySkipped`) |
-| features.policyExceptions.enabled | bool | `false` | Enables the feature |
-| features.policyExceptions.namespace | string | `""` | Restrict policy exceptions to a single namespace |
+| features.policyExceptions.enabled | bool | `true` | Enables the feature |
+| features.policyExceptions.namespace | string | `"kyverno"` | Restrict policy exceptions to a single namespace |
 | features.protectManagedResources.enabled | bool | `false` | Enables the feature |
 | features.registryClient.allowInsecure | bool | `false` | Allow insecure registry |
 | features.registryClient.credentialHelpers | list | `["default","google","amazon","azure","github"]` | Enable registry client helpers |
