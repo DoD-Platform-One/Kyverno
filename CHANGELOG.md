@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.0.0-bb.7] - 2023-10-17
+### Changed
+- Modified OSCAL Version for kyverno and updated to 1.1.1
+
 ## [3.0.0-bb.6] - 2023-10-13
 ### Changed
 - Update `kubectl version` to v1.28.2
