@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.0.0-bb.6] - 2023-10-13
+### Changed
+- Update `kubectl version` to v1.28.2
+
 ## [3.0.0-bb.5] - 2023-10-11
 ### Changed
 - Modified `features.policyExceptions.enabled` to true
