@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 3.0.0-bb.5](https://img.shields.io/badge/Version-3.0.0--bb.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.10.3](https://img.shields.io/badge/AppVersion-v1.10.3-informational?style=flat-square)
+![Version: 3.0.0-bb.6](https://img.shields.io/badge/Version-3.0.0--bb.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.10.3](https://img.shields.io/badge/AppVersion-v1.10.3-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -78,7 +78,7 @@ helm install kyverno chart/
 | test.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534,"seccompProfile":{"type":"RuntimeDefault"}}` | Security context for the test containers |
 | customLabels | object | `{}` | Additional labels |
 | webhooksCleanup.enabled | bool | `false` | Create a helm pre-delete hook to cleanup webhooks. |
-| webhooksCleanup.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.27.5"` | `kubectl` image to run commands for deleting webhooks. |
+| webhooksCleanup.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.2"` | `kubectl` image to run commands for deleting webhooks. |
 | webhooksCleanup.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
 | grafana.enabled | bool | `false` | Enable grafana dashboard creation. |
 | grafana.configMapName | string | `"{{ include \"kyverno.fullname\" . }}-grafana"` | Configmap name template. |
@@ -105,7 +105,7 @@ helm install kyverno chart/
 | cleanupJobs.admissionReports.enabled | bool | `true` | Enable cleanup cronjob |
 | cleanupJobs.admissionReports.image.registry | string | `"registry1.dso.mil"` | Image registry |
 | cleanupJobs.admissionReports.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` | Image repository |
-| cleanupJobs.admissionReports.image.tag | string | `"1.27.5"` | Image tag Defaults to `latest` if omitted |
+| cleanupJobs.admissionReports.image.tag | string | `"v1.28.2"` | Image tag Defaults to `latest` if omitted |
 | cleanupJobs.admissionReports.image.pullPolicy | string | `nil` | Image pull policy Defaults to image.pullPolicy if omitted |
 | cleanupJobs.admissionReports.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
 | cleanupJobs.admissionReports.schedule | string | `"*/10 * * * *"` | Cronjob schedule |
@@ -116,7 +116,7 @@ helm install kyverno chart/
 | cleanupJobs.clusterAdmissionReports.enabled | bool | `true` | Enable cleanup cronjob |
 | cleanupJobs.clusterAdmissionReports.image.registry | string | `"registry1.dso.mil"` | Image registry |
 | cleanupJobs.clusterAdmissionReports.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` | Image repository |
-| cleanupJobs.clusterAdmissionReports.image.tag | string | `"1.27.5"` | Image tag Defaults to `latest` if omitted |
+| cleanupJobs.clusterAdmissionReports.image.tag | string | `"v1.28.2"` | Image tag Defaults to `latest` if omitted |
 | cleanupJobs.clusterAdmissionReports.image.pullPolicy | string | `nil` | Image pull policy Defaults to image.pullPolicy if omitted |
 | cleanupJobs.clusterAdmissionReports.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
 | cleanupJobs.clusterAdmissionReports.schedule | string | `"*/10 * * * *"` | Cronjob schedule |
@@ -381,7 +381,7 @@ helm install kyverno chart/
 | istio.enabled | bool | `false` |  |
 | openshift | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |
-| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:1.27.4"` |  |
+| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.2"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].name | string | `"kyverno-bbtest-manifest"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/yaml"` |  |
 | bbtests.scripts.additionalVolumes[0].name | string | `"kyverno-bbtest-manifest"` |  |
