@@ -968,7 +968,7 @@ backgroundController:
   securityContext:
     runAsNonRoot: true
     runAsUser: 1000
-    runAsgroup: 1000
+    runAsGroup: 1000
     privileged: false
     allowPrivilegeEscalation: false
     readOnlyRootFilesystem: true

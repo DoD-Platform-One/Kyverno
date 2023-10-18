@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.0.0-bb.8] - 2023-10-18
+### Changed
+- Fixed RunAsGroup typo in chart/values.yaml
+
 ## [3.0.0-bb.7] - 2023-10-17
 ### Changed
 - Modified OSCAL Version for kyverno and updated to 1.1.1
