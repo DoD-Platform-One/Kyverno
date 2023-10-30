@@ -9,6 +9,10 @@ metadata:
   annotations:
     "helm.sh/hook": test
 spec:
+  {{- with .Values.test.podSecurityContext }}
+  securityContext:
+    {{- tpl (toYaml .) $ | nindent 4 }}
+  {{- end }}
   restartPolicy: Never
   {{- with .Values.test.imagePullSecrets }}
   imagePullSecrets: {{ tpl (toYaml .) $ | nindent 8 }}
