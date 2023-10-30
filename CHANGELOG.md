@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.0.0-bb.9] - 2023-10-24
+### Changed
+- Add pod level securityContext for kyverno test
+
 ## [3.0.0-bb.8] - 2023-10-18
 ### Changed
 - Fixed RunAsGroup typo in chart/values.yaml
