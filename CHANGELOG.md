@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.0.0-bb.10] - 2023-10-25
+### Changed
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl patch v1.28.2 -> v1.28.3
+
 ## [3.0.0-bb.9] - 2023-10-24
 ### Changed
 - Add pod level securityContext for kyverno test

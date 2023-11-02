@@ -313,7 +313,7 @@ webhooksCleanup:
   # -- Create a helm pre-delete hook to cleanup webhooks.
   enabled: false
   # -- `kubectl` image to run commands for deleting webhooks.
-  image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.2
+  image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.3
   # -- Image pull secrets
   imagePullSecrets:
   - name: private-registry
@@ -407,7 +407,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.28.2'
+      tag: 'v1.28.3'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -459,7 +459,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.28.2'
+      tag: 'v1.28.3'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -1559,7 +1559,7 @@ openshift: false
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.2
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.3
     additionalVolumeMounts:
       - name: "kyverno-bbtest-manifest"
         mountPath: /yaml
