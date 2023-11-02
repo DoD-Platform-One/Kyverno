@@ -1552,6 +1552,16 @@ networkPolicies:
   enabled: false
   # See `kubectl cluster-info` and then resolve to IP
   controlPlaneCidr: 0.0.0.0/0
+  # Required if the container registry exists must be accessed over the internet
+  externalRegistries:
+    allowEgress: false
+    ports: []
+    # ports:
+    # - port: 1234
+    #   protocol: TCP
+
+
+  allowExternalRegistryEgress: false
 istio:
   enabled: false
 openshift: false
