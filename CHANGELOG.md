@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.0.0-bb.11] - 2023-11-06
+### Changed
+- Added the rights to get, list, watch, update, and patch the kyverno-background-controller serviceaccount
+
 ## [3.0.0-bb.10] - 2023-11-02
 ### Changed
 - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl patch v1.28.2 -> v1.28.3
