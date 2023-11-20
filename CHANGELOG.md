@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.0.0-bb.12] - 2023-11-16
+### Changed
+- Added `registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.8` to `tests/images.txt`
+
 ## [3.0.0-bb.11] - 2023-11-06
 ### Changed
 - Added the rights to get, list, watch, update, and patch the kyverno-background-controller serviceaccount
