@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 3.0.0-bb.12](https://img.shields.io/badge/Version-3.0.0--bb.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.10.3](https://img.shields.io/badge/AppVersion-v1.10.3-informational?style=flat-square)
+![Version: 3.0.0-bb.13](https://img.shields.io/badge/Version-3.0.0--bb.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.10.3](https://img.shields.io/badge/AppVersion-v1.10.3-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -81,6 +81,7 @@ helm install kyverno chart/
 | webhooksCleanup.enabled | bool | `false` | Create a helm pre-delete hook to cleanup webhooks. |
 | webhooksCleanup.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.3"` | `kubectl` image to run commands for deleting webhooks. |
 | webhooksCleanup.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
+| webhooksCleanup.automountServiceAccountToken.enabled | bool | `true` |  |
 | grafana.enabled | bool | `false` | Enable grafana dashboard creation. |
 | grafana.configMapName | string | `"{{ include \"kyverno.fullname\" . }}-grafana"` | Configmap name template. |
 | grafana.namespace | string | `nil` | Namespace to create the grafana dashboard configmap. If not set, it will be created in the same namespace where the chart is deployed. |
@@ -103,7 +104,9 @@ helm install kyverno chart/
 | features.registryClient.allowInsecure | bool | `false` | Allow insecure registry |
 | features.registryClient.credentialHelpers | list | `["default","google","amazon","azure","github"]` | Enable registry client helpers |
 | features.reports.chunkSize | int | `1000` | Reports chunk size |
+| cleanupJobs.rbac.serviceAccount.automountServiceAccountToken.enabled | bool | `false` |  |
 | cleanupJobs.admissionReports.enabled | bool | `true` | Enable cleanup cronjob |
+| cleanupJobs.admissionReports.automountServiceAccountToken.enabled | bool | `true` |  |
 | cleanupJobs.admissionReports.image.registry | string | `"registry1.dso.mil"` | Image registry |
 | cleanupJobs.admissionReports.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` | Image repository |
 | cleanupJobs.admissionReports.image.tag | string | `"v1.28.3"` | Image tag Defaults to `latest` if omitted |
@@ -115,6 +118,7 @@ helm install kyverno chart/
 | cleanupJobs.admissionReports.podSecurityContext | object | `{"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000}` | Security context for the pod |
 | cleanupJobs.admissionReports.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000,"seccompProfile":{"type":"RuntimeDefault"}}` | Security context for the containers |
 | cleanupJobs.clusterAdmissionReports.enabled | bool | `true` | Enable cleanup cronjob |
+| cleanupJobs.clusterAdmissionReports.automountServiceAccountToken.enabled | bool | `true` |  |
 | cleanupJobs.clusterAdmissionReports.image.registry | string | `"registry1.dso.mil"` | Image registry |
 | cleanupJobs.clusterAdmissionReports.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` | Image repository |
 | cleanupJobs.clusterAdmissionReports.image.tag | string | `"v1.28.3"` | Image tag Defaults to `latest` if omitted |
@@ -129,6 +133,8 @@ helm install kyverno chart/
 | admissionController.rbac.create | bool | `true` | Create RBAC resources |
 | admissionController.rbac.serviceAccount.name | string | `nil` | The ServiceAccount name |
 | admissionController.rbac.serviceAccount.annotations | object | `{}` | Annotations for the ServiceAccount |
+| admissionController.rbac.serviceAccount.automountServiceAccountToken.enabled | bool | `false` |  |
+| admissionController.rbac.deployment.automountServiceAccountToken.enabled | bool | `true` |  |
 | admissionController.rbac.clusterRole.extraResources | list | `[]` | Extra resource permissions to add in the cluster role |
 | admissionController.createSelfSignedCert | bool | `false` | Create self-signed certificates at deployment time. The certificates won't be automatically renewed if this is set to `true`. |
 | admissionController.replicas | int | `3` | Desired number of pods |
@@ -207,6 +213,8 @@ helm install kyverno chart/
 | backgroundController.rbac.create | bool | `true` | Create RBAC resources |
 | backgroundController.rbac.serviceAccount.name | string | `nil` | Service account name |
 | backgroundController.rbac.serviceAccount.annotations | object | `{}` | Annotations for the ServiceAccount |
+| backgroundController.rbac.serviceAccount.automountServiceAccountToken.enabled | bool | `false` |  |
+| backgroundController.rbac.deployment.automountServiceAccountToken.enabled | bool | `true` |  |
 | backgroundController.rbac.clusterRole.extraResources | list | `[]` | Extra resource permissions to add in the cluster role |
 | backgroundController.image.registry | string | `"registry1.dso.mil"` | Image registry |
 | backgroundController.image.repository | string | `"ironbank/opensource/kyverno/kyverno/background-controller"` | Image repository |
@@ -262,6 +270,8 @@ helm install kyverno chart/
 | cleanupController.rbac.create | bool | `true` | Create RBAC resources |
 | cleanupController.rbac.serviceAccount.name | string | `nil` | Service account name |
 | cleanupController.rbac.serviceAccount.annotations | object | `{}` | Annotations for the ServiceAccount |
+| cleanupController.rbac.serviceAccount.automountServiceAccountToken.enabled | bool | `false` |  |
+| cleanupController.rbac.deployment.automountServiceAccountToken.enabled | bool | `true` |  |
 | cleanupController.rbac.clusterRole.extraResources | list | `[]` | Extra resource permissions to add in the cluster role |
 | cleanupController.createSelfSignedCert | bool | `false` | Create self-signed certificates at deployment time. The certificates won't be automatically renewed if this is set to `true`. |
 | cleanupController.image.registry | string | `"registry1.dso.mil"` | Image registry |
@@ -325,6 +335,8 @@ helm install kyverno chart/
 | reportsController.rbac.create | bool | `true` | Create RBAC resources |
 | reportsController.rbac.serviceAccount.name | string | `nil` | Service account name |
 | reportsController.rbac.serviceAccount.annotations | object | `{}` | Annotations for the ServiceAccount |
+| reportsController.rbac.serviceAccount.automountServiceAccountToken.enabled | bool | `false` |  |
+| reportsController.rbac.deployment.automountServiceAccountToken.enabled | bool | `true` |  |
 | reportsController.rbac.clusterRole.extraResources | list | `[]` | Extra resource permissions to add in the cluster role |
 | reportsController.image.registry | string | `"registry1.dso.mil"` | Image registry |
 | reportsController.image.repository | string | `"ironbank/opensource/kyverno/kyverno/reports-controller"` | Image repository |

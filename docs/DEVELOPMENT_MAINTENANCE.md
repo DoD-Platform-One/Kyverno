@@ -125,3 +125,22 @@ Note that this list is likely incomplete currently.
 - Changed image to default to Ironbank image
 - Set default `securityContext`, `imagePullSecrets`, `extraVolumes`, `extraVolumeMounts`, and `config`
 - Added commented out values for `serviceMonitor.scheme` and `serviceMonitor.tlsConfig`
+
+## `automountServiceAccountToken`
+The following files have been updated to manage the auto-mounting of ServiceAccount tokens and can be disabling/enabling per SA and/or deployment
+
+```
+templates/admission-controller/deployment.yaml
+templates/admission-controller/serviceaccount.yaml
+templates/background-controller/deployment.yaml
+templates/background-controller/serviceaccount.yaml
+templates/cleanup-controller/deployment.yaml
+templates/cleanup-controller/serviceaccount.yaml
+templates/cleanup/cleanup-admission-reports.yaml
+templates/cleanup/cleanup-cluster-admission-reports.yaml
+templates/cleanup/serviceaccount.yaml
+templates/hooks/pre-delete.yaml
+templates/reports-controller/deployment.yaml
+templates/reports-controller/serviceaccount.yaml
+values.yaml
+```

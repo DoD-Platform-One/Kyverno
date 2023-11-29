@@ -317,6 +317,9 @@ webhooksCleanup:
   # -- Image pull secrets
   imagePullSecrets:
   - name: private-registry
+  # disable mounting serviceAccount token to the pods
+  automountServiceAccountToken:
+    enabled: true
 
 grafana:
   # -- Enable grafana dashboard creation.
@@ -395,10 +398,22 @@ features:
 # Cleanup cronjobs to prevent internal resources from stacking up in the cluster
 cleanupJobs:
 
+  rbac:
+    serviceAccount:
+      # disable mounting serviceAccount token to the pods
+      automountServiceAccountToken:
+        enabled: false
+
+
+  ###
   admissionReports:
 
     # -- Enable cleanup cronjob
     enabled: true
+
+    # disable mounting serviceAccount token to the pods
+    automountServiceAccountToken:
+      enabled: true
 
     image:
       # -- (string) Image registry
@@ -451,6 +466,10 @@ cleanupJobs:
 
     # -- Enable cleanup cronjob
     enabled: true
+
+    # disable mounting serviceAccount token to the pods
+    automountServiceAccountToken:
+      enabled: true
 
     image:
       # -- (string) Image registry
@@ -516,6 +535,15 @@ admissionController:
       # -- Annotations for the ServiceAccount
       annotations: {}
         # example.com/annotation: value
+        
+      # disable mounting serviceAccount token to the pods
+      automountServiceAccountToken:
+        enabled: false
+
+    deployment:
+      # disable mounting serviceAccount token to the pods
+      automountServiceAccountToken:
+        enabled: true 
 
     clusterRole:
       # -- Extra resource permissions to add in the cluster role
@@ -862,6 +890,15 @@ backgroundController:
       annotations: {}
         # example.com/annotation: value
 
+      # disable mounting serviceAccount token to the pods
+      automountServiceAccountToken:
+        enabled: false
+
+    deployment:
+      # disable mounting serviceAccount token to the pods
+      automountServiceAccountToken:
+        enabled: true 
+
     clusterRole:
       # -- Extra resource permissions to add in the cluster role
       extraResources: []
@@ -1073,6 +1110,15 @@ cleanupController:
       # -- Annotations for the ServiceAccount
       annotations: {}
         # example.com/annotation: value
+
+      # disable mounting serviceAccount token to the pods
+      automountServiceAccountToken:
+        enabled: false
+
+    deployment:
+      # disable mounting serviceAccount token to the pods
+      automountServiceAccountToken:
+        enabled: true 
 
     clusterRole:
       # -- Extra resource permissions to add in the cluster role
@@ -1343,6 +1389,15 @@ reportsController:
       # -- Annotations for the ServiceAccount
       annotations: {}
         # example.com/annotation: value
+
+      # disable mounting serviceAccount token to the pods
+      automountServiceAccountToken:
+        enabled: false
+
+    deployment:
+      # disable mounting serviceAccount token to the pods
+      automountServiceAccountToken:
+        enabled: true 
 
     clusterRole:
       # -- Extra resource permissions to add in the cluster role

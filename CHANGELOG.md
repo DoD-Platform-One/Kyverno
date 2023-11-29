@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.0.0-bb.13] - 2023-11-24
+### Changed
+- Allow the automountserviceaccounttoken to be disabled/enabled
+
 ## [3.0.0-bb.12] - 2023-11-16
 ### Changed
 - Added `registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.8` to `tests/images.txt`

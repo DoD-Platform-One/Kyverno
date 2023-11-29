@@ -26,6 +26,7 @@ spec:
       annotations: {{ tpl (toYaml .) $ | nindent 8 }}
       {{- end }}
     spec:
+      automountServiceAccountToken: {{ .Values.admissionController.rbac.deployment.automountServiceAccountToken.enabled }}
       {{- with .Values.admissionController.container.imagePullSecrets }}
       imagePullSecrets:
         {{- tpl (toYaml .) $ | nindent 8 }}

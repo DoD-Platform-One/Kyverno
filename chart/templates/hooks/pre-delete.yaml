@@ -13,6 +13,7 @@ spec:
   backoffLimit: 2
   template:
     spec:
+      automountServiceAccountToken: {{ .Values.webhooksCleanup.automountServiceAccountToken.enabled }}
       serviceAccount: {{ template "kyverno.admission-controller.serviceAccountName" . }}
       restartPolicy: Never
       {{- with .Values.webhooksCleanup.imagePullSecrets }}

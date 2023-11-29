@@ -15,6 +15,7 @@ spec:
     spec:
       template:
         spec:
+          automountServiceAccountToken: {{ .Values.cleanupJobs.admissionReports.automountServiceAccountToken.enabled }}
           {{- with .Values.cleanupJobs.admissionReports.imagePullSecrets }}
           imagePullSecrets:
             {{- tpl (toYaml .) $ | nindent 12 }}
