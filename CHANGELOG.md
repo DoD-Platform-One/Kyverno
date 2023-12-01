@@ -3,6 +3,16 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.1.0-bb.0] - 2023-11-21
+### Changed
+- Updated `kubectl` from `v1.28.3` to `v1.28.4`
+- Updated `kyverno` from `v1.10.3` to `v1.11.0`
+- Updated `background-controller` from `1.10.3` to `v1.11.0`
+- Updated `cleanup-controller` from `v1.10.3` to `v1.11.0`
+- Updated `reports-controller` from `1.10.3` to `v1.11.0`
+- Updated `kyvernopre` from `v1.10.3` to `v1.11.0`
+- Updated `ubi8-minimal` from `8.8` to `8.9`
+
 ## [3.0.0-bb.13] - 2023-11-24
 ### Changed
 - Allow the automountserviceaccounttoken to be disabled/enabled

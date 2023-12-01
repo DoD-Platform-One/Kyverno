@@ -1,22 +1,17 @@
 
 # How to update the Kyverno Package chart
-Kyverno within Big Bang is a modified version of an upstream chart. `kpt` is used to handle any automatic updates from upstream. The below details the steps required to update to a new version of the Fluentbit package.
+Kyverno within Big Bang is a modified version of an upstream chart. `kpt` is used to handle any automatic updates from upstream. The below details the steps required to update to a new version of the Kyverno package.
 
+1. Review the upstream [changelog](https://github.com/kyverno/kyverno/blob/main/CHANGELOG.md) for potential breaking changes.
 1. Navigate to the upstream [kyverno helm chart repo](https://github.com/kyverno/kyverno/tree/main/charts/kyverno) and find the latest chart version that works with the image update. For example, if updating to 1.9.1 I would look at the [Chart.yaml](https://github.com/kyverno/kyverno/blob/main/charts/kyverno/Chart.yaml) `appVersion` field and switch through the latest git tags until I find one that matches 1.9.1. For this example that would be [`v1.9.1`](https://github.com/kyverno/kyverno/blob/v1.9.1/charts/kyverno/Chart.yaml#L5).
-
-2. Create a development branch and merge request from the Gitlab issue or use the existing `renovate/ironbank` branch and existing MR created by Renovate.
-   
-3. From the top level of the repo run `kpt pkg update chart@{GIT TAG} --strategy alpha-git-patch` replacing `{GIT TAG}` with the tag you found in step one. You may run into some merge conflicts, resolve these in the way that makes the most sense. In general, if something is a BB addition you will want to keep it, otherwise go with the upstream change.
-
-4. Append `-bb.0` to the `version` in `chart/Chart.yaml`.
-
-5. Update `CHANGELOG.md` adding an entry for the new version and noting all changes (at minimum should include `Updated Kyverno to x.x.x`).
-
-6. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
-
-7. Open an MR in "Draft" status ( or the Renovate created MR ) and validate that CI passes. This will perform a number of smoke tests against the package, but it is good to manually deploy to test some things that CI doesn't. Follow the steps below for manual testing.
-
-8. Once all manual testing is complete take your MR out of "Draft" status and add the review label. 
+1. Check out the existing `renovate/ironbank` branch created by the renovate-runner, an MR for this branch should be linked in the Renovate issue.
+1. From the top level of the repo run `kpt pkg update chart@{GIT TAG} --strategy alpha-git-patch` replacing `{GIT TAG}` with the tag you found in step one. You may run into some merge conflicts, resolve these in the way that makes the most sense. In general, if something is a BB addition you will want to keep it, otherwise go with the upstream change.
+1. Append `-bb.0` to the `version` in `chart/Chart.yaml`.
+1. Run `helm dependency update` from the `./chart` directory to regenerate dependencies.
+1. Update `CHANGELOG.md` adding an entry for the new version and noting all changes (at minimum should include `Updated Kyverno to x.x.x`).
+1. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
+1. Open an MR in "Draft" status ( or the Renovate created MR ) and validate that CI passes. This will perform a number of smoke tests against the package, but it is good to manually deploy to test some things that CI doesn't. Follow the steps below for manual testing.
+1. Once all manual testing is complete take your MR out of "Draft" status and add the review label. 
 
 # Testing New Kyverno Version
 
@@ -62,69 +57,151 @@ Checking Prometheus for Kyverno dashboards
 
 # Modifications made to upstream chart
 
-Note that this list is likely incomplete currently.
+## Main
 
-## chart/Chart.yaml
+### chart/Chart.yaml
 
-- Annotations added for versioning, images
-- Gluon dependency added for helm tests
+- Added `-bb` to chart `version`
+- Added `bigbang.dev/applicationVersions` and `helm.sh/images` to `annotations`
+- Added `gluon` to `dependencies`
 
-## chart/values.yaml
+### chart/values.yaml
 
-- Changed image to default to Ironbank image
-- Added values for `extraArgs`, `dashboards`, `registries`, `istio`, `networkPolicies`, `openshift`, and `bbtests`
-- Changed default limits and requests
+- Set `upgrade.fromV2` to `true`
 
-## chart/charts
+- Set `apiVersionOverride.podDisruptionBudget` to `policy/v1`
 
-- Added directory and `gluon` dependency
+- Set `defaultRegistry` to `registry1.dso.mil` 
 
-## chart/crds
+- Set `existingImagePullSecrets` to `private-registry`
 
-- Added directory and `crd-servicemonitors.yaml`
+- Set `image` fields to use ironbank images, as follows:
+  ```
+  image:
+    registry: registry1.dso.mil
+    repository: ironbank/{repository_path}
+    tag: {tag}
+  imagePullSecrets:
+  - name: private-registry
+  ```
+  *in the following locations*
+  - `test`
+  - `webhooksCleanup`
+  - `cleanupJobs.admissionReports`
+  - `cleanupJobs.clusterAdmissionReports`
+  - `admissionController.initContainer`
+  - `admissionController.container`
+  - `backgroundController`
+  - `cleanupController`
+  - `reportsController`
 
-## chart/dashboards
+- Set `podSecurityContext` and `securityContext`, as follows:
+  ```
+  podSecurityContext:
+    runAsUser: {id}
+    runAsGroup: {id}
+    runAsNonRoot: true
+  securityContext:
+    runAsUser: {id}
+    runAsGroup: {id}
+  ```
+  *according to the chart below*
+  | key | id | 
+  | --- | -- |
+  | `test` | 65534 |
+  | `webhooksCleanup` | 1001 |
+  | `cleanupJobs` | 1000 |
+  | `admissionController` | 10001 |
+  | `backgroundController` | 1000 |
+  | `cleanupController` | 1000 |
+  | `reportsController` | 1000 |
 
-- Added directory and `dashboard.json`
+- Set `features.policyExceptions.namespace` to `kyverno`
 
-## chart/templates/_helpers.tpl
+- Set `admissionController.replicas` to `3`
 
-- add `kyverno.pullsecretlist` definition (lines 72 to 81)
+- Set `admissionController.container.resources` as follows:
+  ```
+  resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+  ```
 
-## chart/templates/bigbang/
+- Add service accounts rule to `backgroundController.rbac.coreClusterRole.extraResources` as follows:
+  ```
+  - apiGroups: 
+      - ''
+    resources: 
+      - serviceaccounts
+    verbs: 
+      - get
+      - list 
+      - watch
+      - update
+      - patch
+  ```
 
-- Added `bigbang` directory (`/chart/templates/bigbang`)
-- Added `dashboards`
-- Added `network-policy` directory and network policies
-
-## chart/templates/tests/
-
-- Added tests for `clusterrole`, `clusterrolebinding`, `configmap`, `gluon`, and `serviceaccount`
-
-## chart/templates/tests/test.yaml
-
-- Added values for `namespace`, `imagePullSecrets`, 
-- Changed test container from `wget` to `curl` 
+- Added Big Bang `monitoring`, `networkPolicies`, `istio`, `openshift`, and `bbtests` fields
 
 
+### chart/charts
 
-#######################
-## chart/templates/configmap.yaml
+- Generate `gluon` dependency
 
-- Add `fluent-bit.conf:` [OUTPUT]s, lines 11 to 226
+### chart/tests/
 
-## chart/templates/_pod.tpl
+- Add test files `/manifests/sync-secrets.yaml` and `scripts/secrets.sh`
 
-- Add `additionalElastic` to `additionalLoki` (lines 50 to 77) with the adjustment in order to `envFrom` in the middle (lines 55-58)
-- Add `Values.additionalOutputs` (lines 122 to 137 and lines 162-180)
-- Change container name to `name: {{ default .Chart.Name .Values.nameOverride }}`
+## Templates
 
-## chart/values.yaml
+### chart/templates/bigbang/network-policy
 
-- Added values for `elasticsearch`, `istio`, `additionalOutputs`, `storage_buffer`, `networkPolicies`, `openshift`, and `bbtests`
-- Changed image to default to Ironbank image
-- Set default `securityContext`, `imagePullSecrets`, `extraVolumes`, `extraVolumeMounts`, and `config`
-- Added commented out values for `serviceMonitor.scheme` and `serviceMonitor.tlsConfig`
+- Add Big Bang network policy templates
+
+### chart/templates/_helpers.tpl
+
+- Add `kyverno.test-labels` definition for required helm labels
+
+### chart/templates/cleanup-controller/role.yaml
+
+- Add rule for core API group on configmaps:
+  ```
+  - apiGroups:
+      - ''
+    resources:
+      - configmaps
+    verbs:
+      - get
+      - list
+      - watch
+  ```
+
+### chart/templates/tests/
+
+- In each of the upstream tests, `admission-controller-liveness`, `admission-controller-metrics`, `admission-controller-readiness`, `cleanup-controller-liveness`, `cleanup-controller-metrics`, `cleanup-controller-readiness`, and `reports-controller-metrics`:
+  - Check whether `bbtests` is enabled
+    ```
+    {{- if dig "bbtests" "enabled" false (merge .Values dict) }}
+      ...
+    {{- end }}
+    ```
+  - Add `podSecurityContext` and `imagePullSecrets`
+    ```
+    {{- with .Values.test.podSecurityContext }}
+    securityContext:
+      {{- tpl (toYaml .) $ | nindent 4 }}
+    {{- end }}
+    {{- with .Values.test.imagePullSecrets }}
+    imagePullSecrets: {{ tpl (toYaml .) $ | nindent 8 }}
+    {{- end }}
+    ```
+  - Replace `wget` with `curl`
+
+- Add Big Bang test files `clusterrole`, `clusterrolebinding`, `configmap`, `gluon`, `serviceaccount`, and `test`
 
 ## `automountServiceAccountToken`
 The following files have been updated to manage the auto-mounting of ServiceAccount tokens and can be disabling/enabling per SA and/or deployment

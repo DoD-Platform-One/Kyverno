@@ -85,20 +85,24 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "red",
-                                "value": null
+                              "color": "text",
+                              "value": null
                             },
                             {
-                                "color": "red",
-                                "value": 50
+                              "value": 0,
+                              "color": "green"
                             },
                             {
-                                "color": "#EAB839",
-                                "value": 75
+                              "color": "#eab839",
+                              "value": 25
                             },
                             {
-                                "color": "green",
-                                "value": 100
+                              "color": "red",
+                              "value": 50
+                            },
+                            {
+                              "color": "red",
+                              "value": 100
                             }
                         ]
                     },
@@ -129,7 +133,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(increase(kyverno_policy_results_total{rule_result=\"fail\"}[24h]))*100/sum(increase(kyverno_policy_results_total{}[24h]))",
+                    "expr": "sum(increase(kyverno_policy_results_total{rule_result=\"fail\", cluster=~\"$cluster\"}[24h]) or vector(0))*100/sum(increase(kyverno_policy_results_total{cluster=~\"$cluster\"}[24h]))",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -186,7 +190,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "count(count(kyverno_policy_rule_info_total{policy_type=\"cluster\"}==1) by (policy_name))",
+                    "expr": "count(count(kyverno_policy_rule_info_total{policy_type=\"cluster\",cluster=~\"$cluster\"}==1) by (policy_name))",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -244,7 +248,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "count(count(kyverno_policy_rule_info_total{policy_type=\"namespaced\"}==1) by (policy_name))",
+                    "expr": "count(count(kyverno_policy_rule_info_total{policy_type=\"namespaced\", cluster=~\"$cluster\"}==1) by (policy_name))",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -269,20 +273,24 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "red",
-                                "value": null
+                              "color": "text",
+                              "value": null
                             },
                             {
-                                "color": "red",
-                                "value": 50
+                              "value": 0,
+                              "color": "green"
                             },
                             {
-                                "color": "#EAB839",
-                                "value": 75
+                              "color": "#eab839",
+                              "value": 25
                             },
                             {
-                                "color": "green",
-                                "value": 100
+                              "color": "red",
+                              "value": 50
+                            },
+                            {
+                              "color": "red",
+                              "value": 100
                             }
                         ]
                     },
@@ -313,7 +321,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(increase(kyverno_policy_results_total{rule_result=\"fail\", policy_background_mode=\"true\"}[24h]))*100/sum(increase(kyverno_policy_results_total{policy_background_mode=\"true\"}[24h]))",
+                    "expr": "sum(increase(kyverno_policy_results_total{rule_result=\"fail\", policy_background_mode=\"true\", cluster=~\"$cluster\"}[24h]) or vector(0))*100/sum(increase(kyverno_policy_results_total{policy_background_mode=\"true\", cluster=~\"$cluster\"}[24h]))",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -370,7 +378,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "count(kyverno_policy_rule_info_total{rule_type=\"validate\"}==1)",
+                    "expr": "count(count(kyverno_policy_rule_info_total{rule_type=\"validate\", cluster=~\"$cluster\"}==1) by (rule_name))",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -428,7 +436,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "count(kyverno_policy_rule_info_total{rule_type=\"mutate\"}==1)",
+                    "expr": "count(count(kyverno_policy_rule_info_total{rule_type=\"mutate\", cluster=~\"$cluster\"}==1) by (rule_name))",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -486,7 +494,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "count(kyverno_policy_rule_info_total{rule_type=\"generate\"}==1)",
+                    "expr": "count(count(kyverno_policy_rule_info_total{rule_type=\"generate\", cluster=~\"$cluster\"}==1) by (rule_name))",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -572,9 +580,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(increase(kyverno_policy_results_total{rule_execution_cause=\"admission_request\"}[5m])) by (rule_result)",
+                    "expr": "sum(increase(kyverno_policy_results_total{rule_execution_cause=\"admission_request\", cluster=~\"$cluster\"}[5m])) by (rule_result)",
                     "interval": "",
-                    "legendFormat": "{{rule_result}}",
+                    "legendFormat": "Admission Review Result: {{rule_result}}",
                     "refId": "A"
                 }
             ],
@@ -603,7 +611,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -678,9 +686,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(increase(kyverno_policy_results_total{rule_execution_cause=\"background_scan\"}[5m])) by (rule_result)",
+                    "expr": "sum(increase(kyverno_policy_results_total{rule_execution_cause=\"background_scan\", cluster=~\"$cluster\"}[5m])) by (rule_result)",
                     "interval": "",
-                    "legendFormat": "{{rule_result}}",
+                    "legendFormat": "Background Scan Result: {{rule_result}}",
                     "refId": "A"
                 }
             ],
@@ -709,7 +717,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -785,9 +793,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(sum(increase(kyverno_policy_results_total{rule_result=\"fail\"}[5m])) by (policy_name, policy_type)) by (policy_type)",
+                    "expr": "sum(sum(increase(kyverno_policy_results_total{rule_result=\"fail\", cluster=~\"$cluster\"}[5m])) by (policy_name, policy_type)) by (policy_type)",
                     "interval": "",
-                    "legendFormat": "{{policy_type}}",
+                    "legendFormat": "Policy Type: {{policy_type}}",
                     "refId": "A"
                 }
             ],
@@ -816,7 +824,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -891,9 +899,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(sum(increase(kyverno_policy_results_total{rule_execution_cause=\"admission_request\"}[5m])) by (policy_name, rule_result)) by (rule_result)",
+                    "expr": "sum(sum(increase(kyverno_policy_results_total{rule_execution_cause=\"admission_request\", cluster=~\"$cluster\"}[5m])) by (policy_name, rule_result)) by (rule_result)",
                     "interval": "",
-                    "legendFormat": "{{rule_result}}",
+                    "legendFormat": "Admission Review Result: {{rule_result}}",
                     "refId": "A"
                 }
             ],
@@ -922,7 +930,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -997,9 +1005,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(sum(increase(kyverno_policy_results_total{rule_execution_cause=\"background_scan\"}[5m])) by (policy_name, rule_result)) by (rule_result)",
+                    "expr": "sum(sum(increase(kyverno_policy_results_total{rule_execution_cause=\"background_scan\", cluster=~\"$cluster\"}[5m])) by (policy_name, rule_result)) by (rule_result)",
                     "interval": "",
-                    "legendFormat": "{{rule_result}}",
+                    "legendFormat": "Background Scan Result: {{rule_result}}",
                     "refId": "A"
                 }
             ],
@@ -1028,7 +1036,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -1120,9 +1128,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "count(count(kyverno_policy_rule_info_total{}==1) by (policy_name, policy_type)) by (policy_type)",
+                    "expr": "count(count(kyverno_policy_rule_info_total{cluster=~\"$cluster\"}==1) by (policy_name, policy_type)) by (policy_type)",
                     "interval": "",
-                    "legendFormat": "{{policy_type}}",
+                    "legendFormat": "Policy Type: {{policy_type}}",
                     "refId": "A"
                 }
             ],
@@ -1151,7 +1159,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -1225,9 +1233,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "count(count(kyverno_policy_rule_info_total{}==1) by (policy_name, policy_validation_mode)) by (policy_validation_mode)",
+                    "expr": "count(count(kyverno_policy_rule_info_total{cluster=~\"$cluster\"}==1) by (policy_name, policy_validation_mode)) by (policy_validation_mode)",
                     "interval": "",
-                    "legendFormat": "audit",
+                    "legendFormat": "Policy Validation Mode: {{policy_validation_mode}}",
                     "refId": "A"
                 }
             ],
@@ -1256,7 +1264,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -1325,9 +1333,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "count(count(kyverno_policy_rule_info_total{policy_background_mode=\"true\"}==1) by (policy_name, policy_type)) by (policy_type)",
+                    "expr": "count(count(kyverno_policy_rule_info_total{policy_background_mode=\"true\", cluster=~\"$cluster\"}==1) by (policy_name, policy_type)) by (policy_type)",
                     "interval": "",
-                    "legendFormat": "{{policy_type}}",
+                    "legendFormat": "Policy Type: {{policy_type}}",
                     "refId": "A"
                 }
             ],
@@ -1356,7 +1364,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -1419,9 +1427,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "count(count(kyverno_policy_rule_info_total{policy_namespace!=\"-\"}==1) by (policy_name, policy_namespace)) by (policy_namespace)",
+                    "expr": "count(count(kyverno_policy_rule_info_total{policy_namespace!=\"-\", cluster=~\"$cluster\"}==1) by (policy_name, policy_namespace)) by (policy_namespace)",
                     "interval": "",
-                    "legendFormat": "{{policy_namespace}}",
+                    "legendFormat": "Namespace: {{policy_namespace}}",
                     "refId": "A"
                 }
             ],
@@ -1450,7 +1458,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -1524,9 +1532,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "count(kyverno_policy_rule_info_total{}==1) by (rule_type)",
+                    "expr": "count(count(kyverno_policy_rule_info_total{cluster=~\"$cluster\"}==1) by (rule_type, rule_name)) by (rule_type)",
                     "interval": "",
-                    "legendFormat": "{{rule_type}}",
+                    "legendFormat": "Rule Type: {{rule_type}}",
                     "refId": "A"
                 }
             ],
@@ -1555,7 +1563,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -1635,9 +1643,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(rate(kyverno_policy_execution_duration_seconds_sum{}[5m])) by (rule_type) / sum(rate(kyverno_policy_execution_duration_seconds_count{}[5m])) by (rule_type)",
+                    "expr": "sum(rate(kyverno_policy_execution_duration_seconds_sum{cluster=~\"$cluster\"}[5m])) by (rule_type) / sum(rate(kyverno_policy_execution_duration_seconds_count{cluster=~\"$cluster\"}[5m])) by (rule_type)",
                     "interval": "",
-                    "legendFormat": "{{rule_type}}",
+                    "legendFormat": "Rule Type: {{rule_type}}",
                     "refId": "A"
                 }
             ],
@@ -1666,7 +1674,7 @@
                     "label": "",
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -1739,9 +1747,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(rate(kyverno_policy_execution_duration_seconds_sum{}[5m])) by (policy_type) / sum(rate(kyverno_policy_execution_duration_seconds_count{}[5m])) by (policy_type)",
+                    "expr": "sum(rate(kyverno_policy_execution_duration_seconds_sum{cluster=~\"$cluster\"}[5m])) by (policy_type) / sum(rate(kyverno_policy_execution_duration_seconds_count{cluster=~\"$cluster\"}[5m])) by (policy_type)",
                     "interval": "",
-                    "legendFormat": "{{policy_type}}",
+                    "legendFormat": "Policy Type: {{policy_type}}",
                     "refId": "A"
                 }
             ],
@@ -1770,7 +1778,7 @@
                     "label": "",
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -1835,7 +1843,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(kyverno_policy_execution_duration_seconds_sum{}) / sum(kyverno_policy_execution_duration_seconds_count{})",
+                    "expr": "sum(kyverno_policy_execution_duration_seconds_sum{cluster=~\"$cluster\"}) / sum(kyverno_policy_execution_duration_seconds_count{cluster=~\"$cluster\"})",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -1891,7 +1899,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "avg(sum(kyverno_policy_execution_duration_seconds_sum{}) by (policy_name, policy_type) / sum(kyverno_policy_execution_duration_seconds_count{}) by (policy_name, policy_type))",
+                    "expr": "avg(sum(kyverno_policy_execution_duration_seconds_sum{cluster=~\"$cluster\"}) by (policy_name, policy_type) / sum(kyverno_policy_execution_duration_seconds_count{cluster=~\"$cluster\"}) by (policy_name, policy_type))",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -1959,7 +1967,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(rate(kyverno_admission_review_duration_seconds_sum{}[5m])) by (resource_request_operation) / sum(rate(kyverno_admission_review_duration_seconds_count{}[5m])) by (resource_request_operation)",
+                    "expr": "sum(rate(kyverno_admission_review_duration_seconds_sum{cluster=~\"$cluster\"}[5m])) by (resource_request_operation) / sum(rate(kyverno_admission_review_duration_seconds_count{cluster=~\"$cluster\"}[5m])) by (resource_request_operation)",
                     "interval": "",
                     "legendFormat": "Resource Operation: {{resource_request_operation}}",
                     "refId": "A"
@@ -1991,7 +1999,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -2054,7 +2062,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(rate(kyverno_admission_review_duration_seconds_sum{}[5m])) by (resource_kind) / sum(rate(kyverno_admission_review_duration_seconds_count{}[5m])) by (resource_kind)",
+                    "expr": "sum(rate(kyverno_admission_review_duration_seconds_sum{cluster=~\"$cluster\"}[5m])) by (resource_kind) / sum(rate(kyverno_admission_review_duration_seconds_count{cluster=~\"$cluster\"}[5m])) by (resource_kind)",
                     "interval": "",
                     "legendFormat": "Resource Kind: {{resource_kind}}",
                     "refId": "A"
@@ -2086,7 +2094,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -2151,7 +2159,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(increase(kyverno_admission_requests_total{}[5m]))",
+                    "expr": "sum(increase(kyverno_admission_requests_total{cluster=~\"$cluster\"}[5m]))",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -2207,7 +2215,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(kyverno_admission_review_duration_seconds_sum{})/sum(kyverno_admission_review_duration_seconds_count{})",
+                    "expr": "sum(kyverno_admission_review_duration_seconds_sum{cluster=~\"$cluster\"})/sum(kyverno_admission_review_duration_seconds_count{cluster=~\"$cluster\"})",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -2285,7 +2293,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(increase(kyverno_policy_changes_total{}[5m])) by (policy_change_type)",
+                    "expr": "sum(increase(kyverno_policy_changes_total{cluster=~\"$cluster\"}[5m])) by (policy_change_type)",
                     "interval": "",
                     "legendFormat": "Change type: {{policy_change_type}}",
                     "refId": "A"
@@ -2317,7 +2325,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -2389,9 +2397,9 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(increase(kyverno_policy_changes_total{}[5m])) by (policy_type)",
+                    "expr": "sum(increase(kyverno_policy_changes_total{cluster=~\"$cluster\"}[5m])) by (policy_type)",
                     "interval": "",
-                    "legendFormat": "{{policy_type}}",
+                    "legendFormat": "Policy Type: {{policy_type}}",
                     "refId": "A"
                 }
             ],
@@ -2420,7 +2428,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -2485,7 +2493,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(increase(kyverno_policy_changes_total{}[24h]))",
+                    "expr": "sum(increase(kyverno_policy_changes_total{cluster=~\"$cluster\"}[24h]))",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -2541,7 +2549,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(rate(kyverno_policy_changes_total{}[5m]))",
+                    "expr": "sum(rate(kyverno_policy_changes_total{cluster=~\"$cluster\"}[5m]))",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -2615,7 +2623,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(increase(kyverno_admission_requests_total{}[5m])) by (resource_request_operation)",
+                    "expr": "sum(increase(kyverno_admission_requests_total{cluster=~\"$cluster\"}[5m])) by (resource_request_operation)",
                     "interval": "",
                     "legendFormat": "Resource Operation: {{resource_request_operation}}",
                     "refId": "A"
@@ -2647,7 +2655,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -2716,7 +2724,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(increase(kyverno_admission_requests_total{}[5m])) by (resource_kind)",
+                    "expr": "sum(increase(kyverno_admission_requests_total{cluster=~\"$cluster\"}[5m])) by (resource_kind)",
                     "interval": "",
                     "legendFormat": "Resource Kind: {{resource_kind}}",
                     "refId": "A"
@@ -2748,7 +2756,7 @@
                     "label": null,
                     "logBase": 1,
                     "max": null,
-                    "min": null,
+                    "min": "0",
                     "show": true
                 },
                 {
@@ -2813,7 +2821,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum(increase(kyverno_admission_requests_total{}[24h]))",
+                    "expr": "sum(increase(kyverno_admission_requests_total{cluster=~\"$cluster\"}[24h]))",
                     "interval": "",
                     "legendFormat": "",
                     "refId": "A"
@@ -2838,6 +2846,20 @@
                 "refresh": 1,
                 "regex": "",
                 "type": "datasource"
+            }
+            ,{
+                "allValue": ".*",
+                "datasource": "${DS_PROMETHEUS_KYVERNO}",
+                "definition": "label_values(kyverno_policy_results_total, cluster)",
+                "hide": 0,
+                "includeAll": true,
+                "label": "Cluster",
+                "multi": true,
+                "name": "cluster",
+                "options": [],
+                "query": "label_values(kyverno_policy_results_total, cluster)",
+                "refresh": 2,
+                "type": "query"
             }
         ]
     },

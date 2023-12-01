@@ -1,6 +1,12 @@
 dependencies:
+- name: grafana
+  repository: ""
+  version: 0.0.0
+- name: crds
+  repository: ""
+  version: 3.1.0
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
   version: 0.3.1
-digest: sha256:8e4eb94709bfb6c1d62c60655174e102175f04ee290fdcab81a056c3c31d78d1
-generated: "2023-08-24T11:57:42.415676169-06:00"
+digest: sha256:404fc778ed8d629d80e045833042b8bd8acd4eef55c98c54aeeb6c3ffebaf6ff
+generated: "2023-11-21T14:22:31.491466-05:00"
