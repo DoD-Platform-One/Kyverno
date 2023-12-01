@@ -1,46 +1,49 @@
 apiVersion: v2
 type: application
 name: kyverno
-version: 3.0.0-bb.13
-appVersion: v1.10.3
+version: 3.1.0-bb.0
+appVersion: v1.11.0
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
 keywords:
   - kubernetes
   - nirmata
   - policy agent
+  - policy
   - validating webhook
-  - admissions controller
+  - admission controller
+  - mutation
+  - mutate
+  - validate
+  - generate
+  - supply chain
+  - security
 home: https://kyverno.io/
 sources:
   - https://github.com/kyverno/kyverno
 maintainers:
   - name: Nirmata
     url: https://kyverno.io/
-kubeVersion: ">=1.16.0-0"
-dependencies:
-  - name: gluon
-    version: 0.3.1
-    repository: oci://registry1.dso.mil/bigbang
+kubeVersion: ">=1.25.0-0"
 annotations:
   bigbang.dev/applicationVersions: |
-    - Kyverno: v1.9.3
+    - Kyverno: v1.11.0
   # Kubectl image is used if webhooksCleanup.enable or bbtests.enabled
   helm.sh/images: |
     - name: kyverno
-      image: registry1.dso.mil/ironbank/opensource/kyverno:v1.10.3
+      image: registry1.dso.mil/ironbank/opensource/kyverno:v1.11.0
     - name: kyvernopre
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.10.3
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.11.0
     - name: kubectl
-      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.3
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.4
     - name: ubi8-minimal
-      image: registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.8
+      image: registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.9
     - name: reports-controller
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:1.10.3
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.11.0
     - name: background-controller
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:1.10.3
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.11.0
     - name: cleanup-controller
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.10.3
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.11.0
   artifacthub.io/operator: "false"
   artifacthub.io/prerelease: "false"
   artifacthub.io/links: |
@@ -48,6 +51,12 @@ annotations:
       url: https://kyverno.io/docs
   # valid kinds are: added, changed, deprecated, removed, fixed and security
   artifacthub.io/changes: |
+    - kind: added
+      description: support for GrafanaDashboard custom resource
+    - kind: changed
+      description: only create ServiceMonitor if cluster supports it
+    - kind: fixed
+      description: rbac templating issues
     - kind: added
       description: make sigstore volume configurable
     - kind: changed
@@ -64,3 +73,35 @@ annotations:
       description: missing image pull secrets in helm hooks
     - kind: added
       description: support `excludeRoles` and `excludeClusterRoles` in config
+    - kind: added
+      description: define resources for cleanupJobs
+    - kind: changed
+      description: change to enable webhook cleanup hook by default
+    - kind: added
+      description: allow pod labels for cleanup jobs
+    - kind: added
+      description: allow nodeSelector for cleanup jobs
+    - kind: added
+      description: allow nodeSelector, tolerations and affinity settings for webhooksCleanup
+    - kind: added
+      description: allow affinity settings for cleanup jobs
+    - kind: added
+      description: Add helper to handle the labels for cleanup jobs, add component label
+    - kind: added
+      description: allow podSecurityContext and securityContext for webhooksCleanup
+    - kind: added
+      description: match conditions support in webhooks
+    - kind: fixed
+      description: missing image pull policy missing in a couple of deployments
+    - kind: added
+      description: added TUF flags for custom sigstore deployments
+dependencies:
+  - name: grafana
+    version: "0.0.0"
+    condition: grafana.enabled
+  - name: crds
+    version: "3.1.0"
+    condition: crds.install
+  - name: gluon
+    version: 0.3.1
+    repository: oci://registry1.dso.mil/bigbang
