@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.1.0-bb.1] - 2023-12-06
+### Changed
+- Updating OSCAL Component File.
+
 ## [3.1.0-bb.0] - 2023-11-21
 ### Changed
 - Updated `kubectl` from `v1.28.3` to `v1.28.4`
