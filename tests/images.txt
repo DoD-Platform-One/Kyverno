@@ -1,2 +1,2 @@
-registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.9
+registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.3
 registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.4

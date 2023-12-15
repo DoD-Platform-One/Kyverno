@@ -288,10 +288,10 @@ test:
     # -- (string) Image registry
     registry: registry1.dso.mil
     # -- Image repository
-    repository: ironbank/redhat/ubi/ubi8-minimal
+    repository: ironbank/redhat/ubi/ubi9-minimal
     # -- Image tag
     # Defaults to `latest` if omitted
-    tag: '8.9'
+    tag: '9.3'
     # -- (string) Image pull policy
     # Defaults to image.pullPolicy if omitted
     pullPolicy: ~

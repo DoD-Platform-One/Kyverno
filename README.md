@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 3.1.0-bb.1](https://img.shields.io/badge/Version-3.1.0--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.11.0](https://img.shields.io/badge/AppVersion-v1.11.0-informational?style=flat-square)
+![Version: 3.1.0-bb.2](https://img.shields.io/badge/Version-3.1.0--bb.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.11.0](https://img.shields.io/badge/AppVersion-v1.11.0-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -74,8 +74,8 @@ helm install kyverno chart/
 | imagePullSecrets | object | `{}` | Image pull secrets for image verification policies, this will define the `--imagePullSecrets` argument |
 | existingImagePullSecrets | list | `["private-registry"]` | Existing Image pull secrets for image verification policies, this will define the `--imagePullSecrets` argument |
 | test.image.registry | string | `"registry1.dso.mil"` | Image registry |
-| test.image.repository | string | `"ironbank/redhat/ubi/ubi8-minimal"` | Image repository |
-| test.image.tag | string | `"8.9"` | Image tag Defaults to `latest` if omitted |
+| test.image.repository | string | `"ironbank/redhat/ubi/ubi9-minimal"` | Image repository |
+| test.image.tag | string | `"9.3"` | Image tag Defaults to `latest` if omitted |
 | test.image.pullPolicy | string | `nil` | Image pull policy Defaults to image.pullPolicy if omitted |
 | test.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
 | test.resources.limits | object | `{"cpu":"100m","memory":"256Mi"}` | Pod resource limits |
