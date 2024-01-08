@@ -3,6 +3,13 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.1.1-bb.0] - 2024-1-8
+### Changed
+- Updated upstream chart from `3.1.0` to `3.1.1`
+- Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.11.0` to `v1.11.1`
+- Updated `gluon` from `0.3.1` to `0.4.6`
+- Added `ServiceMonitor` CRD
+
 ## [3.1.0-bb.2] - 2023-12-14
 ### Changed
 - Updated `ubi8-minimal:8.9` to `ubi9-minimal:9.3`

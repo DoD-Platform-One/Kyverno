@@ -4,9 +4,9 @@ dependencies:
   version: 0.0.0
 - name: crds
   repository: ""
-  version: 3.1.0
+  version: 3.1.1
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
-  version: 0.3.1
-digest: sha256:404fc778ed8d629d80e045833042b8bd8acd4eef55c98c54aeeb6c3ffebaf6ff
-generated: "2023-11-21T14:22:31.491466-05:00"
+  version: 0.4.6
+digest: sha256:9259f910a35bc10aadd6259af2960783dd5b171c7d1f1a780605d2fb3140c040
+generated: "2024-01-04T09:12:44.677319-05:00"

@@ -392,6 +392,46 @@ webhooksCleanup:
     seccompProfile:
       type: RuntimeDefault
 
+policyReportsCleanup:
+  # -- Create a helm post-upgrade hook to cleanup the old policy reports.
+  enabled: true
+
+  image:
+    # -- (string) Image registry
+    registry: registry1.dso.mil
+    # -- Image repository
+    repository: ironbank/opensource/kubernetes/kubectl
+    # -- Image tag
+    # Defaults to `latest` if omitted
+    tag: 'v1.28.4'
+    # -- (string) Image pull policy
+    # Defaults to image.pullPolicy if omitted
+    pullPolicy: ~
+
+  # -- Image pull secrets
+  imagePullSecrets:
+  - name: private-registry
+
+  # -- Security context for the pod
+  podSecurityContext: 
+    runAsUser: 1001
+    runAsGroup: 1001
+    runAsNonRoot: true
+
+  # -- Security context for the hook containers
+  securityContext:
+    runAsUser: 1001
+    runAsGroup: 1001
+    runAsNonRoot: true
+    privileged: false
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
+    seccompProfile:
+      type: RuntimeDefault
+
 grafana:
   # -- Enable grafana dashboard creation.
   enabled: false
@@ -881,7 +921,7 @@ admissionController:
       repository: ironbank/opensource/kyverno/kyvernopre
       # -- (string) Image tag
       # If missing, defaults to image.tag
-      tag: 'v1.11.0'
+      tag: 'v1.11.1'
       # -- (string) Image pull policy
       # If missing, defaults to image.pullPolicy
       pullPolicy: ~
@@ -925,7 +965,7 @@ admissionController:
       repository: ironbank/opensource/kyverno
       # -- (string) Image tag
       # Defaults to appVersion in Chart.yaml if omitted
-      tag: 'v1.11.0'
+      tag: 'v1.11.1'
       # -- Image pull policy
       pullPolicy: IfNotPresent
 
@@ -1156,7 +1196,7 @@ backgroundController:
     repository: ironbank/opensource/kyverno/kyverno/background-controller
     # -- Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.11.0'
+    tag: 'v1.11.1'
     # -- Image pull policy
     pullPolicy: IfNotPresent
 
@@ -1395,7 +1435,7 @@ cleanupController:
     repository: ironbank/opensource/kyverno/kyverno/cleanup-controller
     # -- (string) Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.11.0'
+    tag: 'v1.11.1'
     # -- Image pull policy
     pullPolicy: IfNotPresent
 
@@ -1680,7 +1720,7 @@ reportsController:
     repository: ironbank/opensource/kyverno/kyverno/reports-controller
     # -- (string) Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.11.0'
+    tag: 'v1.11.1'
     # -- Image pull policy
     pullPolicy: IfNotPresent
 
