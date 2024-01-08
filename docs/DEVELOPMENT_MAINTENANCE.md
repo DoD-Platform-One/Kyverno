@@ -23,8 +23,8 @@ You will want to install with:
 - Monitoring enabled
 
 Checking Prometheus for Kyverno dashboards
-- Login to Prometheus, validate under `Status` -> `Targets` that all kyverno targets are showing as up
-- Login to Grafana, then navigate to the Kyverno daskboard ( Dashboards > Browse > Kyverno ) and validate that the dashboard displays data
+- Login to Prometheus, validate under `Status` -> `Targets` that all kyverno controller targets are showing as up
+- Login to Grafana, then navigate to the Kyverno daskboard ( Dashboards > Browse > Kyverno Metrics ) and validate that the dashboard displays data
 
 > 📌 __NOTE__: if using MacOS make sure that you have gnu sed installed and add it to your PATH variable [GNU SED Instructions](https://gist.github.com/andre3k1/e3a1a7133fded5de5a9ee99c87c6fa0d)
 - [ ] Test secret sync in new namespace
@@ -94,6 +94,7 @@ Checking Prometheus for Kyverno dashboards
   - `backgroundController`
   - `cleanupController`
   - `reportsController`
+  - `policyReportsCleanup`
 
 - Set `podSecurityContext` and `securityContext`, as follows:
   ```
@@ -110,11 +111,13 @@ Checking Prometheus for Kyverno dashboards
   | --- | -- |
   | `test` | 65534 |
   | `webhooksCleanup` | 1001 |
-  | `cleanupJobs` | 1000 |
+  | `cleanupJobs.admissionReports` | 1000 |
+  | `cleanupJobs.clusterAdmissionReports` | 1000 |
   | `admissionController` | 10001 |
   | `backgroundController` | 1000 |
   | `cleanupController` | 1000 |
   | `reportsController` | 1000 |
+  | `policyReportsCleanup` | 1001 |
 
 - Set `features.policyExceptions.namespace` to `kyverno`
 
@@ -147,6 +150,19 @@ Checking Prometheus for Kyverno dashboards
 
 - Added Big Bang `monitoring`, `networkPolicies`, `istio`, `openshift`, and `bbtests` fields
 
+- `automountServiceAccountToken.enabled` added to:
+  - `admissionController.rbac.serviceAccount`
+  - `admissionController.rbac.deployment`
+  - `backgroundController.rbac.serviceAccount`
+  - `backgroundController.rbac.deployment`
+  - `cleanupJobs.admissionReports`
+  - `cleanupJobs.clusterAdmissionReports`
+  - `cleanupJobs.rbac.serviceAccount`
+  - `cleanupController.deployment.serviceAccount`
+  - `cleanupController.rbac.serviceAccount`
+  - `reportsController.deployment.serviceAccount`
+  - `reportsController.rbac.serviceAccount`
+  - `webhooksCleanup`
 
 ### chart/charts
 
@@ -155,6 +171,10 @@ Checking Prometheus for Kyverno dashboards
 ### chart/tests/
 
 - Add test files `/manifests/sync-secrets.yaml` and `scripts/secrets.sh`
+
+### chart/crds/
+
+- Add `crd-servicemonitors.yaml` from monitoring package
 
 ## Templates
 

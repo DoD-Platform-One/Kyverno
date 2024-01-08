@@ -1,8 +1,8 @@
 apiVersion: v2
 type: application
 name: kyverno
-version: 3.1.0-bb.2
-appVersion: v1.11.0
+version: 3.1.1-bb.0
+appVersion: v1.11.1
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
 keywords:
@@ -31,19 +31,19 @@ annotations:
   # Kubectl image is used if webhooksCleanup.enable or bbtests.enabled
   helm.sh/images: |
     - name: kyverno
-      image: registry1.dso.mil/ironbank/opensource/kyverno:v1.11.0
+      image: registry1.dso.mil/ironbank/opensource/kyverno:v1.11.1
     - name: kyvernopre
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.11.0
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.11.1
     - name: kubectl
       image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.4
     - name: ubi9-minimal
       image: registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.3
     - name: reports-controller
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.11.0
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.11.1
     - name: background-controller
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.11.0
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.11.1
     - name: cleanup-controller
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.11.0
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.11.1
   artifacthub.io/operator: "false"
   artifacthub.io/prerelease: "false"
   artifacthub.io/links: |
@@ -53,8 +53,6 @@ annotations:
   artifacthub.io/changes: |
     - kind: added
       description: support for GrafanaDashboard custom resource
-    - kind: changed
-      description: only create ServiceMonitor if cluster supports it
     - kind: fixed
       description: rbac templating issues
     - kind: added
@@ -100,8 +98,8 @@ dependencies:
     version: "0.0.0"
     condition: grafana.enabled
   - name: crds
-    version: "3.1.0"
+    version: "3.1.1"
     condition: crds.install
   - name: gluon
-    version: 0.3.1
+    version: 0.4.6
     repository: oci://registry1.dso.mil/bigbang
