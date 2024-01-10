@@ -344,7 +344,7 @@ webhooksCleanup:
     repository: ironbank/opensource/kubernetes/kubectl
     # -- Image tag
     # Defaults to `latest` if omitted
-    tag: 'v1.28.4'
+    tag: 'v1.28.5'
     # -- (string) Image pull policy
     # Defaults to image.pullPolicy if omitted
     pullPolicy: ~
@@ -403,7 +403,7 @@ policyReportsCleanup:
     repository: ironbank/opensource/kubernetes/kubectl
     # -- Image tag
     # Defaults to `latest` if omitted
-    tag: 'v1.28.4'
+    tag: 'v1.28.5'
     # -- (string) Image pull policy
     # Defaults to image.pullPolicy if omitted
     pullPolicy: ~
@@ -417,6 +417,21 @@ policyReportsCleanup:
     runAsUser: 1001
     runAsGroup: 1001
     runAsNonRoot: true
+
+  # -- Node labels for pod assignment
+  nodeSelector: {}
+
+  # -- List of node taints to tolerate
+  tolerations: []
+
+  # -- Pod anti affinity constraints.
+  podAntiAffinity: {}
+
+  # -- Pod affinity constraints.
+  podAffinity: {}
+
+  # -- Node affinity constraints.
+  nodeAffinity: {}
 
   # -- Security context for the hook containers
   securityContext:
@@ -569,7 +584,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.28.4'
+      tag: 'v1.28.5'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -649,7 +664,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.28.4'
+      tag: 'v1.28.5'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -921,7 +936,7 @@ admissionController:
       repository: ironbank/opensource/kyverno/kyvernopre
       # -- (string) Image tag
       # If missing, defaults to image.tag
-      tag: 'v1.11.1'
+      tag: 'v1.11.3'
       # -- (string) Image pull policy
       # If missing, defaults to image.pullPolicy
       pullPolicy: ~
@@ -965,7 +980,7 @@ admissionController:
       repository: ironbank/opensource/kyverno
       # -- (string) Image tag
       # Defaults to appVersion in Chart.yaml if omitted
-      tag: 'v1.11.1'
+      tag: 'v1.11.3'
       # -- Image pull policy
       pullPolicy: IfNotPresent
 
@@ -1196,7 +1211,7 @@ backgroundController:
     repository: ironbank/opensource/kyverno/kyverno/background-controller
     # -- Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.11.1'
+    tag: 'v1.11.3'
     # -- Image pull policy
     pullPolicy: IfNotPresent
 
@@ -1435,7 +1450,7 @@ cleanupController:
     repository: ironbank/opensource/kyverno/kyverno/cleanup-controller
     # -- (string) Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.11.1'
+    tag: 'v1.11.3'
     # -- Image pull policy
     pullPolicy: IfNotPresent
 
@@ -1720,7 +1735,7 @@ reportsController:
     repository: ironbank/opensource/kyverno/kyverno/reports-controller
     # -- (string) Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.11.1'
+    tag: 'v1.11.3'
     # -- Image pull policy
     pullPolicy: IfNotPresent
 
@@ -1958,7 +1973,7 @@ openshift: false
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.4
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.5
     additionalVolumeMounts:
       - name: "kyverno-bbtest-manifest"
         mountPath: /yaml

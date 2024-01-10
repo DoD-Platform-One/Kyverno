@@ -5,7 +5,7 @@ metadata:
 upstream:
   type: git
   git:
-    commit: afe740a42abb147d853a3cd03451d0a913fdd47b
+    commit: 1612b21e6a3896de0a0dd93b574b18538fbfbf2f
     repo: https://github.com/kyverno/kyverno
     directory: charts/kyverno
-    ref: kyverno-chart-3.1.1
+    ref: kyverno-chart-3.1.3

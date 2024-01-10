@@ -3,6 +3,12 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.1.3-bb.0] - 2024-1-10
+### Changed
+- Updated upstream chart from `3.1.1` to `3.1.3`
+- Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.11.1` to `v1.11.3`
+- Updated `kubectl` from `1.28.4` to `1.28.5`
+
 ## [3.1.1-bb.0] - 2024-1-8
 ### Changed
 - Updated upstream chart from `3.1.0` to `3.1.1`
