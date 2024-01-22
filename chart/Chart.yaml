@@ -1,8 +1,8 @@
 apiVersion: v2
 type: application
 name: kyverno
-version: 3.1.3-bb.0
-appVersion: v1.11.3
+version: 3.1.4-bb.0
+appVersion: v1.11.4
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
 keywords:
@@ -27,23 +27,23 @@ maintainers:
 kubeVersion: ">=1.25.0-0"
 annotations:
   bigbang.dev/applicationVersions: |
-    - Kyverno: v1.11.0
+    - Kyverno: v1.11.4
   # Kubectl image is used if webhooksCleanup.enable or bbtests.enabled
   helm.sh/images: |
     - name: kyverno
-      image: registry1.dso.mil/ironbank/opensource/kyverno:v1.11.3
+      image: registry1.dso.mil/ironbank/opensource/kyverno:v1.11.4
     - name: kyvernopre
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.11.3
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.11.4
     - name: kubectl
       image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.5
     - name: ubi9-minimal
       image: registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.3
     - name: reports-controller
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.11.3
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.11.4
     - name: background-controller
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.11.3
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.11.4
     - name: cleanup-controller
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.11.3
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.11.4
   artifacthub.io/operator: "false"
   artifacthub.io/prerelease: "false"
   artifacthub.io/links: |
@@ -54,7 +54,7 @@ dependencies:
     version: "0.0.0"
     condition: grafana.enabled
   - name: crds
-    version: "3.1.3"
+    version: "3.1.4"
     condition: crds.install
   - name: gluon
     version: 0.4.6
