@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.1.4-bb.1] - 2024-1-26
+### Changed
+- Updated `kubectl` from `1.28.5` to `1.28.6`
+
 ## [3.1.4-bb.0] - 2024-1-22
 ### Changed
 - Updated upstream chart from `3.1.3` to `3.1.4`
