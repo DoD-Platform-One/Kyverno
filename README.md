@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 3.1.4-bb.1](https://img.shields.io/badge/Version-3.1.4--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.11.4](https://img.shields.io/badge/AppVersion-v1.11.4-informational?style=flat-square)
+![Version: 3.1.4-bb.2](https://img.shields.io/badge/Version-3.1.4--bb.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.11.4](https://img.shields.io/badge/AppVersion-v1.11.4-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -97,6 +97,7 @@ helm install kyverno chart/
 | webhooksCleanup.podAffinity | object | `{}` | Pod affinity constraints. |
 | webhooksCleanup.nodeAffinity | object | `{}` | Node affinity constraints. |
 | webhooksCleanup.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":1001,"runAsNonRoot":true,"runAsUser":1001,"seccompProfile":{"type":"RuntimeDefault"}}` | Security context for the hook containers |
+| webhooksCleanup.resources | object | `{"limits":{"cpu":"0.5","memory":"256Mi"},"requests":{"cpu":"0.5","memory":"256Mi"}}` | Resource limits for the containers |
 | policyReportsCleanup.enabled | bool | `true` | Create a helm post-upgrade hook to cleanup the old policy reports. |
 | policyReportsCleanup.image.registry | string | `"registry1.dso.mil"` | Image registry |
 | policyReportsCleanup.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` | Image repository |
@@ -110,6 +111,7 @@ helm install kyverno chart/
 | policyReportsCleanup.podAffinity | object | `{}` | Pod affinity constraints. |
 | policyReportsCleanup.nodeAffinity | object | `{}` | Node affinity constraints. |
 | policyReportsCleanup.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":1001,"runAsNonRoot":true,"runAsUser":1001,"seccompProfile":{"type":"RuntimeDefault"}}` | Security context for the hook containers |
+| policyReportsCleanup.resources | object | `{"limits":{"cpu":"0.5","memory":"256Mi"},"requests":{"cpu":"0.5","memory":"256Mi"}}` | Resource limits for the containers |
 | grafana.enabled | bool | `false` | Enable grafana dashboard creation. |
 | grafana.configMapName | string | `"{{ include \"kyverno.fullname\" . }}-grafana"` | Configmap name template. |
 | grafana.namespace | string | `nil` | Namespace to create the grafana dashboard configmap. If not set, it will be created in the same namespace where the chart is deployed. |

@@ -392,6 +392,15 @@ webhooksCleanup:
     seccompProfile:
       type: RuntimeDefault
 
+  # -- Resource limits for the containers
+  resources:
+    limits:
+      cpu: "0.5"
+      memory: "256Mi"
+    requests:
+      cpu: "0.5"
+      memory: "256Mi"
+
 policyReportsCleanup:
   # -- Create a helm post-upgrade hook to cleanup the old policy reports.
   enabled: true
@@ -446,6 +455,15 @@ policyReportsCleanup:
         - ALL
     seccompProfile:
       type: RuntimeDefault
+  
+  # -- Resource limits for the containers
+  resources:
+    limits:
+      cpu: "0.5"
+      memory: "256Mi"
+    requests:
+      cpu: "0.5"
+      memory: "256Mi"
 
 grafana:
   # -- Enable grafana dashboard creation.
