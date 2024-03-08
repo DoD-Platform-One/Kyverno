@@ -3,6 +3,11 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.1.4-bb.3] - 2024-3-08
+### Changed
+- Updated `kubectl` from `1.28.6` to `1.28.7`
+
+
 ## [3.1.4-bb.2] - 2024-2-16
 ### Changed
 - Added the resource limits for pre-delete and post-upgrade pods.
