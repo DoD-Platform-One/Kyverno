@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 3.1.4-bb.4](https://img.shields.io/badge/Version-3.1.4--bb.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.11.4](https://img.shields.io/badge/AppVersion-v1.11.4-informational?style=flat-square)
+![Version: 3.1.4-bb.5](https://img.shields.io/badge/Version-3.1.4--bb.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.11.4](https://img.shields.io/badge/AppVersion-v1.11.4-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -471,6 +471,7 @@ helm install kyverno chart/
 | networkPolicies.externalRegistries.allowEgress | bool | `false` |  |
 | networkPolicies.externalRegistries.ports | list | `[]` |  |
 | networkPolicies.allowExternalRegistryEgress | bool | `false` |  |
+| networkPolicies.additionalPolicies | list | `[]` |  |
 | istio.enabled | bool | `false` |  |
 | openshift | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |

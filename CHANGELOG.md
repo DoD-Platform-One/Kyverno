@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.1.4-bb.5] - 2024-04-05
+### Added
+- Custom network policies
+
 ## [3.1.4-bb.4] - 2024-03-11
 ### Changed
 - Added Openshift updates for deploying kyverno into Openshift cluster
