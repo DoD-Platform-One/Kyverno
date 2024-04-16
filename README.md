@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 3.1.4-bb.5](https://img.shields.io/badge/Version-3.1.4--bb.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.11.4](https://img.shields.io/badge/AppVersion-v1.11.4-informational?style=flat-square)
+![Version: 3.1.4-bb.6](https://img.shields.io/badge/Version-3.1.4--bb.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.11.4](https://img.shields.io/badge/AppVersion-v1.11.4-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -475,7 +475,7 @@ helm install kyverno chart/
 | istio.enabled | bool | `false` |  |
 | openshift | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |
-| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.7"` |  |
+| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.29.3"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].name | string | `"kyverno-bbtest-manifest"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/yaml"` |  |
 | bbtests.scripts.additionalVolumes[0].name | string | `"kyverno-bbtest-manifest"` |  |
