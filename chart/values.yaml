@@ -344,7 +344,7 @@ webhooksCleanup:
     repository: ironbank/opensource/kubernetes/kubectl
     # -- Image tag
     # Defaults to `latest` if omitted
-    tag: 'v1.28.7'
+    tag: 'v1.29.3'
     # -- (string) Image pull policy
     # Defaults to image.pullPolicy if omitted
     pullPolicy: ~
@@ -412,7 +412,7 @@ policyReportsCleanup:
     repository: ironbank/opensource/kubernetes/kubectl
     # -- Image tag
     # Defaults to `latest` if omitted
-    tag: 'v1.28.7'
+    tag: 'v1.29.3'
     # -- (string) Image pull policy
     # Defaults to image.pullPolicy if omitted
     pullPolicy: ~
@@ -602,7 +602,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.28.7'
+      tag: 'v1.29.3'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -682,7 +682,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.28.7'
+      tag: 'v1.29.3'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -1992,7 +1992,7 @@ openshift: false
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.28.7
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.29.3
     additionalVolumeMounts:
       - name: "kyverno-bbtest-manifest"
         mountPath: /yaml
