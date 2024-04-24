@@ -2,12 +2,12 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
----
-
+## [3.1.4-bb.7] - 2024-04-23
+### Changed
+- Fixed README.md for the chart that was overwritten and the README.md.gotmpl 
 ## [3.1.4-bb.6] - 2024-4-16
 ### Changed
 - Updated `kubectl` from `1.28.7` to `1.29.3`
-
 ## [3.1.4-bb.5] - 2024-04-05
 ### Added
 - Custom network policies
