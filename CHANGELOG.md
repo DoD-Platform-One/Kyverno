@@ -2,12 +2,19 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+---
+## [3.1.4-bb.8] - 2024-04-29
+### Changed
+- Updated CHANGELOG to fix formatting
+
 ## [3.1.4-bb.7] - 2024-04-23
 ### Changed
 - Fixed README.md for the chart that was overwritten and the README.md.gotmpl 
-## [3.1.4-bb.6] - 2024-4-16
+
+## [3.1.4-bb.6] - 2024-04-16
 ### Changed
 - Updated `kubectl` from `1.28.7` to `1.29.3`
+
 ## [3.1.4-bb.5] - 2024-04-05
 ### Added
 - Custom network policies
@@ -16,31 +23,31 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Changed
 - Added Openshift updates for deploying kyverno into Openshift cluster
 
-## [3.1.4-bb.3] - 2024-3-08
+## [3.1.4-bb.3] - 2024-03-08
 ### Changed
 - Updated `kubectl` from `1.28.6` to `1.28.7`
 
-## [3.1.4-bb.2] - 2024-2-16
+## [3.1.4-bb.2] - 2024-02-16
 ### Changed
 - Added the resource limits for pre-delete and post-upgrade pods.
 
-## [3.1.4-bb.1] - 2024-1-26
+## [3.1.4-bb.1] - 2024-01-26
 ### Changed
 - Updated `kubectl` from `1.28.5` to `1.28.6`
 
-## [3.1.4-bb.0] - 2024-1-22
+## [3.1.4-bb.0] - 2024-01-22
 ### Changed
 - Updated upstream chart from `3.1.3` to `3.1.4`
 - Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.11.3` to `v1.11.4`
 - Updated `kubectl` from `1.28.4` to `1.28.5`
 
-## [3.1.3-bb.0] - 2024-1-10
+## [3.1.3-bb.0] - 2024-01-10
 ### Changed
 - Updated upstream chart from `3.1.1` to `3.1.3`
 - Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.11.1` to `v1.11.3`
 - Updated `kubectl` from `1.28.4` to `1.28.5`
 
-## [3.1.1-bb.0] - 2024-1-8
+## [3.1.1-bb.0] - 2024-01-8
 ### Changed
 - Updated upstream chart from `3.1.0` to `3.1.1`
 - Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.11.0` to `v1.11.1`
