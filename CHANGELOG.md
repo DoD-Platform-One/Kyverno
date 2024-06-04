@@ -3,6 +3,9 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.1.4-bb.9] - 2024-05-24
+### Changed
+- Added healthcheck validation and configuration validation 
 ## [3.1.4-bb.8] - 2024-04-29
 ### Changed
 - Updated CHANGELOG to fix formatting
