@@ -1,0 +1,15 @@
+apiVersion: compliance.bigbang.dev/v1alpha1
+kind: Validation
+metadata:
+  name: kyverno-config-check
+spec:
+  checks:
+    - name: kyverno-policy-check
+      script: |
+        kubectl get clusterpolicies -o json | jq -r '.items[] | select(.spec.rules | length == 0) | .metadata.name'
+      expectedOutcome: ""
+    - name: kyverno-role-check
+      script: |
+        kubectl get roles -n kyverno -o json | jq -r '.items[] | select(.rules | length == 0) | .metadata.name'
+      expectedOutcome: ""
+

@@ -1,0 +1,15 @@
+apiVersion: compliance.bigbang.dev/v1alpha1
+kind: Validation
+metadata:
+  name: kyverno-healthcheck
+spec:
+  checks:
+    - name: kyverno-pod-status
+      script: |
+         kubectl get pods -n kyverno -o json | jq -r '.items[] | select(.status.phase != "Running" and .status.phase != "Succeeded") | .metadata.name'
+      expectedOutcome: ""
+    - name: kyverno-service-status
+      script: |
+        kubectl get svc -n kyverno -o json | jq -r '.items[] | select(.spec.type == "LoadBalancer" and .status.loadBalancer.ingress == null) | .metadata.name'
+      expectedOutcome: ""
+
