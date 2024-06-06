@@ -3,9 +3,13 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
-## [3.1.4-bb.9] - 2024-05-24
+## [3.2.4-bb.0] - 2024-06-05
 ### Changed
-- Added healthcheck validation and configuration validation 
+- Updated upstream chart from `3.1.4` to `3.2.4`
+- Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.11.4` to `v1.12.3`
+- Updated `kubectl` from `1.29.3` to `1.29.4`
+- Added reference to kyvernocli with version `1.12.3`
+
 ## [3.1.4-bb.8] - 2024-04-29
 ### Changed
 - Updated CHANGELOG to fix formatting
