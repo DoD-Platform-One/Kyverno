@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.2.4-bb.1] - 2024-06-13
+### Changed
+- Revert Oscal package validation checks
+
 ## [3.2.4-bb.0] - 2024-06-05
 ### Changed
 - Updated upstream chart from `3.1.4` to `3.2.4`
