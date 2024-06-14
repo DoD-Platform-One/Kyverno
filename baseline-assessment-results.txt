@@ -1,4 +1,0 @@
-Validation passed for kyverno-pod-status
-Validation passed for kyverno-service-status
-Validation passed for kyverno-policy-check
-Validation passed for kyverno-role-check

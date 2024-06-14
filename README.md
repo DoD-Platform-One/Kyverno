@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 3.2.4-bb.0](https://img.shields.io/badge/Version-3.2.4--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.12.3](https://img.shields.io/badge/AppVersion-v1.12.3-informational?style=flat-square)
+![Version: 3.2.4-bb.1](https://img.shields.io/badge/Version-3.2.4--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.12.3](https://img.shields.io/badge/AppVersion-v1.12.3-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -129,6 +129,7 @@ helm install kyverno chart/
 | webhooksCleanup.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":1001,"runAsNonRoot":true,"runAsUser":1001,"seccompProfile":{"type":"RuntimeDefault"}}` | Security context for the hook containers |
 | webhooksCleanup.resources | object | `{"limits":{"cpu":"0.5","memory":"256Mi"},"requests":{"cpu":"0.5","memory":"256Mi"}}` | Resource limits for the containers |
 | policyReportsCleanup.enabled | bool | `true` | Create a helm post-upgrade hook to cleanup the old policy reports. |
+| policyReportsCleanup.automountServiceAccountToken.enabled | bool | `true` |  |
 | policyReportsCleanup.image.registry | string | `"registry1.dso.mil"` | Image registry |
 | policyReportsCleanup.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` | Image repository |
 | policyReportsCleanup.image.tag | string | `"v1.29.4"` | Image tag Defaults to `latest` if omitted |

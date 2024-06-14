@@ -1,2 +1,0 @@
-Validation passed for kyverno-policy-check
-Validation passed for kyverno-role-check
