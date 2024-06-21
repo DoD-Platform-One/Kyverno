@@ -10,7 +10,17 @@ Kyverno within Big Bang is a modified version of an upstream chart. `kpt` is use
 1. Run `helm dependency update` from the `./chart` directory to regenerate dependencies.
 1. Update `CHANGELOG.md` adding an entry for the new version and noting all changes (at minimum should include `Updated Kyverno to x.x.x`).
 1. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
-1. Open an MR in "Draft" status ( or the Renovate created MR ) and validate that CI passes. This will perform a number of smoke tests against the package, but it is good to manually deploy to test some things that CI doesn't. Follow the steps below for manual testing.
+1. Open an MR in "Draft" status ( or the Renovate created MR ) and validate that CI passes. This will perform a number of smoke tests against the package, but it is good to manually deploy to test some things that CI doesn't. Follow the steps below for manual testing. For automated CI testing follow the steps in [test-package-against-bb](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) and modify test-values with the following settings:
+  ```yaml
+  kyverno:
+    enabled: true
+    sourceType: "git"
+    git:
+      tag: null
+      repo: "https://repo1.dso.mil/big-bang/product/packages/kyverno.git"
+      path: "./chart"
+      branch: renovate/ironbank
+  ```
 1. Once all manual testing is complete take your MR out of "Draft" status and add the review label. 
 
 # Testing New Kyverno Version
