@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.2.4-bb.2] - 2024-06-18
+### Changed
+- Updated DEVELOPMENT_MAINTENANCE.md with instructions for integration testing in pipeline
+
 ## [3.2.4-bb.1] - 2024-06-13
 ### Changed
 - Revert Oscal package validation checks
