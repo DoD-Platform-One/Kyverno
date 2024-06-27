@@ -2,7 +2,6 @@
     "baseBranches": ["main"],
     "configWarningReuseIssue": false,
     "dependencyDashboard": true,
-    "dependencyDashboardHeader": "- [ ] Update Helm chart from upstream to match new version.\n- [ ] Verify `chart/crds/crd-servicemonitors.yaml` is up-to-date.\n- [ ] Verify `chart/dashboards/dashboard.json` is up-to-date.",
     "dependencyDashboardTitle": "Renovate: Upgrade Kyverno Images",
     "draftPR": true,
     "enabledManagers": ["helm-values","regex"],
