@@ -125,7 +125,7 @@ crds:
       repository: ironbank/opensource/kyverno/kyvernocli
       # -- (string) Image tag
       # Defaults to appVersion in Chart.yaml if omitted
-      tag: 'v1.12.3'
+      tag: 'v1.12.4'
       # -- (string) Image pull policy
       pullPolicy: ~
 
@@ -1420,7 +1420,7 @@ admissionController:
       repository: ironbank/opensource/kyverno/kyvernopre
       # -- (string) Image tag
       # If missing, defaults to image.tag
-      tag: 'v1.12.3'
+      tag: 'v1.12.4'
       # -- (string) Image pull policy
       # If missing, defaults to image.pullPolicy
       pullPolicy: ~
@@ -1468,7 +1468,7 @@ admissionController:
       repository: ironbank/opensource/kyverno
       # -- (string) Image tag
       # Defaults to appVersion in Chart.yaml if omitted
-      tag: 'v1.12.3'
+      tag: 'v1.12.4'
       # -- Image pull policy
       pullPolicy: IfNotPresent
 
@@ -1714,7 +1714,7 @@ backgroundController:
     repository: ironbank/opensource/kyverno/kyverno/background-controller
     # -- Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.12.3'
+    tag: 'v1.12.4'
     # -- Image pull policy
     pullPolicy: IfNotPresent
 
@@ -1983,7 +1983,7 @@ cleanupController:
     repository: ironbank/opensource/kyverno/kyverno/cleanup-controller
     # -- (string) Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.12.3'
+    tag: 'v1.12.4'
     # -- Image pull policy
     pullPolicy: IfNotPresent
 
@@ -2309,7 +2309,7 @@ reportsController:
     repository: ironbank/opensource/kyverno/kyverno/reports-controller
     # -- (string) Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.12.3'
+    tag: 'v1.12.4'
     # -- Image pull policy
     pullPolicy: IfNotPresent
 
