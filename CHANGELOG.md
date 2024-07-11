@@ -3,6 +3,9 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.2.5-bb.0] - 2024-07-09
+### Changed
+- Updated upstream chart from `3.2.4` to `3.2.5` and app version from `v1.12.3` to `v1.12.4`
 ## [3.2.4-bb.2] - 2024-06-18
 ### Changed
 - Updated DEVELOPMENT_MAINTENANCE.md with instructions for integration testing in pipeline
