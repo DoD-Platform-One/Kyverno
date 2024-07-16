@@ -5,11 +5,13 @@
 Kubernetes Native Policy Management
 
 ## Upstream References
+
 * <https://kyverno.io/>
 
 * <https://github.com/kyverno/kyverno>
 
 ## Learn More
+
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 

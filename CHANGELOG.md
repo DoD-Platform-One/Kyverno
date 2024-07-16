@@ -3,30 +3,50 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+
+## [3.2.5-bb.1] - 2024-07-15
+
+### Changed
+
+- Disabled policy cleanup in post-upgarde hook in `/chart/values.yaml`
+
 ## [3.2.5-bb.0] - 2024-07-09
+
 ### Changed
+
 - Updated upstream chart from `3.2.4` to `3.2.5` and app version from `v1.12.3` to `v1.12.4`
+
 ## [3.2.4-bb.2] - 2024-06-18
+
 ### Changed
+
 - Updated DEVELOPMENT_MAINTENANCE.md with instructions for integration testing in pipeline
 
 ## [3.2.4-bb.1] - 2024-06-13
+
 ### Changed
+
 - Revert Oscal package validation checks
 
 ## [3.2.4-bb.0] - 2024-06-05
+
 ### Changed
+
 - Updated upstream chart from `3.1.4` to `3.2.4`
 - Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.11.4` to `v1.12.3`
 - Updated `kubectl` from `1.29.3` to `1.29.4`
 - Added reference to kyvernocli with version `1.12.3`
 
 ## [3.1.4-bb.8] - 2024-04-29
+
 ### Changed
+
 - Updated CHANGELOG to fix formatting
 
 ## [3.1.4-bb.7] - 2024-04-23
+
 ### Changed
+
 - Fixed README.md for the chart that was overwritten and the README.md.gotmpl 
 
 ## [3.1.4-bb.6] - 2024-04-16
@@ -124,6 +144,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Update `kubectl version` to v1.28.2
 
 ## [3.0.0-bb.5] - 2023-10-11
+
 ### Changed
 - Modified `features.policyExceptions.enabled` to true
 - Restricted new `policyExceptions` to the kyerno `namespace`
@@ -133,33 +154,47 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Modified runAsGroup securityContext for kyverno containers
 
 ## [3.0.0-bb.3] - 2023-09-19
+
 ### Changed
+
 - Set controlPlaneCidr to 0.0.0.0/0 for package test
 
 ## [3.0.0-bb.2] - 2023-09-14
+
 ### Changed
+
 - Made test resources conditional on bbtests.enabled
 
 ## [3.0.0-bb.2] - 2023-09-14
+
 ### Changed
+
 - Made test resources conditional on bbtests.enabled
 
 ## [3.0.0-bb.1] - 2023-09-12
+
 ### Changed
+
 - NetworkPolicy fixes based on new labels
 
 ## [3.0.0-bb.0] - 2023-08-24
+
 ### Changed
+
 - Updated to latest images 1.10.3
 - Updated to latest chart 3.0.0
 
 ## [2.7.2-bb.0] - 2023-04-17
+
 ### Changed
+
 - Updated to latest image 1.9.2
 - Updated to latest chart 2.7.2
 
 ## [2.6.5-bb.3] - 2023-03-13
+
 ### Changed
+
 - Updated kubectl to v1.26.2
 
 ## [2.6.5-bb.2] - 2023-02-07
@@ -167,17 +202,23 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Updated kubectl to v1.26.1
 
 ## [2.6.5-bb.1] - 2023-01-26
+
 ### Changed
+
 - Updated kubectl to v1.25.6
 
 ## [2.6.5-bb.0] - 2023-01-06
+
 ### Changed
+
 - Updated kubectl to v1.25.5
 - Updated Helm chart to v2.6.5
 - Updated appVersion to v1.8.5
 
 ## [2.6.1-bb.0] - 2022-11-15
+
 ### Changed
+
 - Updated Helm chart to v2.6.1
 - Updated Kyverno image to v1.8.1
 - Updated kubectl image to v1.25.4
