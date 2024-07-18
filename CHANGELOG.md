@@ -3,6 +3,14 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.2.5-bb.3] - 2024-07-18
+
+### Changed
+
+- Updated `kubectl` from `1.29.4` to `1.29.6`
+- Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.12.3` to `v1.12.4`
+- Added reference to `kyvernocli` with version `v1.12.4`
+- Updated DEVELOPMENT_MAINTENANCE.md to accurately reflect list of files with `automountServiceAccountToken` changes.
 
 ## [3.2.5-bb.2] - 2024-07-18
 

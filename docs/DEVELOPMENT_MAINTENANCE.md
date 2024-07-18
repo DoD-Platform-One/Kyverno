@@ -245,8 +245,13 @@ templates/cleanup-controller/deployment.yaml
 templates/cleanup-controller/serviceaccount.yaml
 templates/cleanup/cleanup-admission-reports.yaml
 templates/cleanup/cleanup-cluster-admission-reports.yaml
+templates/cleanup/cleanup-cluster-ephemeral-reports.yaml
+templates/cleanup/cleanup-ephemeral-reports.yaml
+templates/cleanup/cleanup-update-requests.yaml
 templates/cleanup/serviceaccount.yaml
-templates/hooks/pre-delete.yaml
+templates/hooks/post-upgrade-clean-reports.yaml
+templates/hooks/post-upgrade-migrate-resources.yaml
+templates/hooks/pre-delete-scale-to-zero.yaml
 templates/reports-controller/deployment.yaml
 templates/reports-controller/serviceaccount.yaml
 values.yaml

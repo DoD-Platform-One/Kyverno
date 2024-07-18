@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: kyverno
-version: 3.2.5-bb.2
+version: 3.2.5-bb.3
 appVersion: v1.12.4
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
@@ -35,7 +35,7 @@ annotations:
     - name: kyvernopre
       image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.12.4
     - name: kubectl
-      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.29.4
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.29.6
     - name: ubi9-minimal
       image: registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.4
     - name: reports-controller
