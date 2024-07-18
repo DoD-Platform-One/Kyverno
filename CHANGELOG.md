@@ -4,6 +4,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.2.5-bb.2] - 2024-07-18
+
+### Removed
+
+- Removed duplicate dashboard.json in `chart/charts/grafana/`
+
 ## [3.2.5-bb.1] - 2024-07-15
 
 ### Changed
