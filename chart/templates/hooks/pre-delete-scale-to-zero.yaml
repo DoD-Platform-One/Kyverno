@@ -23,6 +23,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
+      automountServiceAccountToken: {{ .Values.webhooksCleanup.automountServiceAccountToken.enabled }}
       serviceAccount: {{ template "kyverno.admission-controller.serviceAccountName" . }}
       {{- with .Values.webhooksCleanup.podSecurityContext }}
       securityContext:
