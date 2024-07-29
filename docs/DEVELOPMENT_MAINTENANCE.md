@@ -1,5 +1,6 @@
 
 # How to update the Kyverno Package chart
+
 Kyverno within Big Bang is a modified version of an upstream chart. `kpt` is used to handle any automatic updates from upstream. The below details the steps required to update to a new version of the Kyverno package.
 
 1. Review the upstream [changelog](https://github.com/kyverno/kyverno/blob/main/CHANGELOG.md) for potential breaking changes.
@@ -11,6 +12,7 @@ Kyverno within Big Bang is a modified version of an upstream chart. `kpt` is use
 1. Update `CHANGELOG.md` adding an entry for the new version and noting all changes (at minimum should include `Updated Kyverno to x.x.x`).
 1. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
 1. Open an MR in "Draft" status ( or the Renovate created MR ) and validate that CI passes. This will perform a number of smoke tests against the package, but it is good to manually deploy to test some things that CI doesn't. Follow the steps below for manual testing. For automated CI testing follow the steps in [test-package-against-bb](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) and modify test-values with the following settings:
+
   ```yaml
   kyverno:
     enabled: true
@@ -21,23 +23,28 @@ Kyverno within Big Bang is a modified version of an upstream chart. `kpt` is use
       path: "./chart"
       branch: renovate/ironbank
   ```
-1. Once all manual testing is complete take your MR out of "Draft" status and add the review label. 
+
+1. Once all manual testing is complete take your MR out of "Draft" status and add the review label.
 
 # Testing New Kyverno Version
 
 NOTE: For these testing steps it is good to do them on both a clean install and an upgrade. For clean install, point kyverno to your branch. For an upgrade do an install with kyverno pointing to the latest tag, then perform a helm upgrade with kyverno pointing to your branch.
 
 You will want to install with:
+
 - Kyverno Kyverno-Policies, and Kyverno-Reporter enabled
 - Istio enabled
 - Monitoring enabled
 
 Checking Prometheus for Kyverno dashboards
+
 - Login to Prometheus, validate under `Status` -> `Targets` that all kyverno controller targets are showing as up
 - Login to Grafana, then navigate to the Kyverno daskboard ( Dashboards > Browse > Kyverno Metrics ) and validate that the dashboard displays data
 
 > 📌 __NOTE__: if using MacOS make sure that you have gnu sed installed and add it to your PATH variable [GNU SED Instructions](https://gist.github.com/andre3k1/e3a1a7133fded5de5a9ee99c87c6fa0d)
+
 - [ ] Test secret sync in new namespace
+
     ```Shell
     # create secret in kyverno NS
     kubectl create secret generic \
@@ -57,7 +64,9 @@ Checking Prometheus for Kyverno dashboards
     # Check for the secret that should be synced - if it exists this test is successful
     kubectl get secrets kyverno-bbtest-secret -n kyverno-bbtest
     ```
+
 - [ ] Delete the test resources
+
     ```shell
     # If above is successful, delete test resources
     kubectl delete -f https://repo1.dso.mil/big-bang/product/packages/kyverno/-/raw/main/chart/tests/manifests/sync-secrets.yaml
@@ -81,11 +90,12 @@ Checking Prometheus for Kyverno dashboards
 
 - Set `apiVersionOverride.podDisruptionBudget` to `policy/v1`
 
-- Set `defaultRegistry` to `registry1.dso.mil` 
+- Set `defaultRegistry` to `registry1.dso.mil`
 
 - Set `existingImagePullSecrets` to `private-registry`
 
 - Set `image` fields to use ironbank images, as follows:
+
   ```
   image:
     registry: registry1.dso.mil
@@ -94,6 +104,7 @@ Checking Prometheus for Kyverno dashboards
   imagePullSecrets:
   - name: private-registry
   ```
+
   *in the following locations*
   - `test`
   - `webhooksCleanup`
@@ -107,6 +118,7 @@ Checking Prometheus for Kyverno dashboards
   - `policyReportsCleanup`
 
 - Set `podSecurityContext` and `securityContext`, as follows:
+
   ```
   podSecurityContext:
     runAsUser: {id}
@@ -116,8 +128,9 @@ Checking Prometheus for Kyverno dashboards
     runAsUser: {id}
     runAsGroup: {id}
   ```
+
   *according to the chart below*
-  | key | id | 
+  | key | id |
   | --- | -- |
   | `test` | 65534 |
   | `webhooksCleanup` | 1001 |
@@ -134,6 +147,7 @@ Checking Prometheus for Kyverno dashboards
 - Set `admissionController.replicas` to `3`
 
 - Set `admissionController.container.resources` as follows:
+
   ```
   resources:
   limits:
@@ -145,6 +159,7 @@ Checking Prometheus for Kyverno dashboards
   ```
 
 - Add service accounts rule to `backgroundController.rbac.coreClusterRole.extraResources` as follows:
+
   ```
   - apiGroups: 
       - ''
@@ -199,6 +214,7 @@ Checking Prometheus for Kyverno dashboards
 ### chart/templates/cleanup-controller/role.yaml
 
 - Add rule for core API group on configmaps:
+
   ```
   - apiGroups:
       - ''
@@ -214,12 +230,15 @@ Checking Prometheus for Kyverno dashboards
 
 - In each of the upstream tests, `admission-controller-liveness`, `admission-controller-metrics`, `admission-controller-readiness`, `cleanup-controller-liveness`, `cleanup-controller-metrics`, `cleanup-controller-readiness`, and `reports-controller-metrics`:
   - Check whether `bbtests` is enabled
+
     ```
     {{- if dig "bbtests" "enabled" false (merge .Values dict) }}
       ...
     {{- end }}
     ```
+
   - Add `podSecurityContext` and `imagePullSecrets`
+
     ```
     {{- with .Values.test.podSecurityContext }}
     securityContext:
@@ -229,11 +248,13 @@ Checking Prometheus for Kyverno dashboards
     imagePullSecrets: {{ tpl (toYaml .) $ | nindent 8 }}
     {{- end }}
     ```
+
   - Replace `wget` with `curl`
 
 - Add Big Bang test files `clusterrole`, `clusterrolebinding`, `configmap`, `gluon`, `serviceaccount`, and `test`
 
 ## `automountServiceAccountToken`
+
 The following files have been updated to manage the auto-mounting of ServiceAccount tokens and can be disabling/enabling per SA and/or deployment
 
 ```

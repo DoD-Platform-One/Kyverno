@@ -3,6 +3,7 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+
 ## [3.2.5-bb.3] - 2024-07-18
 
 ### Changed
@@ -61,61 +62,85 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### Changed
 
-- Fixed README.md for the chart that was overwritten and the README.md.gotmpl 
+- Fixed README.md for the chart that was overwritten and the README.md.gotmpl
 
 ## [3.1.4-bb.6] - 2024-04-16
+
 ### Changed
+
 - Updated `kubectl` from `1.28.7` to `1.29.3`
 
 ## [3.1.4-bb.5] - 2024-04-05
+
 ### Added
+
 - Custom network policies
 
 ## [3.1.4-bb.4] - 2024-03-11
+
 ### Changed
+
 - Added Openshift updates for deploying kyverno into Openshift cluster
 
 ## [3.1.4-bb.3] - 2024-03-08
+
 ### Changed
+
 - Updated `kubectl` from `1.28.6` to `1.28.7`
 
 ## [3.1.4-bb.2] - 2024-02-16
+
 ### Changed
+
 - Added the resource limits for pre-delete and post-upgrade pods.
 
 ## [3.1.4-bb.1] - 2024-01-26
+
 ### Changed
+
 - Updated `kubectl` from `1.28.5` to `1.28.6`
 
 ## [3.1.4-bb.0] - 2024-01-22
+
 ### Changed
+
 - Updated upstream chart from `3.1.3` to `3.1.4`
 - Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.11.3` to `v1.11.4`
 - Updated `kubectl` from `1.28.4` to `1.28.5`
 
 ## [3.1.3-bb.0] - 2024-01-10
+
 ### Changed
+
 - Updated upstream chart from `3.1.1` to `3.1.3`
 - Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.11.1` to `v1.11.3`
 - Updated `kubectl` from `1.28.4` to `1.28.5`
 
 ## [3.1.1-bb.0] - 2024-01-8
+
 ### Changed
+
 - Updated upstream chart from `3.1.0` to `3.1.1`
 - Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.11.0` to `v1.11.1`
 - Updated `gluon` from `0.3.1` to `0.4.6`
 - Added `ServiceMonitor` CRD
 
 ## [3.1.0-bb.2] - 2023-12-14
+
 ### Changed
+
 - Updated `ubi8-minimal:8.9` to `ubi9-minimal:9.3`
 
 ## [3.1.0-bb.1] - 2023-12-06
+
 ### Changed
+
 - Updating OSCAL Component File.
 
 ## [3.1.0-bb.0] - 2023-11-21
+
 ### Changed
+
 - Updated `kubectl` from `v1.28.3` to `v1.28.4`
 - Updated `kyverno` from `v1.10.3` to `v1.11.0`
 - Updated `background-controller` from `1.10.3` to `v1.11.0`
@@ -125,46 +150,65 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Updated `ubi8-minimal` from `8.8` to `8.9`
 
 ## [3.0.0-bb.13] - 2023-11-24
+
 ### Changed
+
 - Allow the automountserviceaccounttoken to be disabled/enabled
 
 ## [3.0.0-bb.12] - 2023-11-16
+
 ### Changed
+
 - Added `registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.8` to `tests/images.txt`
 
 ## [3.0.0-bb.11] - 2023-11-06
+
 ### Changed
+
 - Added the rights to get, list, watch, update, and patch the kyverno-background-controller serviceaccount
 
 ## [3.0.0-bb.10] - 2023-11-02
+
 ### Changed
+
 - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl patch v1.28.2 -> v1.28.3
 - Added `.Values.allowExternalRegistryEgress` option to enable a `NetworkPolicy` that allows the Admission Controller to talk to external networks. Default: false
 
 ## [3.0.0-bb.9] - 2023-10-24
+
 ### Changed
+
 - Add pod level securityContext for kyverno test
 
 ## [3.0.0-bb.8] - 2023-10-18
+
 ### Changed
+
 - Fixed RunAsGroup typo in chart/values.yaml
 
 ## [3.0.0-bb.7] - 2023-10-17
+
 ### Changed
+
 - Modified OSCAL Version for kyverno and updated to 1.1.1
 
 ## [3.0.0-bb.6] - 2023-10-13
+
 ### Changed
+
 - Update `kubectl version` to v1.28.2
 
 ## [3.0.0-bb.5] - 2023-10-11
 
 ### Changed
+
 - Modified `features.policyExceptions.enabled` to true
 - Restricted new `policyExceptions` to the kyerno `namespace`
 
 ## [3.0.0-bb.4] - 2023-09-20
+
 ### Changed
+
 - Modified runAsGroup securityContext for kyverno containers
 
 ## [3.0.0-bb.3] - 2023-09-19
@@ -212,7 +256,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Updated kubectl to v1.26.2
 
 ## [2.6.5-bb.2] - 2023-02-07
+
 ### Changed
+
 - Updated kubectl to v1.26.1
 
 ## [2.6.5-bb.1] - 2023-01-26
