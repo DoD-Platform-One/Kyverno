@@ -141,7 +141,6 @@ kubectl delete validatingwebhookconfigurations kyverno-policy-validating-webhook
 [Kyverno Official Documentation
 ](https://kyverno.io/docs/)
 
-
 [Video Tutorial - Policy Management with Kyverno
 ](https://www.youtube.com/watch?v=ZrbJB2KgFAE)
 
