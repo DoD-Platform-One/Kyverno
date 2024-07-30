@@ -9,14 +9,21 @@ POLICY_NAME="sync-secrets"
 
 echo "Test: Copy secret to new namespace"
 echo "Step 1: Create secret to be copied"
+
 # kubectl create secret generic $SECRET_NAME -n kyverno
-kubectl create secret generic -n kyverno $SECRET_NAME \
-  --from-literal=username='username' \
-  --from-literal=password='password'
+kubectl get secret $SECRET_NAME -n kyverno 2> /dev/null || kubectl create secret generic -n kyverno $SECRET_NAME \
+    --from-literal=username='username' \
+    --from-literal=password='password'
+
+#Double check if secret exists:
 kubectl get secret $SECRET_NAME -n kyverno
 
 echo "Step 2: Apply kyverno policy"
 kubectl apply -n kyverno -f /yaml/ && sleep 5 #wait for policy to be ready
+# if run locally in kyverno/chart/tests/scripts directory run:
+# kubectl apply -n kyverno -f ../manifests/sync-secrets.yaml && sleep 5
+# for local cleanup: 
+# kubectl delete -n kyverno -f ../manifests/sync-secrets.yaml
 
 # Check for ClusterPolicy secret-sync prior to creating the namespace
 check_cluster_policy "$POLICY_NAME"
