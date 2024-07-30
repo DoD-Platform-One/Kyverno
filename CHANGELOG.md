@@ -4,6 +4,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.2.6-bb.0] - 2024-07-30
+
+### Changed
+
+- Updated kyverno chart from `3.2.5` to `3.2.6` and app version from `v1.12.5` to `v1.12.5`
+- Updated `kubectl` from `1.29.6` to `1.29.7`
+- Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.12.4` to `v1.12.5`
+- Added reference to `kyvernocli` with version `v1.12.5`
+
 ## [3.2.5-bb.4] - 2024-07-30
 
 ### Changed
@@ -64,6 +73,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.11.4` to `v1.12.3`
 - Updated `kubectl` from `1.29.3` to `1.29.4`
 - Added reference to kyvernocli with version `1.12.3`
+
+## [3.1.4-bb.9] - 2024-05-24
+
+### Changed
+
+- Added healthcheck validation and configuration validation
 
 ## [3.1.4-bb.8] - 2024-04-29
 
