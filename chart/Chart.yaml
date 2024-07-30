@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: kyverno
-version: 3.2.5-bb.3
+version: 3.2.5-bb.4
 appVersion: v1.12.4
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
@@ -64,5 +64,5 @@ dependencies:
     version: 3.2.5
     condition: crds.install
   - name: gluon
-    version: 0.4.6
+    version: 0.5.2
     repository: oci://registry1.dso.mil/bigbang
