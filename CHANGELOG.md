@@ -3,6 +3,13 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+
+## [3.2.5-bb.4] - 2024-07-30
+
+### Changed
+
+- Update secret sync test script to check for kyverno-bbtest-secret already existing.
+
 ## [3.2.5-bb.4] - 2024-07-30
 
 ### Changed
