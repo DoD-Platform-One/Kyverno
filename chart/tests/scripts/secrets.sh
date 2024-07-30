@@ -1,8 +1,11 @@
 #!/bin/bash
 set -e
 
+source ./check_cluster_policy.sh
+
 NAMESPACE="kyverno-bbtest"
 SECRET_NAME="kyverno-bbtest-secret"
+POLICY_NAME="sync-secrets"
 
 echo "Test: Copy secret to new namespace"
 echo "Step 1: Create secret to be copied"
@@ -14,6 +17,16 @@ kubectl get secret $SECRET_NAME -n kyverno
 
 echo "Step 2: Apply kyverno policy"
 kubectl apply -n kyverno -f /yaml/ && sleep 5 #wait for policy to be ready
+
+# Check for ClusterPolicy secret-sync prior to creating the namespace
+check_cluster_policy "$POLICY_NAME"
+if [ $? -ne 0 ]; then
+    echo "ClusterPolicy check failed."
+    exit 1
+else
+    echo "ClusterPolicy check succeeded."
+    exit 0
+fi
 
 echo "Step 3: Check if the secret was created in new namespace"
 kubectl create namespace $NAMESPACE
