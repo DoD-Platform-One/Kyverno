@@ -13,7 +13,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernopre`  from `v1.12.4` to `v1.12.5`
 - Added reference to `kyvernocli` with version `v1.12.5`
 
-## [3.2.5-bb.4] - 2024-07-30
+## [3.2.5-bb.5] - 2024-07-30
 
 ### Changed
 
