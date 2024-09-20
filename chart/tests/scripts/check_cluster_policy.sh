@@ -34,9 +34,13 @@ check_cluster_policy() {
 
   if [ $found -eq 0 ]; then
       echo "Error: ClusterPolicy '$policy_name' not found after $((max_attempts * wait_time)) seconds."
+        # echo "Clean Up"
+        # kubectl delete -n kyverno -f /yaml/sync-secrets.yaml
+        # kubectl delete secret $SECRET_NAME -n $NAMESPACE
+        # kubectl delete secret $SECRET_NAME -n kyverno
+        # kubectl delete namespace $NAMESPACE
       exit 1
   else
       echo "ClusterPolicy '$policy_name' check completed successfully."
-      exit 0
   fi
 }
