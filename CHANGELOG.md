@@ -4,12 +4,6 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
-## [3.2.6-bb.1] - 2024-09-20
-
-### Changed
-
-- Updated secrets.sh and clusterpolicy.sh to fix early exit.
-
 ## [3.2.6-bb.0] - 2024-07-30
 
 ### Changed

@@ -8,7 +8,7 @@ Kyverno within Big Bang is a modified version of an upstream chart. `kpt` is use
 1. Check out the existing `renovate/ironbank` branch created by the renovate-runner, an MR for this branch should be linked in the Renovate issue.
 1. From the top level of the repo run `kpt pkg update chart@{GIT TAG} --strategy alpha-git-patch` replacing `{GIT TAG}` with the tag you found in step one. You may run into some merge conflicts, resolve these in the way that makes the most sense. In general, if something is a BB addition you will want to keep it, otherwise go with the upstream change.
 1. Append `-bb.0` to the `version` in `chart/Chart.yaml`.
-1. Check for a new version of gluon prior to running helm dependency update. <https://repo1.dso.mil/big-bang/product/packages/gluon/-/tags>. If found, update the version in Chart.yaml.
+1. Check for a new version of gluon prior to running helm dependency update. https://repo1.dso.mil/big-bang/product/packages/gluon/-/tags. If found, update the version in Chart.yaml.
 1. Run `helm dependency update` from the `./chart` directory to regenerate dependencies.
 1. Update `CHANGELOG.md` adding an entry for the new version and noting all changes (at minimum should include `Updated Kyverno to x.x.x`).
 1. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).

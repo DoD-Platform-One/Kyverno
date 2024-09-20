@@ -7,9 +7,6 @@ NAMESPACE="kyverno-bbtest"
 SECRET_NAME="kyverno-bbtest-secret"
 POLICY_NAME="sync-secrets"
 
-#ensure namespace does not already exist
-kubectl get namespace $NAMESPACE -n kyverno 2> /dev/null && kubectl delete namespace $NAMESPACE 2> /dev/null
-
 echo "Test: Copy secret to new namespace"
 echo "Step 1: Create secret to be copied"
 
@@ -22,9 +19,7 @@ kubectl get secret $SECRET_NAME -n kyverno 2> /dev/null || kubectl create secret
 kubectl get secret $SECRET_NAME -n kyverno
 
 echo "Step 2: Apply kyverno policy"
-kubectl apply -n kyverno -f /yaml/sync-secrets.yaml && sleep 5 #wait for policy to be ready
-kubectl get cpol sync-secrets
-
+kubectl apply -n kyverno -f /yaml/ && sleep 5 #wait for policy to be ready
 # if run locally in kyverno/chart/tests/scripts directory run:
 # kubectl apply -n kyverno -f ../manifests/sync-secrets.yaml && sleep 5
 # for local cleanup: 
@@ -32,15 +27,23 @@ kubectl get cpol sync-secrets
 
 # Check for ClusterPolicy secret-sync prior to creating the namespace
 check_cluster_policy "$POLICY_NAME"
+if [ $? -ne 0 ]; then
+    echo "ClusterPolicy check failed."
+    exit 1
+else
+    echo "ClusterPolicy check succeeded."
+    exit 0
+fi
 
 echo "Step 3: Check if the secret was created in new namespace"
-
 kubectl create namespace $NAMESPACE
 # Timeout of 2 minutes in case we fail
 timeout 120s /bin/sh -c "until kubectl get secret $SECRET_NAME -n $NAMESPACE; do sleep 5; done"
+
 echo "Clean Up"
-kubectl delete -n kyverno -f /yaml/sync-secrets.yaml
+kubectl delete -n kyverno -f /yaml/
 kubectl delete secret $SECRET_NAME -n $NAMESPACE
 kubectl delete secret $SECRET_NAME -n kyverno
 kubectl delete namespace $NAMESPACE
+
 echo "Test: Passed"
