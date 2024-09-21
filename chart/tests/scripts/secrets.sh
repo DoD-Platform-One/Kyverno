@@ -50,5 +50,5 @@ echo "Clean Up"
 kubectl delete secret $SECRET_NAME -n $NAMESPACE 
 kubectl delete -n kyverno -f /yaml/$POLICY_NAME.yaml
 kubectl delete secret $SECRET_NAME -n kyverno
-kubectl delete namespace $NAMESPACE
+kubectl delete namespace $NAMESPACE --wait=false
 echo -e "TEST: ${GRN}PASS${NC}"
