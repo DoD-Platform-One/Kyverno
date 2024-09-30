@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kyverno
 
-![Version: 3.2.6-bb.1](https://img.shields.io/badge/Version-3.2.6--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.12.5](https://img.shields.io/badge/AppVersion-v1.12.5-informational?style=flat-square)
+![Version: 3.2.6-bb.3](https://img.shields.io/badge/Version-3.2.6--bb.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.12.5](https://img.shields.io/badge/AppVersion-v1.12.5-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
