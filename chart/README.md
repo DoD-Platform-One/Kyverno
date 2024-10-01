@@ -1,6 +1,6 @@
 # kyverno
 
-![Version: 3.2.4-bb.2](https://img.shields.io/badge/Version-3.2.4--bb.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.12.3](https://img.shields.io/badge/AppVersion-v1.12.3-informational?style=flat-square)
+![Version: 3.2.7](https://img.shields.io/badge/Version-3.2.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.12.6](https://img.shields.io/badge/AppVersion-v1.12.6-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
