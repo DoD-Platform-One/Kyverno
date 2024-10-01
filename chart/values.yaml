@@ -103,7 +103,7 @@ crds:
       repository: ironbank/opensource/kyverno/kyvernocli
       # -- (string) Image tag
       # Defaults to appVersion in Chart.yaml if omitted
-      tag: 'v1.12.5'
+      tag: 'v1.12.6'
       # -- (string) Image pull policy
       pullPolicy: ~
     imagePullSecrets:
@@ -426,7 +426,7 @@ webhooksCleanup:
     repository: ironbank/opensource/kubernetes/kubectl
     # -- Image tag
     # Defaults to `latest` if omitted
-    tag: 'v1.29.7'
+    tag: 'v1.30.5'
     # -- (string) Image pull policy
     # Defaults to image.pullPolicy if omitted
     pullPolicy: ~
@@ -488,7 +488,7 @@ policyReportsCleanup:
     repository: ironbank/opensource/kubernetes/kubectl
     # -- Image tag
     # Defaults to `latest` if omitted
-    tag: 'v1.29.7'
+    tag: 'v1.30.5'
     # -- (string) Image pull policy
     # Defaults to image.pullPolicy if omitted
     pullPolicy: ~
@@ -664,7 +664,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.29.7'
+      tag: 'v1.30.5'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -730,7 +730,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.29.7'
+      tag: 'v1.30.5'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -797,7 +797,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.29.7'
+      tag: 'v1.30.5'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -862,7 +862,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.29.7'
+      tag: 'v1.30.5'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -927,7 +927,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.29.7'
+      tag: 'v1.30.5'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -1185,7 +1185,7 @@ admissionController:
       repository: ironbank/opensource/kyverno/kyvernopre
       # -- (string) Image tag
       # If missing, defaults to image.tag
-      tag: 'v1.12.5'
+      tag: 'v1.12.6'
       # -- (string) Image pull policy
       # If missing, defaults to image.pullPolicy
       pullPolicy: ~
@@ -1227,7 +1227,7 @@ admissionController:
       repository: ironbank/opensource/kyverno
       # -- (string) Image tag
       # Defaults to appVersion in Chart.yaml if omitted
-      tag: 'v1.12.5'
+      tag: 'v1.12.6'
       # -- Image pull policy
       pullPolicy: IfNotPresent
     # -- Image pull secrets
@@ -1451,7 +1451,7 @@ backgroundController:
     repository: ironbank/opensource/kyverno/kyverno/background-controller
     # -- Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.12.5'
+    tag: 'v1.12.6'
     # -- Image pull policy
     pullPolicy: IfNotPresent
   # -- Image pull secrets
@@ -1682,7 +1682,7 @@ cleanupController:
     repository: ironbank/opensource/kyverno/kyverno/cleanup-controller
     # -- (string) Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.12.5'
+    tag: 'v1.12.6'
     # -- Image pull policy
     pullPolicy: IfNotPresent
   # -- Image pull secrets
@@ -1966,7 +1966,7 @@ reportsController:
     repository: ironbank/opensource/kyverno/kyverno/reports-controller
     # -- (string) Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.12.5'
+    tag: 'v1.12.6'
     # -- Image pull policy
     pullPolicy: IfNotPresent
   # -- Image pull secrets
@@ -2198,7 +2198,7 @@ openshift: false
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.29.7
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.5
     additionalVolumeMounts:
       - name: "kyverno-bbtest-manifest"
         mountPath: /yaml

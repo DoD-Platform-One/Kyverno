@@ -4,6 +4,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.2.7-bb.0] - 2024-10-01
+
+### Changed
+
+- Updated `kyverno` chart from `3.2.6` to `3.2.7` and app version from `v1.12.5` to `v1.12.6`
+- Updated `kubectl` from `1.29.7` to `1.30.5`
+- Updated `kyverno`, `background-controller`, `cleanup-controller`, `reports-controller`, `kyvernocli`, `kyvernopre` from `v1.12.5` to `v1.12.6`
+
 ## [3.2.6-bb.3] - 2024-09-30
 
 ### Changed
