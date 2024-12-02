@@ -26,6 +26,7 @@ maintainers:
     url: https://kyverno.io/
 kubeVersion: ">=1.25.0-0"
 annotations:
+  bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/applicationVersions: |
     - Kyverno: v1.12.6
   # Kubectl image is used if webhooksCleanup.enable or bbtests.enabled
