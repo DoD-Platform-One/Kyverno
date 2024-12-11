@@ -10,7 +10,7 @@ spec:
       - ipBlock:
           cidr: 0.0.0.0/0
       ports:
-        - port: 9443
+        - port: {{ .Values.admissionController.webhookServer.port }}
           protocol: TCP
   podSelector:
     matchLabels: {{- include "kyverno.labels.merge" (list (include "kyverno.labels.common" .) (include "kyverno.admission-controller.matchLabels" .)) | nindent 8 }}

@@ -11,6 +11,10 @@ global:
     registry: registry1.dso.mil
   imagePullSecrets:
     - name: private-registry
+
+  # -- Resync period for informers
+  resyncPeriod: 15m
+
   caCertificates:
     # -- Global CA certificates to use with Kyverno deployments
     # This value is expected to be one large string of CA certificates
@@ -33,6 +37,10 @@ global:
 
   # -- Global node labels for pod assignment. Non-global values will override the global value.
   nodeSelector: {}
+
+  # -- Global List of node taints to tolerate. Non-global values will override the global value.
+  tolerations: []
+
 # -- (string) Override the name of the chart
 nameOverride: ~
 # -- (string) Override the expanded name of the chart
@@ -54,11 +62,7 @@ crds:
   groups:
     # -- Install CRDs in group `kyverno.io`
     kyverno:
-      admissionreports: true
-      backgroundscanreports: true
       cleanuppolicies: true
-      clusteradmissionreports: true
-      clusterbackgroundscanreports: true
       clustercleanuppolicies: true
       clusterpolicies: true
       globalcontextentries: true
@@ -85,11 +89,7 @@ crds:
     enabled: true
     # -- Resources to migrate
     resources:
-      - admissionreports.kyverno.io
-      - backgroundscanreports.kyverno.io
       - cleanuppolicies.kyverno.io
-      - clusteradmissionreports.kyverno.io
-      - clusterbackgroundscanreports.kyverno.io
       - clustercleanuppolicies.kyverno.io
       - clusterpolicies.kyverno.io
       - globalcontextentries.kyverno.io
@@ -98,12 +98,13 @@ crds:
       - updaterequests.kyverno.io
     image:
       # -- (string) Image registry
-      registry: registry1.dso.mil
+      registry: ~
+      defaultRegistry: registry1.dso.mil
       # -- (string) Image repository
       repository: ironbank/opensource/kyverno/kyvernocli
       # -- (string) Image tag
       # Defaults to appVersion in Chart.yaml if omitted
-      tag: 'v1.12.6'
+      tag: 'v1.13.2'
       # -- (string) Image pull policy
       pullPolicy: ~
     imagePullSecrets:
@@ -189,14 +190,8 @@ config:
     - '[Pod/binding,*,*]'
     - '[ReplicaSet,*,*]'
     - '[ReplicaSet/*,*,*]'
-    - '[AdmissionReport,*,*]'
-    - '[AdmissionReport/*,*,*]'
-    - '[ClusterAdmissionReport,*,*]'
-    - '[ClusterAdmissionReport/*,*,*]'
-    - '[BackgroundScanReport,*,*]'
-    - '[BackgroundScanReport/*,*,*]'
-    - '[ClusterBackgroundScanReport,*,*]'
-    - '[ClusterBackgroundScanReport/*,*,*]'
+    - '[EphemeralReport,*,*]'
+    - '[ClusterEphemeralReport,*,*]'
     # exclude resources from the chart
     - '[ClusterRole,*,{{ template "kyverno.admission-controller.roleName" . }}]'
     - '[ClusterRole,*,{{ template "kyverno.admission-controller.roleName" . }}:core]'
@@ -286,23 +281,24 @@ config:
     - '[ServiceMonitor,{{ if .Values.admissionController.serviceMonitor.namespace }}{{ .Values.admissionController.serviceMonitor.namespace }}{{ else }}{{ template "kyverno.namespace" . }}{{ end }},{{ template "kyverno.reports-controller.name" . }}]'
     - '[Secret,{{ include "kyverno.namespace" . }},{{ template "kyverno.admission-controller.serviceName" . }}.{{ template "kyverno.namespace" . }}.svc.*]'
     - '[Secret,{{ include "kyverno.namespace" . }},{{ template "kyverno.cleanup-controller.name" . }}.{{ template "kyverno.namespace" . }}.svc.*]'
-  # -- Defines the `namespaceSelector` in the webhook configurations.
-  # Note that it takes a list of `namespaceSelector` and/or `objectSelector` in the JSON format, and only the first element
-  # will be forwarded to the webhook configurations.
+  # -- Sets the threshold for the total number of UpdateRequests generated for mutateExisitng and generate policies.
+  updateRequestThreshold: 1000
+
+  # -- Defines the `namespaceSelector`/`objectSelector` in the webhook configurations.
   # The Kyverno namespace is excluded if `excludeKyvernoNamespace` is `true` (default)
   webhooks:
     # Exclude namespaces
-    - namespaceSelector:
-        matchExpressions:
-          - key: kubernetes.io/metadata.name
-            operator: NotIn
-            values:
-              - kube-system
-  # Exclude objects
-  # - objectSelector:
-  #     matchExpressions:
-  #     - key: webhooks.kyverno.io/exclude
-  #       operator: DoesNotExist
+    namespaceSelector:
+      matchExpressions:
+      - key: kubernetes.io/metadata.name
+        operator: NotIn
+        values:
+          - kube-system
+    # Exclude objects
+    # - objectSelector:
+    #     matchExpressions:
+    #     - key: webhooks.kyverno.io/exclude
+    #       operator: DoesNotExist
 
   # -- Defines annotations to set on webhook configurations.
   webhookAnnotations:
@@ -350,13 +346,23 @@ metricsConfig:
   # -- (list) Configures the bucket boundaries for all Histogram metrics, changing this configuration requires restart of the kyverno admission controller
   bucketBoundaries: [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10, 15, 20, 25, 30]
   # -- (map) Configures the exposure of individual metrics, by default all metrics and all labels are exported, changing this configuration requires restart of the kyverno admission controller
-  metricsExposure: ~
-  # metricsExposure:
-  #   kyverno_policy_execution_duration_seconds:
-  #     disabledLabelDimensions: ["resource_kind", "resource_namespace", "resource_request_operation"]
-  #     bucketBoundaries: [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5]
-  #   kyverno_admission_review_duration_seconds:
-  #     enabled: false
+
+  metricsExposure:
+    kyverno_policy_execution_duration_seconds:
+      # bucketBoundaries: [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5]
+      disabledLabelDimensions: ["resource_namespace", "resource_request_operation"]
+    kyverno_admission_review_duration_seconds:
+      # enabled: false
+      disabledLabelDimensions: ["resource_namespace"]
+    kyverno_policy_rule_info_total:
+      disabledLabelDimensions: ["resource_namespace", "policy_namespace"]
+    kyverno_policy_results_total:
+      disabledLabelDimensions: ["resource_namespace", "policy_namespace"]
+    kyverno_admission_requests_total:
+      disabledLabelDimensions: ["resource_namespace"]
+    kyverno_cleanup_controller_deletedobjects_total:
+      disabledLabelDimensions: ["resource_namespace", "policy_namespace"]
+
 # -- Image pull secrets for image verification policies, this will define the `--imagePullSecrets` argument
 imagePullSecrets: {}
 # regcred:
@@ -373,6 +379,9 @@ existingImagePullSecrets:
   - private-registry
 # Tests configuration
 test:
+  # -- Sleep time before running test
+  sleep: 20
+
   image:
     # -- (string) Image registry
     registry: registry1.dso.mil
@@ -380,7 +389,7 @@ test:
     repository: ironbank/redhat/ubi/ubi9-minimal
     # -- Image tag
     # Defaults to `latest` if omitted
-    tag: '9.4'
+    tag: '9.5'
     # -- (string) Image pull policy
     # Defaults to image.pullPolicy if omitted
     pullPolicy: ~
@@ -419,6 +428,11 @@ customLabels: {}
 webhooksCleanup:
   # -- Create a helm pre-delete hook to cleanup webhooks.
   enabled: true
+
+  autoDeleteWebhooks:
+    # -- Allow webhooks controller to delete webhooks using finalizers
+    enabled: false
+
   image:
     # -- (string) Image registry
     registry: registry1.dso.mil
@@ -426,7 +440,7 @@ webhooksCleanup:
     repository: ironbank/opensource/kubernetes/kubectl
     # -- Image tag
     # Defaults to `latest` if omitted
-    tag: 'v1.30.5'
+    tag: 'v1.30.6'
     # -- (string) Image pull policy
     # Defaults to image.pullPolicy if omitted
     pullPolicy: ~
@@ -488,7 +502,7 @@ policyReportsCleanup:
     repository: ironbank/opensource/kubernetes/kubectl
     # -- Image tag
     # Defaults to `latest` if omitted
-    tag: 'v1.30.5'
+    tag: 'v1.30.6'
     # -- (string) Image pull policy
     # Defaults to image.pullPolicy if omitted
     pullPolicy: ~
@@ -552,6 +566,8 @@ grafana:
   # according to https://grafana-operator.github.io/grafana-operator/docs/examples/dashboard_from_configmap/readme/
   grafanaDashboard:
     create: false
+    folder: kyverno
+    allowCrossNamespaceImport: true
     matchLabels:
       dashboards: "grafana"
 # Features configuration
@@ -568,6 +584,17 @@ features:
   validatingAdmissionPolicyReports:
     # -- Enables the feature
     enabled: false
+  reporting:
+    # -- Enables the feature
+    validate: true
+    # -- Enables the feature
+    mutate: true
+    # -- Enables the feature
+    mutateExisting: true
+    # -- Enables the feature
+    imageVerify: true
+    # -- Enables the feature
+    generate: true
   autoUpdateWebhooks:
     # -- Enables the feature
     enabled: true
@@ -595,6 +622,9 @@ features:
   generateValidatingAdmissionPolicy:
     # -- Enables the feature
     enabled: false
+  dumpPatches:
+    # -- Enables the feature
+    enabled: false
   globalContext:
     # -- Maximum allowed response size from API Calls. A value of 0 bypasses checks (not recommended)
     maxApiCallResponseLength: 2000000
@@ -612,7 +642,7 @@ features:
       # - PolicyError
   policyExceptions:
     # -- Enables the feature
-    enabled: true
+    enabled: false
     # -- Restrict policy exceptions to a single namespace
     namespace: 'kyverno'
   protectManagedResources:
@@ -623,24 +653,24 @@ features:
     allowInsecure: false
     # -- Enable registry client helpers
     credentialHelpers:
-      - default
-      - google
-      - amazon
-      - azure
-      - github
-  reports:
-    # -- Reports chunk size
-    chunkSize: 0
+    - default
+    - google
+    - amazon
+    - azure
+    - github
   ttlController:
     # -- Reconciliation interval for the label based cleanup manager
     reconciliationInterval: 1m
   tuf:
     # -- Enables the feature
     enabled: false
-    # -- (string) Tuf root
+    # -- (string) Path to Tuf root
     root: ~
+    # -- (string) Raw Tuf root
+    rootRaw: ~
     # -- (string) Tuf mirror
     mirror: ~
+
 # Cleanup cronjobs to prevent internal resources from stacking up in the cluster
 cleanupJobs:
   rbac:
@@ -664,7 +694,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.30.5'
+      tag: 'v1.30.6'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -730,7 +760,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.30.5'
+      tag: 'v1.30.6'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -797,7 +827,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.30.5'
+      tag: 'v1.30.6'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -862,7 +892,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.30.5'
+      tag: 'v1.30.6'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -927,7 +957,7 @@ cleanupJobs:
       repository: ironbank/opensource/kubernetes/kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
-      tag: 'v1.30.5'
+      tag: 'v1.30.6'
       # -- (string) Image pull policy
       # Defaults to image.pullPolicy if omitted
       pullPolicy: ~
@@ -976,6 +1006,7 @@ cleanupJobs:
     podAffinity: {}
     # -- Node affinity constraints.
     nodeAffinity: {}
+
 # Admission controller configuration
 admissionController:
   # -- Overrides features defined at the root level
@@ -987,6 +1018,13 @@ admissionController:
   rbac:
     # -- Create RBAC resources
     create: true
+
+    # -- Create rolebinding to view role
+    createViewRoleBinding: true
+
+    # -- The view role to use in the rolebinding
+    viewRoleName: view
+
     serviceAccount:
       # -- The ServiceAccount name
       name:
@@ -1014,22 +1052,30 @@ admissionController:
             - get
             - list
             - watch
+
     clusterRole:
       # -- Extra resource permissions to add in the cluster role
-      extraResources: []
-      # - apiGroups:
-      #     - ''
-      #   resources:
-      #     - pods
-      #   verbs:
-      #     - create
-      #     - update
-      #     - delete
+      extraResources:
+        - apiGroups:
+            - '*'
+          resources:
+            - '*'
+          verbs:
+            - get
+            - list
+            - watch
   # -- Create self-signed certificates at deployment time.
   # The certificates won't be automatically renewed if this is set to `true`.
   createSelfSignedCert: false
   # -- (int) Desired number of pods
   replicas: 3
+
+  # -- The number of revisions to keep
+  revisionHistoryLimit: 10
+
+  # -- Resync period for informers
+  resyncPeriod: 15m
+
   # -- Additional labels to add to each pod
   podLabels: {}
   # example.com/label: foo
@@ -1037,6 +1083,9 @@ admissionController:
   # -- Additional annotations to add to each pod
   podAnnotations: {}
   # example.com/annotation: foo
+
+  # -- Deployment annotations.
+  annotations: {}
 
   # -- Deployment update strategy.
   # Ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
@@ -1180,12 +1229,13 @@ admissionController:
   initContainer:
     image:
       # -- Image registry
-      registry: registry1.dso.mil
+      registry: ~
+      defaultRegistry: registry1.dso.mil
       # -- Image repository
       repository: ironbank/opensource/kyverno/kyvernopre
       # -- (string) Image tag
       # If missing, defaults to image.tag
-      tag: 'v1.12.6'
+      tag: 'v1.13.2'
       # -- (string) Image pull policy
       # If missing, defaults to image.pullPolicy
       pullPolicy: ~
@@ -1222,12 +1272,13 @@ admissionController:
   container:
     image:
       # -- Image registry
-      registry: registry1.dso.mil
+      registry: ~
+      defaultRegistry: registry1.dso.mil
       # -- Image repository
       repository: ironbank/opensource/kyverno
       # -- (string) Image tag
       # Defaults to appVersion in Chart.yaml if omitted
-      tag: 'v1.12.6'
+      tag: 'v1.13.2'
       # -- Image pull policy
       pullPolicy: IfNotPresent
     # -- Image pull secrets
@@ -1362,6 +1413,13 @@ backgroundController:
   rbac:
     # -- Create RBAC resources
     create: true
+
+    # -- Create rolebinding to view role
+    createViewRoleBinding: true
+
+    # -- The view role to use in the rolebinding
+    viewRoleName: view
+
     serviceAccount:
       # -- Service account name
       name:
@@ -1381,14 +1439,6 @@ backgroundController:
       # This was introduced to avoid breaking change in the chart but should ideally be moved in `clusterRole.extraResources`.
       # @default -- See [values.yaml](values.yaml)
       extraResources:
-        - apiGroups:
-            - '*'
-          resources:
-            - '*'
-          verbs:
-            - get
-            - list
-            - watch
         - apiGroups:
             - networking.k8s.io
           resources:
@@ -1411,10 +1461,9 @@ backgroundController:
             - patch
             - delete
         - apiGroups:
-            - ''
+            - '*'
           resources:
             - configmaps
-            - secrets
             - resourcequotas
             - limitranges
           verbs:
@@ -1423,7 +1472,7 @@ backgroundController:
             - patch
             - delete
         - apiGroups:
-            - ''
+            - '*'
           resources:
             - serviceaccounts
           verbs:
@@ -1434,24 +1483,33 @@ backgroundController:
             - patch
     clusterRole:
       # -- Extra resource permissions to add in the cluster role
-      extraResources: []
-      # - apiGroups:
-      #     - ''
-      #   resources:
-      #     - pods
-      #   verbs:
-      #     - create
-      #     - update
-      #     - delete
-      #     - patch
+      extraResources:
+        - apiGroups:
+            - '*'
+          resources:
+            - '*'
+          verbs:
+            - get
+            - list
+            - watch
+        - apiGroups:
+            - '*'
+          resources:
+            - secrets
+          verbs:
+            - create
+            - update
+            - delete
   image:
     # -- Image registry
-    registry: registry1.dso.mil
+    registry: ~
+    defaultRegistry: registry1.dso.mil
+
     # -- Image repository
     repository: ironbank/opensource/kyverno/kyverno/background-controller
     # -- Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.12.6'
+    tag: 'v1.13.2'
     # -- Image pull policy
     pullPolicy: IfNotPresent
   # -- Image pull secrets
@@ -1461,6 +1519,10 @@ backgroundController:
   replicas: ~
   # -- The number of revisions to keep
   revisionHistoryLimit: 10
+
+  # -- Resync period for informers
+  resyncPeriod: 15m
+
   # -- Additional labels to add to each pod
   podLabels: {}
   # example.com/label: foo
@@ -1468,6 +1530,9 @@ backgroundController:
   # -- Additional annotations to add to each pod
   podAnnotations: {}
   # example.com/annotation: foo
+
+  # -- Deployment annotations.
+  annotations: {}
 
   # -- Deployment update strategy.
   # Ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
@@ -1628,6 +1693,12 @@ backgroundController:
     collector: ''
     # -- Otel collector credentials
     creds: ''
+
+  # -- backgroundController server port
+  # in case you are using hostNetwork: true, you might want to change the port the backgroundController is listening to
+  server:
+    port: 9443
+
   profiling:
     # -- Enable profiling
     enabled: false
@@ -1677,12 +1748,13 @@ cleanupController:
   createSelfSignedCert: false
   image:
     # -- Image registry
-    registry: registry1.dso.mil
+    registry: ~
+    defaultRegistry: registry1.dso.mil
     # -- Image repository
     repository: ironbank/opensource/kyverno/kyverno/cleanup-controller
     # -- (string) Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.12.6'
+    tag: 'v1.13.2'
     # -- Image pull policy
     pullPolicy: IfNotPresent
   # -- Image pull secrets
@@ -1692,6 +1764,10 @@ cleanupController:
   replicas: ~
   # -- The number of revisions to keep
   revisionHistoryLimit: 10
+
+  # -- Resync period for informers
+  resyncPeriod: 15m
+
   # -- Additional labels to add to each pod
   podLabels: {}
   # example.com/label: foo
@@ -1699,6 +1775,9 @@ cleanupController:
   # -- Additional annotations to add to each pod
   podAnnotations: {}
   # example.com/annotation: foo
+
+  # -- Deployment annotations.
+  annotations: {}
 
   # -- Deployment update strategy.
   # Ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
@@ -1925,6 +2004,13 @@ reportsController:
   rbac:
     # -- Create RBAC resources
     create: true
+
+    # -- Create rolebinding to view role
+    createViewRoleBinding: true
+
+    # -- The view role to use in the rolebinding
+    viewRoleName: view
+
     serviceAccount:
       # -- Service account name
       name:
@@ -1954,19 +2040,24 @@ reportsController:
             - watch
     clusterRole:
       # -- Extra resource permissions to add in the cluster role
-      extraResources: []
-      # - apiGroups:
-      #     - ''
-      #   resources:
-      #     - pods
+      extraResources:
+        - apiGroups:
+            - '*'
+          resources:
+            - '*'
+          verbs:
+            - get
+            - list
+            - watch
   image:
     # -- Image registry
-    registry: registry1.dso.mil
+    registry: ~
+    defaultRegistry: registry1.dso.mil
     # -- Image repository
     repository: ironbank/opensource/kyverno/kyverno/reports-controller
     # -- (string) Image tag
     # Defaults to appVersion in Chart.yaml if omitted
-    tag: 'v1.12.6'
+    tag: 'v1.13.2'
     # -- Image pull policy
     pullPolicy: IfNotPresent
   # -- Image pull secrets
@@ -1976,6 +2067,10 @@ reportsController:
   replicas: ~
   # -- The number of revisions to keep
   revisionHistoryLimit: 10
+
+  # -- Resync period for informers
+  resyncPeriod: 15m
+
   # -- Additional labels to add to each pod
   podLabels: {}
   # example.com/label: foo
@@ -1983,6 +2078,9 @@ reportsController:
   # -- Additional annotations to add to each pod
   podAnnotations: {}
   # example.com/annotation: foo
+
+  # -- Deployment annotations.
+  annotations: {}
 
   # -- Deployment update strategy.
   # Ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
@@ -2164,6 +2262,12 @@ reportsController:
     collector: ~
     # -- (string) Otel collector credentials
     creds: ~
+
+  # -- reportsController server port
+  # in case you are using hostNetwork: true, you might want to change the port the reportsController is listening to
+  server:
+    port: 9443
+
   profiling:
     # -- Enable profiling
     enabled: false
@@ -2198,7 +2302,7 @@ openshift: false
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.5
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.6
     additionalVolumeMounts:
       - name: "kyverno-bbtest-manifest"
         mountPath: /yaml
