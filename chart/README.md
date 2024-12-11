@@ -1,6 +1,8 @@
 # kyverno
 
-![Version: 3.2.7](https://img.shields.io/badge/Version-3.2.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.12.6](https://img.shields.io/badge/AppVersion-v1.12.6-informational?style=flat-square)
+Kubernetes Native Policy Management
+
+![Version: 3.3.4](https://img.shields.io/badge/Version-3.3.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.13.2](https://img.shields.io/badge/AppVersion-v1.13.2-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -52,27 +54,33 @@ helm install kyverno chart/
 | upgrade.fromV2 | bool | `true` | Upgrading from v2 to v3 is not allowed by default, set this to true once changes have been reviewed. |
 | apiVersionOverride.podDisruptionBudget | string | `"policy/v1"` | Override api version used to create `PodDisruptionBudget`` resources. When not specified the chart will check if`policy/v1/PodDisruptionBudget` is available to determine the api version automatically. |
 | crds.install | bool | `true` | Whether to have Helm install the Kyverno CRDs, if the CRDs are not installed by Helm, they must be added before policies can be created |
-| crds.groups.kyverno | object | `{"admissionreports":true,"backgroundscanreports":true,"cleanuppolicies":true,"clusteradmissionreports":true,"clusterbackgroundscanreports":true,"clustercleanuppolicies":true,"clusterpolicies":true,"globalcontextentries":true,"policies":true,"policyexceptions":true,"updaterequests":true}` | Install CRDs in group `kyverno.io` |
+| crds.groups.kyverno | object | `{"cleanuppolicies":true,"clustercleanuppolicies":true,"clusterpolicies":true,"globalcontextentries":true,"policies":true,"policyexceptions":true,"updaterequests":true}` | Install CRDs in group `kyverno.io` |
 | crds.groups.reports | object | `{"clusterephemeralreports":true,"ephemeralreports":true}` | Install CRDs in group `reports.kyverno.io` |
 | crds.groups.wgpolicyk8s | object | `{"clusterpolicyreports":true,"policyreports":true}` | Install CRDs in group `wgpolicyk8s.io` |
 | crds.annotations | object | `{}` | Additional CRDs annotations |
 | crds.customLabels | object | `{}` | Additional CRDs labels |
 | crds.migration.enabled | bool | `true` | Enable CRDs migration using helm post upgrade hook |
-| crds.migration.resources | list | `["admissionreports.kyverno.io","backgroundscanreports.kyverno.io","cleanuppolicies.kyverno.io","clusteradmissionreports.kyverno.io","clusterbackgroundscanreports.kyverno.io","clustercleanuppolicies.kyverno.io","clusterpolicies.kyverno.io","globalcontextentries.kyverno.io","policies.kyverno.io","policyexceptions.kyverno.io","updaterequests.kyverno.io"]` | Resources to migrate |
-| crds.migration.image.registry | string | `"registry1.dso.mil"` | Image registry |
-| crds.migration.image.repository | string | `"ironbank/opensource/kyverno/kyvernocli"` | Image repository |
-| crds.migration.image.tag | string | `"v1.12.3"` | Image tag Defaults to appVersion in Chart.yaml if omitted |
-| crds.migration.image.pullPolicy | string | `nil` | Image pull policy |
-| crds.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
-| crds.podSecurityContext | object | `{"nodeAffinity":{},"nodeSelector":{},"podAffinity":{},"podAnnotations":{},"podAntiAffinity":{},"podLabels":{},"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000,"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534,"seccompProfile":{"type":"RuntimeDefault"}},"tolerations":[]}` | Security context for the pod |
-| crds.podSecurityContext.nodeSelector | object | `{}` | Node labels for pod assignment |
-| crds.podSecurityContext.tolerations | list | `[]` | List of node taints to tolerate |
-| crds.podSecurityContext.podAntiAffinity | object | `{}` | Pod anti affinity constraints. |
-| crds.podSecurityContext.podAffinity | object | `{}` | Pod affinity constraints. |
-| crds.podSecurityContext.podLabels | object | `{}` | Pod labels. |
-| crds.podSecurityContext.podAnnotations | object | `{}` | Pod annotations. |
-| crds.podSecurityContext.nodeAffinity | object | `{}` | Node affinity constraints. |
-| crds.podSecurityContext.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534,"seccompProfile":{"type":"RuntimeDefault"}}` | Security context for the hook containers |
+| crds.migration.resources | list | `["cleanuppolicies.kyverno.io","clustercleanuppolicies.kyverno.io","clusterpolicies.kyverno.io","globalcontextentries.kyverno.io","policies.kyverno.io","policyexceptions.kyverno.io","updaterequests.kyverno.io"]` | Resources to migrate |
+| crds.migration.image.registry | string | `nil` | Image registry |
+| crds.migration.image.defaultRegistry | string | `"ghcr.io"` |  |
+| crds.migration.image.repository | string | `"kyverno/kyverno-cli"` | Image repository |
+| crds.migration.image.tag | string | `nil` | Image tag Defaults to appVersion in Chart.yaml if omitted |
+| crds.migration.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
+| crds.migration.imagePullSecrets | list | `[]` | Image pull secrets |
+| crds.migration.podSecurityContext | object | `{}` | Security context for the pod |
+| crds.migration.nodeSelector | object | `{}` | Node labels for pod assignment |
+| crds.migration.tolerations | list | `[]` | List of node taints to tolerate |
+| crds.migration.podAntiAffinity | object | `{}` | Pod anti affinity constraints. |
+| crds.migration.podAffinity | object | `{}` | Pod affinity constraints. |
+| crds.migration.podLabels | object | `{}` | Pod labels. |
+| crds.migration.podAnnotations | object | `{}` | Pod annotations. |
+| crds.migration.nodeAffinity | object | `{}` | Node affinity constraints. |
+| crds.migration.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534,"seccompProfile":{"type":"RuntimeDefault"}}` | Security context for the hook containers |
+
+### Config
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
 | config.create | bool | `true` | Create the configmap. |
 | config.name | string | `nil` | The configmap name (required if `create` is `false`). |
 | config.annotations | object | `{}` | Additional annotations to add to the configmap. |
@@ -84,7 +92,8 @@ helm install kyverno chart/
 | config.excludeClusterRoles | list | `[]` | Exclude roles |
 | config.generateSuccessEvents | bool | `false` | Generate success events. |
 | config.resourceFilters | list | See [values.yaml](values.yaml) | Resource types to be skipped by the Kyverno policy engine. Make sure to surround each entry in quotes so that it doesn't get parsed as a nested YAML list. These are joined together without spaces, run through `tpl`, and the result is set in the config map. |
-| config.webhooks | list | `[{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system"]}]}}]` | Defines the `namespaceSelector` in the webhook configurations. Note that it takes a list of `namespaceSelector` and/or `objectSelector` in the JSON format, and only the first element will be forwarded to the webhook configurations. The Kyverno namespace is excluded if `excludeKyvernoNamespace` is `true` (default) |
+| config.updateRequestThreshold | int | `1000` | Sets the threshold for the total number of UpdateRequests generated for mutateExisitng and generate policies. |
+| config.webhooks | object | `{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system"]}]}}` | Defines the `namespaceSelector`/`objectSelector` in the webhook configurations. The Kyverno namespace is excluded if `excludeKyvernoNamespace` is `true` (default) |
 | config.webhookAnnotations | object | `{"admissions.enforcer/disabled":"true"}` | Defines annotations to set on webhook configurations. |
 | config.webhookLabels | object | `{}` | Defines labels to set on webhook configurations. |
 | config.matchConditions | list | `[]` | Defines match conditions to set on webhook configurations (requires Kubernetes 1.27+). |
@@ -100,62 +109,21 @@ helm install kyverno chart/
 | metricsConfig.namespaces.exclude | list | `[]` | list of namespaces to NOT capture metrics for. |
 | metricsConfig.metricsRefreshInterval | string | `nil` | Rate at which metrics should reset so as to clean up the memory footprint of kyverno metrics, if you might be expecting high memory footprint of Kyverno's metrics. Default: 0, no refresh of metrics. WARNING: This flag is not working since Kyverno 1.8.0 |
 | metricsConfig.bucketBoundaries | list | `[0.005,0.01,0.025,0.05,0.1,0.25,0.5,1,2.5,5,10,15,20,25,30]` | Configures the bucket boundaries for all Histogram metrics, changing this configuration requires restart of the kyverno admission controller |
-| metricsConfig.metricsExposure | map | `nil` | Configures the exposure of individual metrics, by default all metrics and all labels are exported, changing this configuration requires restart of the kyverno admission controller |
-| imagePullSecrets | object | `{}` | Image pull secrets for image verification policies, this will define the `--imagePullSecrets` argument |
-| existingImagePullSecrets | list | `["private-registry"]` | Existing Image pull secrets for image verification policies, this will define the `--imagePullSecrets` argument |
-| test.image.registry | string | `"registry1.dso.mil"` | Image registry |
-| test.image.repository | string | `"ironbank/redhat/ubi/ubi9-minimal"` | Image repository |
-| test.image.tag | string | `"9.4"` | Image tag Defaults to `latest` if omitted |
-| test.image.pullPolicy | string | `nil` | Image pull policy Defaults to image.pullPolicy if omitted |
-| test.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
-| test.resources.limits | object | `{"cpu":"100m","memory":"256Mi"}` | Pod resource limits |
-| test.resources.requests | object | `{"cpu":"10m","memory":"64Mi"}` | Pod resource requests |
-| test.podSecurityContext | object | `{"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534}` | Security context for the test pod |
-| test.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534,"seccompProfile":{"type":"RuntimeDefault"}}` | Security context for the test containers |
-| customLabels | object | `{}` | Additional labels |
-| webhooksCleanup.enabled | bool | `true` | Create a helm pre-delete hook to cleanup webhooks. |
-| webhooksCleanup.image.registry | string | `"registry1.dso.mil"` | Image registry |
-| webhooksCleanup.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` | Image repository |
-| webhooksCleanup.image.tag | string | `"v1.29.4"` | Image tag Defaults to `latest` if omitted |
-| webhooksCleanup.image.pullPolicy | string | `nil` | Image pull policy Defaults to image.pullPolicy if omitted |
-| webhooksCleanup.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
-| webhooksCleanup.automountServiceAccountToken.enabled | bool | `true` |  |
-| webhooksCleanup.podSecurityContext | object | `{"runAsGroup":1001,"runAsNonRoot":true,"runAsUser":1001}` | Security context for the pod |
-| webhooksCleanup.nodeSelector | object | `{}` | Node labels for pod assignment |
-| webhooksCleanup.tolerations | list | `[]` | List of node taints to tolerate |
-| webhooksCleanup.podAntiAffinity | object | `{}` | Pod anti affinity constraints. |
-| webhooksCleanup.podAffinity | object | `{}` | Pod affinity constraints. |
-| webhooksCleanup.podLabels | object | `{}` | Pod labels. |
-| webhooksCleanup.podAnnotations | object | `{}` | Pod annotations. |
-| webhooksCleanup.nodeAffinity | object | `{}` | Node affinity constraints. |
-| webhooksCleanup.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":1001,"runAsNonRoot":true,"runAsUser":1001,"seccompProfile":{"type":"RuntimeDefault"}}` | Security context for the hook containers |
-| webhooksCleanup.resources | object | `{"limits":{"cpu":"0.5","memory":"256Mi"},"requests":{"cpu":"0.5","memory":"256Mi"}}` | Resource limits for the containers |
-| policyReportsCleanup.enabled | bool | `true` | Create a helm post-upgrade hook to cleanup the old policy reports. |
-| policyReportsCleanup.image.registry | string | `"registry1.dso.mil"` | Image registry |
-| policyReportsCleanup.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` | Image repository |
-| policyReportsCleanup.image.tag | string | `"v1.29.4"` | Image tag Defaults to `latest` if omitted |
-| policyReportsCleanup.image.pullPolicy | string | `nil` | Image pull policy Defaults to image.pullPolicy if omitted |
-| policyReportsCleanup.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
-| policyReportsCleanup.podSecurityContext | object | `{"runAsGroup":1001,"runAsNonRoot":true,"runAsUser":1001}` | Security context for the pod |
-| policyReportsCleanup.nodeSelector | object | `{}` | Node labels for pod assignment |
-| policyReportsCleanup.tolerations | list | `[]` | List of node taints to tolerate |
-| policyReportsCleanup.podAntiAffinity | object | `{}` | Pod anti affinity constraints. |
-| policyReportsCleanup.podAffinity | object | `{}` | Pod affinity constraints. |
-| policyReportsCleanup.podLabels | object | `{}` | Pod labels. |
-| policyReportsCleanup.podAnnotations | object | `{}` | Pod annotations. |
-| policyReportsCleanup.nodeAffinity | object | `{}` | Node affinity constraints. |
-| policyReportsCleanup.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":1001,"runAsNonRoot":true,"runAsUser":1001,"seccompProfile":{"type":"RuntimeDefault"}}` | Security context for the hook containers |
-| policyReportsCleanup.resources | object | `{"limits":{"cpu":"0.5","memory":"256Mi"},"requests":{"cpu":"0.5","memory":"256Mi"}}` | Resource limits for the containers |
-| grafana.enabled | bool | `false` | Enable grafana dashboard creation. |
-| grafana.configMapName | string | `"{{ include \"kyverno.fullname\" . }}-grafana"` | Configmap name template. |
-| grafana.namespace | string | `nil` | Namespace to create the grafana dashboard configmap. If not set, it will be created in the same namespace where the chart is deployed. |
-| grafana.annotations | object | `{}` | Grafana dashboard configmap annotations. |
-| grafana.labels | object | `{"grafana_dashboard":"1"}` | Grafana dashboard configmap labels |
-| grafana.grafanaDashboard | object | `{"create":false,"matchLabels":{"dashboards":"grafana"}}` | create GrafanaDashboard custom resource referencing to the configMap. according to <https://grafana-operator.github.io/grafana-operator/docs/examples/dashboard_from_configmap/readme/> |
+| metricsConfig.metricsExposure | map | `{"kyverno_admission_requests_total":{"disabledLabelDimensions":["resource_namespace"]},"kyverno_admission_review_duration_seconds":{"disabledLabelDimensions":["resource_namespace"]},"kyverno_cleanup_controller_deletedobjects_total":{"disabledLabelDimensions":["resource_namespace","policy_namespace"]},"kyverno_policy_execution_duration_seconds":{"disabledLabelDimensions":["resource_namespace","resource_request_operation"]},"kyverno_policy_results_total":{"disabledLabelDimensions":["resource_namespace","policy_namespace"]},"kyverno_policy_rule_info_total":{"disabledLabelDimensions":["resource_namespace","policy_namespace"]}}` | Configures the exposure of individual metrics, by default all metrics and all labels are exported, changing this configuration requires restart of the kyverno admission controller |
+
+### Features
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
 | features.admissionReports.enabled | bool | `true` | Enables the feature |
 | features.aggregateReports.enabled | bool | `true` | Enables the feature |
 | features.policyReports.enabled | bool | `true` | Enables the feature |
 | features.validatingAdmissionPolicyReports.enabled | bool | `false` | Enables the feature |
+| features.reporting.validate | bool | `true` | Enables the feature |
+| features.reporting.mutate | bool | `true` | Enables the feature |
+| features.reporting.mutateExisting | bool | `true` | Enables the feature |
+| features.reporting.imageVerify | bool | `true` | Enables the feature |
+| features.reporting.generate | bool | `true` | Enables the feature |
 | features.autoUpdateWebhooks.enabled | bool | `true` | Enables the feature |
 | features.backgroundScan.enabled | bool | `true` | Enables the feature |
 | features.backgroundScan.backgroundScanWorkers | int | `2` | Number of background scan workers |
@@ -166,19 +134,20 @@ helm install kyverno chart/
 | features.dumpPayload.enabled | bool | `false` | Enables the feature |
 | features.forceFailurePolicyIgnore.enabled | bool | `false` | Enables the feature |
 | features.generateValidatingAdmissionPolicy.enabled | bool | `false` | Enables the feature |
+| features.dumpPatches.enabled | bool | `false` | Enables the feature |
 | features.globalContext.maxApiCallResponseLength | int | `2000000` | Maximum allowed response size from API Calls. A value of 0 bypasses checks (not recommended) |
 | features.logging.format | string | `"text"` | Logging format |
 | features.logging.verbosity | int | `2` | Logging verbosity |
 | features.omitEvents.eventTypes | list | `["PolicyApplied","PolicySkipped"]` | Events which should not be emitted (possible values `PolicyViolation`, `PolicyApplied`, `PolicyError`, and `PolicySkipped`) |
-| features.policyExceptions.enabled | bool | `true` | Enables the feature |
-| features.policyExceptions.namespace | string | `"kyverno"` | Restrict policy exceptions to a single namespace |
+| features.policyExceptions.enabled | bool | `false` | Enables the feature |
+| features.policyExceptions.namespace | string | `""` | Restrict policy exceptions to a single namespace Set to "*" to allow exceptions in all namespaces |
 | features.protectManagedResources.enabled | bool | `false` | Enables the feature |
 | features.registryClient.allowInsecure | bool | `false` | Allow insecure registry |
 | features.registryClient.credentialHelpers | list | `["default","google","amazon","azure","github"]` | Enable registry client helpers |
-| features.reports.chunkSize | int | `0` | Reports chunk size |
 | features.ttlController.reconciliationInterval | string | `"1m"` | Reconciliation interval for the label based cleanup manager |
 | features.tuf.enabled | bool | `false` | Enables the feature |
-| features.tuf.root | string | `nil` | Tuf root |
+| features.tuf.root | string | `nil` | Path to Tuf root |
+| features.tuf.rootRaw | string | `nil` | Raw Tuf root |
 | features.tuf.mirror | string | `nil` | Tuf mirror |
 | cleanupJobs.rbac.serviceAccount.automountServiceAccountToken.enabled | bool | `false` |  |
 | cleanupJobs.admissionReports.enabled | bool | `true` | Enable cleanup cronjob |
@@ -293,6 +262,8 @@ helm install kyverno chart/
 | cleanupJobs.clusterEphemeralReports.nodeAffinity | object | `{}` | Node affinity constraints. |
 | admissionController.featuresOverride | object | `{}` | Overrides features defined at the root level |
 | admissionController.rbac.create | bool | `true` | Create RBAC resources |
+| admissionController.rbac.createViewRoleBinding | bool | `true` | Create rolebinding to view role |
+| admissionController.rbac.viewRoleName | string | `"view"` | The view role to use in the rolebinding |
 | admissionController.rbac.serviceAccount.name | string | `nil` | The ServiceAccount name |
 | admissionController.rbac.serviceAccount.annotations | object | `{}` | Annotations for the ServiceAccount |
 | admissionController.rbac.serviceAccount.automountServiceAccountToken.enabled | bool | `false` |  |
@@ -300,10 +271,13 @@ helm install kyverno chart/
 | admissionController.rbac.coreClusterRole.extraResources | list | See [values.yaml](values.yaml) | Extra resource permissions to add in the core cluster role. This was introduced to avoid breaking change in the chart but should ideally be moved in `clusterRole.extraResources`. |
 | admissionController.rbac.clusterRole.extraResources | list | `[]` | Extra resource permissions to add in the cluster role |
 | admissionController.createSelfSignedCert | bool | `false` | Create self-signed certificates at deployment time. The certificates won't be automatically renewed if this is set to `true`. |
-| admissionController.replicas | int | `3` | Desired number of pods |
+| admissionController.replicas | int | `nil` | Desired number of pods |
+| admissionController.revisionHistoryLimit | int | `10` | The number of revisions to keep |
+| admissionController.resyncPeriod | string | `"15m"` | Resync period for informers |
 | admissionController.podLabels | object | `{}` | Additional labels to add to each pod |
 | admissionController.podAnnotations | object | `{}` | Additional annotations to add to each pod |
-| admissionController.updateStrategy | object | See [values.yaml](values.yaml) | Deployment update strategy. Ref: <https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy> |
+| admissionController.annotations | object | `{}` | Deployment annotations. |
+| admissionController.updateStrategy | object | See [values.yaml](values.yaml) | Deployment update strategy. Ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy |
 | admissionController.priorityClassName | string | `""` | Optional priority class |
 | admissionController.apiPriorityAndFairness | bool | `false` | Change `apiPriorityAndFairness` to `true` if you want to insulate the API calls made by Kyverno admission controller activities. This will help ensure Kyverno stability in busy clusters. Ref: <https://kubernetes.io/docs/concepts/cluster-administration/flow-control/> |
 | admissionController.priorityLevelConfigurationSpec | object | See [values.yaml](values.yaml) | Priority level configuration. The block is directly forwarded into the priorityLevelConfiguration, so you can use whatever specification you want. ref: <https://kubernetes.io/docs/concepts/cluster-administration/flow-control/#prioritylevelconfiguration> |
@@ -329,18 +303,20 @@ helm install kyverno chart/
 | admissionController.caCertificates.data | string | `nil` | CA certificates to use with Kyverno deployments This value is expected to be one large string of CA certificates |
 | admissionController.caCertificates.volume | object | `{}` | Volume to be mounted for CA certificates Not used when `.Values.admissionController.caCertificates.data` is defined |
 | admissionController.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
-| admissionController.initContainer.image.registry | string | `"registry1.dso.mil"` | Image registry |
-| admissionController.initContainer.image.repository | string | `"ironbank/opensource/kyverno/kyvernopre"` | Image repository |
-| admissionController.initContainer.image.tag | string | `"v1.12.3"` | Image tag If missing, defaults to image.tag |
+| admissionController.initContainer.image.registry | string | `nil` | Image registry |
+| admissionController.initContainer.image.defaultRegistry | string | `"ghcr.io"` |  |
+| admissionController.initContainer.image.repository | string | `"kyverno/kyvernopre"` | Image repository |
+| admissionController.initContainer.image.tag | string | `nil` | Image tag If missing, defaults to image.tag |
 | admissionController.initContainer.image.pullPolicy | string | `nil` | Image pull policy If missing, defaults to image.pullPolicy |
 | admissionController.initContainer.resources.limits | object | `{"cpu":"100m","memory":"256Mi"}` | Pod resource limits |
 | admissionController.initContainer.resources.requests | object | `{"cpu":"10m","memory":"64Mi"}` | Pod resource requests |
 | admissionController.initContainer.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":10001,"runAsNonRoot":true,"runAsUser":10001,"seccompProfile":{"type":"RuntimeDefault"}}` | Container security context |
 | admissionController.initContainer.extraArgs | object | `{}` | Additional container args. |
 | admissionController.initContainer.extraEnvVars | list | `[]` | Additional container environment variables. |
-| admissionController.container.image.registry | string | `"registry1.dso.mil"` | Image registry |
-| admissionController.container.image.repository | string | `"ironbank/opensource/kyverno"` | Image repository |
-| admissionController.container.image.tag | string | `"v1.12.3"` | Image tag Defaults to appVersion in Chart.yaml if omitted |
+| admissionController.container.image.registry | string | `nil` | Image registry |
+| admissionController.container.image.defaultRegistry | string | `"ghcr.io"` |  |
+| admissionController.container.image.repository | string | `"kyverno/kyverno"` | Image repository |
+| admissionController.container.image.tag | string | `nil` | Image tag Defaults to appVersion in Chart.yaml if omitted |
 | admissionController.container.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | admissionController.container.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
 | admissionController.container.resources.limits | object | `{"cpu":"500m","memory":"512Mi"}` | Pod resource limits |
@@ -386,22 +362,27 @@ helm install kyverno chart/
 | backgroundController.featuresOverride | object | `{}` | Overrides features defined at the root level |
 | backgroundController.enabled | bool | `true` | Enable background controller. |
 | backgroundController.rbac.create | bool | `true` | Create RBAC resources |
+| backgroundController.rbac.createViewRoleBinding | bool | `true` | Create rolebinding to view role |
+| backgroundController.rbac.viewRoleName | string | `"view"` | The view role to use in the rolebinding |
 | backgroundController.rbac.serviceAccount.name | string | `nil` | Service account name |
 | backgroundController.rbac.serviceAccount.annotations | object | `{}` | Annotations for the ServiceAccount |
 | backgroundController.rbac.serviceAccount.automountServiceAccountToken.enabled | bool | `false` |  |
 | backgroundController.rbac.deployment.automountServiceAccountToken.enabled | bool | `true` |  |
 | backgroundController.rbac.coreClusterRole.extraResources | list | See [values.yaml](values.yaml) | Extra resource permissions to add in the core cluster role. This was introduced to avoid breaking change in the chart but should ideally be moved in `clusterRole.extraResources`. |
 | backgroundController.rbac.clusterRole.extraResources | list | `[]` | Extra resource permissions to add in the cluster role |
-| backgroundController.image.registry | string | `"registry1.dso.mil"` | Image registry |
-| backgroundController.image.repository | string | `"ironbank/opensource/kyverno/kyverno/background-controller"` | Image repository |
-| backgroundController.image.tag | string | `"v1.12.3"` | Image tag Defaults to appVersion in Chart.yaml if omitted |
+| backgroundController.image.registry | string | `nil` | Image registry |
+| backgroundController.image.defaultRegistry | string | `"ghcr.io"` |  |
+| backgroundController.image.repository | string | `"kyverno/background-controller"` | Image repository |
+| backgroundController.image.tag | string | `nil` | Image tag Defaults to appVersion in Chart.yaml if omitted |
 | backgroundController.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | backgroundController.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
 | backgroundController.replicas | int | `nil` | Desired number of pods |
 | backgroundController.revisionHistoryLimit | int | `10` | The number of revisions to keep |
+| backgroundController.resyncPeriod | string | `"15m"` | Resync period for informers |
 | backgroundController.podLabels | object | `{}` | Additional labels to add to each pod |
 | backgroundController.podAnnotations | object | `{}` | Additional annotations to add to each pod |
-| backgroundController.updateStrategy | object | See [values.yaml](values.yaml) | Deployment update strategy. Ref: <https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy> |
+| backgroundController.annotations | object | `{}` | Deployment annotations. |
+| backgroundController.updateStrategy | object | See [values.yaml](values.yaml) | Deployment update strategy. Ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy |
 | backgroundController.priorityClassName | string | `""` | Optional priority class |
 | backgroundController.hostNetwork | bool | `false` | Change `hostNetwork` to `true` when you want the pod to share its host's network namespace. Useful for situations like when you end up dealing with a custom CNI over Amazon EKS. Update the `dnsPolicy` accordingly as well to suit the host network mode. |
 | backgroundController.dnsPolicy | string | `"ClusterFirst"` | `dnsPolicy` determines the manner in which DNS resolution happens in the cluster. In case of `hostNetwork: true`, usually, the `dnsPolicy` is suitable to be `ClusterFirstWithHostNet`. For further reference: <https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy>. |
@@ -448,6 +429,7 @@ helm install kyverno chart/
 | backgroundController.metering.port | int | `8000` | Prometheus endpoint port |
 | backgroundController.metering.collector | string | `""` | Otel collector endpoint |
 | backgroundController.metering.creds | string | `""` | Otel collector credentials |
+| backgroundController.server | object | `{"port":9443}` | backgroundController server port in case you are using hostNetwork: true, you might want to change the port the backgroundController is listening to |
 | backgroundController.profiling.enabled | bool | `false` | Enable profiling |
 | backgroundController.profiling.port | int | `6060` | Profiling endpoint port |
 | backgroundController.profiling.serviceType | string | `"ClusterIP"` | Service type. |
@@ -461,16 +443,19 @@ helm install kyverno chart/
 | cleanupController.rbac.deployment.automountServiceAccountToken.enabled | bool | `true` |  |
 | cleanupController.rbac.clusterRole.extraResources | list | `[]` | Extra resource permissions to add in the cluster role |
 | cleanupController.createSelfSignedCert | bool | `false` | Create self-signed certificates at deployment time. The certificates won't be automatically renewed if this is set to `true`. |
-| cleanupController.image.registry | string | `"registry1.dso.mil"` | Image registry |
-| cleanupController.image.repository | string | `"ironbank/opensource/kyverno/kyverno/cleanup-controller"` | Image repository |
-| cleanupController.image.tag | string | `"v1.12.3"` | Image tag Defaults to appVersion in Chart.yaml if omitted |
+| cleanupController.image.registry | string | `nil` | Image registry |
+| cleanupController.image.defaultRegistry | string | `"ghcr.io"` |  |
+| cleanupController.image.repository | string | `"kyverno/cleanup-controller"` | Image repository |
+| cleanupController.image.tag | string | `nil` | Image tag Defaults to appVersion in Chart.yaml if omitted |
 | cleanupController.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | cleanupController.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
 | cleanupController.replicas | int | `nil` | Desired number of pods |
 | cleanupController.revisionHistoryLimit | int | `10` | The number of revisions to keep |
+| cleanupController.resyncPeriod | string | `"15m"` | Resync period for informers |
 | cleanupController.podLabels | object | `{}` | Additional labels to add to each pod |
 | cleanupController.podAnnotations | object | `{}` | Additional annotations to add to each pod |
-| cleanupController.updateStrategy | object | See [values.yaml](values.yaml) | Deployment update strategy. Ref: <https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy> |
+| cleanupController.annotations | object | `{}` | Deployment annotations. |
+| cleanupController.updateStrategy | object | See [values.yaml](values.yaml) | Deployment update strategy. Ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy |
 | cleanupController.priorityClassName | string | `""` | Optional priority class |
 | cleanupController.hostNetwork | bool | `false` | Change `hostNetwork` to `true` when you want the pod to share its host's network namespace. Useful for situations like when you end up dealing with a custom CNI over Amazon EKS. Update the `dnsPolicy` accordingly as well to suit the host network mode. |
 | cleanupController.server | object | `{"port":9443}` | cleanupController server port in case you are using hostNetwork: true, you might want to change the port the cleanupController is listening to |
@@ -531,22 +516,27 @@ helm install kyverno chart/
 | reportsController.featuresOverride | object | `{}` | Overrides features defined at the root level |
 | reportsController.enabled | bool | `true` | Enable reports controller. |
 | reportsController.rbac.create | bool | `true` | Create RBAC resources |
+| reportsController.rbac.createViewRoleBinding | bool | `true` | Create rolebinding to view role |
+| reportsController.rbac.viewRoleName | string | `"view"` | The view role to use in the rolebinding |
 | reportsController.rbac.serviceAccount.name | string | `nil` | Service account name |
 | reportsController.rbac.serviceAccount.annotations | object | `{}` | Annotations for the ServiceAccount |
 | reportsController.rbac.serviceAccount.automountServiceAccountToken.enabled | bool | `false` |  |
 | reportsController.rbac.deployment.automountServiceAccountToken.enabled | bool | `true` |  |
 | reportsController.rbac.coreClusterRole.extraResources | list | See [values.yaml](values.yaml) | Extra resource permissions to add in the core cluster role. This was introduced to avoid breaking change in the chart but should ideally be moved in `clusterRole.extraResources`. |
 | reportsController.rbac.clusterRole.extraResources | list | `[]` | Extra resource permissions to add in the cluster role |
-| reportsController.image.registry | string | `"registry1.dso.mil"` | Image registry |
-| reportsController.image.repository | string | `"ironbank/opensource/kyverno/kyverno/reports-controller"` | Image repository |
-| reportsController.image.tag | string | `"v1.12.3"` | Image tag Defaults to appVersion in Chart.yaml if omitted |
+| reportsController.image.registry | string | `nil` | Image registry |
+| reportsController.image.defaultRegistry | string | `"ghcr.io"` |  |
+| reportsController.image.repository | string | `"kyverno/reports-controller"` | Image repository |
+| reportsController.image.tag | string | `nil` | Image tag Defaults to appVersion in Chart.yaml if omitted |
 | reportsController.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | reportsController.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
 | reportsController.replicas | int | `nil` | Desired number of pods |
 | reportsController.revisionHistoryLimit | int | `10` | The number of revisions to keep |
+| reportsController.resyncPeriod | string | `"15m"` | Resync period for informers |
 | reportsController.podLabels | object | `{}` | Additional labels to add to each pod |
 | reportsController.podAnnotations | object | `{}` | Additional annotations to add to each pod |
-| reportsController.updateStrategy | object | See [values.yaml](values.yaml) | Deployment update strategy. Ref: <https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy> |
+| reportsController.annotations | object | `{}` | Deployment annotations. |
+| reportsController.updateStrategy | object | See [values.yaml](values.yaml) | Deployment update strategy. Ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy |
 | reportsController.priorityClassName | string | `""` | Optional priority class |
 | reportsController.apiPriorityAndFairness | bool | `false` | Change `apiPriorityAndFairness` to `true` if you want to insulate the API calls made by Kyverno reports controller activities. This will help ensure Kyverno reports stability in busy clusters. Ref: <https://kubernetes.io/docs/concepts/cluster-administration/flow-control/> |
 | reportsController.priorityLevelConfigurationSpec | object | See [values.yaml](values.yaml) | Priority level configuration. The block is directly forwarded into the priorityLevelConfiguration, so you can use whatever specification you want. ref: <https://kubernetes.io/docs/concepts/cluster-administration/flow-control/#prioritylevelconfiguration> |
@@ -597,6 +587,7 @@ helm install kyverno chart/
 | reportsController.metering.port | int | `8000` | Prometheus endpoint port |
 | reportsController.metering.collector | string | `nil` | Otel collector endpoint |
 | reportsController.metering.creds | string | `nil` | Otel collector credentials |
+| reportsController.server | object | `{"port":9443}` | reportsController server port in case you are using hostNetwork: true, you might want to change the port the reportsController is listening to |
 | reportsController.profiling.enabled | bool | `false` | Enable profiling |
 | reportsController.profiling.port | int | `6060` | Profiling endpoint port |
 | reportsController.profiling.serviceType | string | `"ClusterIP"` | Service type. |
@@ -643,6 +634,10 @@ Install Helm
 
 * Clone down the repository
 * cd into directory
+
+## TLS Configuration
+
+If `admissionController.createSelfSignedCert` is `true`, Helm will take care of the steps of creating an external self-signed certificate described in option 2 of the [installation documentation](https://kyverno.io/docs/installation/#option-2-use-your-own-ca-signed-certificate)
 
 ```bash
 helm install crds chart/
@@ -692,7 +687,6 @@ helm install grafana chart/
 ```
 
 ## Values
-
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | configMapName | string | `"{{ include \"kyverno.fullname\" . }}-grafana"` | Configmap name template. |

@@ -14,7 +14,7 @@ spec:
             matchLabels:
               app: prometheus
       ports:
-        - port: 8000
+        - port: {{ .Values.admissionController.metricsService.port }}
           protocol: TCP
   podSelector:
       matchLabels: {{- include "kyverno.labels.merge" (list (include "kyverno.labels.common" .) (include "kyverno.matchLabels.common" .)) | nindent 8 }}

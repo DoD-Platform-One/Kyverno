@@ -18,6 +18,10 @@ spec:
   imagePullSecrets: {{ tpl (toYaml .) $ | nindent 8 }}
   {{- end }}
   restartPolicy: Never
+  {{- with .Values.test.imagePullSecrets | default .Values.global.imagePullSecrets }}
+  imagePullSecrets:
+    {{- tpl (toYaml .) $ | nindent 4 }}
+  {{- end }}
   containers:
     - name: test
       image: {{ template "kyverno.test.image" . }}
@@ -33,6 +37,6 @@ spec:
       command:
         - /bin/sh
         - -c
-        - sleep 20 ; curl -sL -v -k https://{{ template "kyverno.cleanup-controller.name" . }}.{{ template "kyverno.namespace" . }}:{{ .Values.cleanupController.service.port }}/health/readiness
+        - sleep {{ .Values.test.sleep }} ; curl -sL -v -k https://{{ template "kyverno.cleanup-controller.name" . }}.{{ template "kyverno.namespace" . }}:{{ .Values.cleanupController.service.port }}/health/readiness
 {{- end -}}
 {{- end -}}
