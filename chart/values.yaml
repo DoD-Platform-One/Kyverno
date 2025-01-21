@@ -1242,8 +1242,8 @@ admissionController:
     resources:
       # -- Pod resource limits
       limits:
-        cpu: 100m
-        memory: 256Mi
+        cpu: 1
+        memory: 1Gi
       # -- Pod resource requests
       requests:
         cpu: 10m

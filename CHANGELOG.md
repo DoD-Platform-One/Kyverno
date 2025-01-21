@@ -4,6 +4,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.3.4-bb.1] - 2024-01-21
+
+### Changed
+
+- Increase default package memory limit for admissionController to 1Gi
+- Increase default package vCPU limit for admissionController to 1 core
+- Update gluon to v0.5.14
+
 ## [3.3.4-bb.0] - 2024-12-10
 
 ### Changed
