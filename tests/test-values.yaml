@@ -2,3 +2,8 @@ bbtests:
   enabled: true
 networkPolicies:
   enabled: true
+features:
+  policyexceptions:
+    enabled: true
+    # -- Restrict policy exceptions to a single namespace
+    namespace: 'kyverno-bbtest'
