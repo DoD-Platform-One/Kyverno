@@ -4,6 +4,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.3.4-bb.2] - 2024-01-30
+
+### Changed
+
+- Enable PolicyExceptions in test-values for testing policy exceptions in kyverno policy
+
 ## [3.3.4-bb.1] - 2024-01-21
 
 ### Changed
