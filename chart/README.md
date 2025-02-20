@@ -2,7 +2,7 @@
 
 Kubernetes Native Policy Management
 
-![Version: 3.3.4](https://img.shields.io/badge/Version-3.3.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.13.2](https://img.shields.io/badge/AppVersion-v1.13.2-informational?style=flat-square)
+![Version: 3.3.6](https://img.shields.io/badge/Version-3.3.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.13.4](https://img.shields.io/badge/AppVersion-v1.13.4-informational?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -606,6 +606,7 @@ helm install kyverno chart/
 | bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/yaml"` |  |
 | bbtests.scripts.additionalVolumes[0].name | string | `"kyverno-bbtest-manifest"` |  |
 | bbtests.scripts.additionalVolumes[0].configMap.name | string | `"kyverno-bbtest-manifest"` |  |
+| reportsController.sanityChecks | bool | `true` | Enable sanity check for reports CRDs |
 
 ## Contributing
 
