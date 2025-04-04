@@ -1,9 +1,29 @@
-bbtests:
-  enabled: true
-networkPolicies:
-  enabled: true
-features:
-  policyexceptions:
-    enabled: true
-    # -- Restrict policy exceptions to a single namespace
-    namespace: 'kyverno'
+#########################
+# Disable Core Packages #
+#########################
+monitoring:
+  enabled: false
+grafana:
+  enabled: false
+neuvector:
+  enabled: false
+loki:
+  enabled: false
+promtail:
+  enabled: false
+tempo:
+  enabled: false
+kyvernoReporter:
+  enabled: false
+kiali:
+  enabled: false
+addons:
+  minioOperator:
+    enabled: false
+########################
+# Required for package #
+########################
+kyvernoPolicies:
+  values:
+    bbtests:
+      enabled: false
