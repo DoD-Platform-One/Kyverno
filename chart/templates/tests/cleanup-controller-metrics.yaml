@@ -1,10 +1,10 @@
 {{- if dig "bbtests" "enabled" false (merge .Values dict) }}
-{{- if and .Values.cleanupController.enabled .Values.cleanupController.metricsService.create -}}
+{{- if and .Values.kyverno.cleanupController.enabled .Values.kyverno.cleanupController.metricsService.create -}}
 apiVersion: v1
 kind: Pod
 metadata:
-  name: {{ template "kyverno.fullname" . }}-cleanup-controller-metrics
-  namespace: {{ template "kyverno.namespace" . }}
+  name: {{ include "kyverno.fullname" . }}-cleanup-controller-metrics
+  namespace: {{ include "kyverno.namespace" . }}
   labels:
     {{- include "kyverno.test.labels" . | nindent 4 }}
   annotations:
@@ -24,8 +24,8 @@ spec:
   {{- end }}
   containers:
     - name: test
-      image: {{ template "kyverno.test.image" . }}
-      imagePullPolicy: {{ template "kyverno.test.imagePullPolicy" . }}
+      image: {{ include "kyverno.test.image" . }}
+      imagePullPolicy: {{ include "kyverno.test.imagePullPolicy" . }}
       {{- with .Values.test.resources }}
       resources:
         {{- tpl (toYaml .) $ | nindent 8 }}
@@ -37,6 +37,6 @@ spec:
       command:
         - /bin/sh
         - -c
-        - sleep {{ .Values.test.sleep }} ; curl -sL -v -k http://{{ template "kyverno.cleanup-controller.name" . }}-metrics.{{ template "kyverno.namespace" . }}:{{ .Values.cleanupController.metricsService.port }}/metrics
+        - sleep {{ .Values.test.sleep }} ; curl -sL -v -k http://{{ include "kyverno.cleanup-controller.name" . }}-metrics.{{ include "kyverno.namespace" . }}:{{ .Values.kyverno.cleanupController.metricsService.port }}/metrics
 {{- end -}}
 {{- end -}}

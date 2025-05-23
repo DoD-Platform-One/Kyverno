@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "kyverno.name" . }}-bbtest-manifest
+  name: {{ include "kyverno.name" . }}-bbtest-manifest
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "kyverno.test-labels" . | nindent 4 }}

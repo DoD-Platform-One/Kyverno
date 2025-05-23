@@ -1,27 +1,29 @@
 {{/* vim: set filetype=mustache: */}}
 
-{{- define "kyverno.test.labels" -}}
-{{- template "kyverno.labels.merge" (list
-  (include "kyverno.labels.common" .)
-  (include "kyverno.test.matchLabels" .)
-) -}}
+{{- define "kyverno.chart" -}}
+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 15 | trimSuffix "-b" -}}
 {{- end -}}
 
-{{- define "kyverno.test.matchLabels" -}}
-{{- template "kyverno.labels.merge" (list
-  (include "kyverno.matchLabels.common" .)
-  (include "kyverno.labels.component" "test")
-) -}}
+{{- define "kyverno.chartVersion" -}}
+  {{- .Chart.Version | replace "+" "_" | trunc 5 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "kyverno.test.annotations" -}}
-helm.sh/hook: test
+{{- define "kyverno.test-labels" -}}
+{{- with (include "kyverno.labels.helm" .) }}
+{{ . }}
+{{- end }}
+app: kyverno
+app.kubernetes.io/component: kyverno
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/name: {{ include "kyverno.name" . }}-test
+app.kubernetes.io/part-of: {{ include "kyverno.name" . }}
+app.kubernetes.io/version: "{{ .Chart.Version | replace "+" "_" }}"
 {{- end -}}
 
 {{- define "kyverno.test.image" -}}
-{{- template "kyverno.image" (dict "image" .Values.test.image "defaultTag" "latest") -}}
+{{- include "kyverno.image" (dict "image" .Values.test.image "defaultTag" "latest") -}}
 {{- end -}}
 
 {{- define "kyverno.test.imagePullPolicy" -}}
-{{- default .Values.admissionController.container.image.pullPolicy .Values.test.image.pullPolicy -}}
+{{- default .Values.global.image.pullPolicy .Values.test.image.pullPolicy -}}
 {{- end -}}

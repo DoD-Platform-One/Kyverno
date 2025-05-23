@@ -4,6 +4,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.3.6-bb.2] - 2025-04-21
+
+### Changed
+
+- Refactor kyverno BB package with pass-through pattern.
+- Enabled bbtests for kyverno-policies for better integration testing.
+- Added upstream notes to chart.yaml and readme.
+
 ## [3.3.6-bb.1] - 2025-04-07
 
 ### Changed

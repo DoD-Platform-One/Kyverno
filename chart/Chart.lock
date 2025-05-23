@@ -1,12 +1,9 @@
 dependencies:
-- name: grafana
-  repository: ""
-  version: 3.3.6
-- name: crds
-  repository: ""
+- name: kyverno
+  repository: https://kyverno.github.io/kyverno/
   version: 3.3.6
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
   version: 0.5.14
-digest: sha256:8965872cbd2f109670149626df2c6c3d78cb1826e6c331a8cb40947b62da08f2
-generated: "2025-02-17T17:00:18.340402-05:00"
+digest: sha256:64672789a4fdcf92c5c293da19af68fd13c4e6ea6630cc5fe78a2940e01eed31
+generated: "2025-04-17T17:18:48.081638405-04:00"

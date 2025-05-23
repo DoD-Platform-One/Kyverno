@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ template "kyverno.name" . }}-bbtest-role
+  name: {{ include "kyverno.name" . }}-bbtest-role
   labels:
     {{- include "kyverno.test-labels" . | nindent 4 }}
   annotations:

@@ -1,10 +1,10 @@
 {{- if dig "bbtests" "enabled" false (merge .Values dict) }}
-{{- if .Values.admissionController.enabled -}}
+{{- if .Values.kyverno.admissionController.enabled -}}
 apiVersion: v1
 kind: Pod
 metadata:
-  name: {{ template "kyverno.fullname" . }}-admission-controller-readiness
-  namespace: {{ template "kyverno.namespace" . }}
+  name: {{ include "kyverno.fullname" . }}-admission-controller-readiness
+  namespace: {{ include "kyverno.namespace" . }}
   labels:
     {{- include "kyverno.test.labels" . | nindent 4 }}
   annotations:
@@ -37,6 +37,6 @@ spec:
       command:
         - /bin/sh
         - -c
-        - sleep {{ .Values.test.sleep }} ; wget -O- -S --no-check-certificate https://{{ template "kyverno.admission-controller.serviceName" . }}.{{ template "kyverno.namespace" . }}:{{ .Values.admissionController.service.port }}/health/readiness
+        - sleep {{ .Values.test.sleep }} ; wget -O- -S --no-check-certificate https://{{ template "kyverno.admission-controller.serviceName" . }}.{{ template "kyverno.namespace" . }}:{{ .Values.kyverno.admissionController.service.port }}/health/readiness
 {{- end -}}
 {{- end -}}
