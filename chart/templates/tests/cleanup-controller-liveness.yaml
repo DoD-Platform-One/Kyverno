@@ -1,10 +1,10 @@
 {{- if dig "bbtests" "enabled" false (merge .Values dict) }}
-{{- if .Values.cleanupController.enabled -}}
+{{- if .Values.kyverno.cleanupController.enabled -}}
 apiVersion: v1
 kind: Pod
 metadata:
-  name: {{ template "kyverno.fullname" . }}-cleanup-controller-liveness
-  namespace: {{ template "kyverno.namespace" . }}
+  name: {{ include "kyverno.fullname" . }}-cleanup-controller-liveness
+  namespace: {{ include "kyverno.namespace" . }}
   labels:
     {{- include "kyverno.test.labels" . | nindent 4 }}
   annotations:
@@ -24,8 +24,8 @@ spec:
   {{- end }}
   containers:
     - name: test
-      image: {{ template "kyverno.test.image" . }}
-      imagePullPolicy: {{ template "kyverno.test.imagePullPolicy" . }}
+      image: {{ include "kyverno.test.image" . }}
+      imagePullPolicy: {{ include "kyverno.test.imagePullPolicy" . }}
       {{- with .Values.test.resources }}
       resources:
         {{- tpl (toYaml .) $ | nindent 8 }}
@@ -37,6 +37,6 @@ spec:
       command:
         - /bin/sh
         - -c
-        - sleep {{ .Values.test.sleep }} ; curl -sL -v -k https://{{ template "kyverno.cleanup-controller.name" . }}.{{ template "kyverno.namespace" . }}:{{ .Values.cleanupController.service.port }}/health/liveness                            
+        - sleep {{ .Values.test.sleep }} ; curl -sL -v -k https://{{ include "kyverno.cleanup-controller.name" . }}.{{ include "kyverno.namespace" . }}:{{ .Values.kyverno.cleanupController.service.port }}/health/liveness                            
 {{- end -}}
 {{- end -}}

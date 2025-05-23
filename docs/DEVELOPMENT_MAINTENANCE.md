@@ -241,11 +241,11 @@ Checking Prometheus for Kyverno dashboards
   - Add `podSecurityContext` and `imagePullSecrets`
 
     ```
-    {{- with .Values.test.podSecurityContext }}
+    {{- with .Values.kyverno.test.podSecurityContext }}
     securityContext:
       {{- tpl (toYaml .) $ | nindent 4 }}
     {{- end }}
-    {{- with .Values.test.imagePullSecrets }}
+    {{- with .Values.kyverno.test.imagePullSecrets }}
     imagePullSecrets: {{ tpl (toYaml .) $ | nindent 8 }}
     {{- end }}
     ```

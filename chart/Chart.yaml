@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: kyverno
-version: 3.3.6-bb.1
+version: 3.3.6-bb.2
 appVersion: v1.13.4
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
@@ -26,6 +26,9 @@ maintainers:
     url: https://kyverno.io/
 kubeVersion: ">=1.25.0-0"
 annotations:
+  bigbang.dev/upstreamReleaseNotesMarkdown: |
+      - [Find our upstream chart's CHANGELOG here](https://github.com/kyverno/kyverno/blob/main/CHANGELOG.md)
+      - [and our upstream application release notes here](https://github.com/kyverno/kyverno/releases)
   bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/applicationVersions: |
     - Kyverno: v1.13.4
@@ -59,12 +62,9 @@ annotations:
     - kind: fixed
       description: fixed global image registry config by introducing *.image.defaultRegistry.
 dependencies:
-  - name: grafana
+  - name: kyverno
     version: 3.3.6
-    condition: grafana.enabled
-  - name: crds
-    version: 3.3.6
-    condition: crds.install
+    repository: https://kyverno.github.io/kyverno/
   - name: gluon
     version: 0.5.14
     repository: oci://registry1.dso.mil/bigbang

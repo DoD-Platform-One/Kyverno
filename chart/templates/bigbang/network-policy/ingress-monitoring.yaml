@@ -1,4 +1,4 @@
-{{- if and .Values.networkPolicies.enabled .Values.admissionController.serviceMonitor.enabled}}
+{{- if and .Values.networkPolicies.enabled .Values.kyverno.admissionController.serviceMonitor.enabled}}
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -14,7 +14,7 @@ spec:
             matchLabels:
               app: prometheus
       ports:
-        - port: {{ .Values.admissionController.metricsService.port }}
+        - port: {{ .Values.kyverno.admissionController.metricsService.port }}
           protocol: TCP
   podSelector:
       matchLabels: {{- include "kyverno.labels.merge" (list (include "kyverno.labels.common" .) (include "kyverno.matchLabels.common" .)) | nindent 8 }}
