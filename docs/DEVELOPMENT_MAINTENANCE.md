@@ -200,7 +200,7 @@ Checking Prometheus for Kyverno dashboards
 
 ### chart/crds/
 
-- Add `crd-servicemonitors.yaml` from monitoring package
+- Update `crd-servicemonitors.yaml` with the latest version from the monitoring package
 
 ## Templates
 

@@ -4,6 +4,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.3.6-bb.3] - 2025-05-30
+
+### Changed
+
+- Updated servicemonitors.monitoring.coreos.com with latest version
+
 ## [3.3.6-bb.2] - 2025-04-21
 
 ### Changed
