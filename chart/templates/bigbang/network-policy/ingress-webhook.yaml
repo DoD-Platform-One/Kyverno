@@ -10,10 +10,16 @@ spec:
       - ipBlock:
           cidr: 0.0.0.0/0
       ports:
-        - port: {{ .Values.kyverno.admissionController.webhookServer.port }}
+        - port: {{ .Values.upstream.admissionController.webhookServer.port }}
           protocol: TCP
   podSelector:
-    matchLabels: {{- include "kyverno.labels.merge" (list (include "kyverno.labels.common" .) (include "kyverno.admission-controller.matchLabels" .)) | nindent 8 }}
+    matchLabels:
+      {{- $version := "" | regexReplaceAll "-bb.*" .Chart.Version }}
+      {{- $labels := (include "kyverno.labels.merge" (list (include "kyverno.labels.common" .) (include "kyverno.admission-controller.matchLabels" .)) | fromYaml) }}
+      {{- $_ := set $labels "app.kubernetes.io/part-of" .Values.upstream.fullnameOverride }}
+      {{- $_ := set $labels "app.kubernetes.io/version" $version }}
+      {{- $_ := set $labels "helm.sh/chart" (printf "upstream-%s" $version) }}
+      {{- toYaml $labels | nindent 8 }}
   policyTypes:
     - Ingress
 {{- end }}

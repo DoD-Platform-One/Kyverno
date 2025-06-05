@@ -4,6 +4,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.3.6-bb.4] - 2025-06-03
+
+### Changed
+
+- Deleted test templates that are in upstream and adjusted test values so they are passed to the child chart.
+- Updated gluon from `0.5.17` to `0.6.2`
+- Swapped ubi9-minimal `9.5` image in test with busybox `v1.37.0`
+- Set upstream alias for child chart values
+- Updated networkPolicies to accomdate alias and trim bb version for pass-through
+
 ## [3.3.6-bb.3] - 2025-05-30
 
 ### Changed
