@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: kyverno
-version: 3.3.6-bb.3
+version: 3.3.6-bb.4
 appVersion: v1.13.4
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
@@ -40,8 +40,6 @@ annotations:
       image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4
     - name: kubectl
       image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.10
-    - name: ubi9-minimal
-      image: registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.5
     - name: reports-controller
       image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4
     - name: background-controller
@@ -50,6 +48,8 @@ annotations:
       image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4
     - name: kyvernocli
       image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernocli:v1.13.4
+    - name: busybox
+      image: registry1.dso.mil/ironbank/frontiertechnology/cortex/busybox:v1.37.0
   artifacthub.io/operator: "false"
   artifacthub.io/prerelease: "false"
   artifacthub.io/links: |
@@ -65,7 +65,8 @@ dependencies:
   - name: kyverno
     version: 3.3.6
     repository: https://kyverno.github.io/kyverno/
+    alias: "upstream"
   - name: gluon
-    version: 0.5.14
+    version: 0.6.2
     repository: oci://registry1.dso.mil/bigbang
 
