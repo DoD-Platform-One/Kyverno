@@ -4,6 +4,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.3.6-bb.5] - 2025-06-06
+
+### Changed
+
+- Moved crd-servicemonitor from templates directory to chart directory for helm to install it first.
+
 ## [3.3.6-bb.4] - 2025-06-03
 
 ### Changed
