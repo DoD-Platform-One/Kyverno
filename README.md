@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kyverno
 
-![Version: 3.3.6-bb.4](https://img.shields.io/badge/Version-3.3.6--bb.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.13.4](https://img.shields.io/badge/AppVersion-v1.13.4-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 3.3.6-bb.5](https://img.shields.io/badge/Version-3.3.6--bb.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.13.4](https://img.shields.io/badge/AppVersion-v1.13.4-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -50,7 +50,7 @@ helm install kyverno chart/
 | global.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | global.resyncPeriod | string | `"15m"` |  |
 | upstream.nameOverride | string | `"kyverno"` |  |
-| upstream.fullnameOverride | string | `"kyverno-kyverno"` |  |
+| upstream.fullnameOverride | string | `"kyverno"` |  |
 | upstream.namespaceOverride | string | `nil` |  |
 | upstream.upgrade.fromV2 | bool | `true` | Upgrading from v2 to v3 is not allowed by default, set this to true once changes have been reviewed. |
 | upstream.apiVersionOverride.podDisruptionBudget | string | `"policy/v1"` | Override api version used to create `PodDisruptionBudget`` resources. When not specified the chart will check if`policy/v1/PodDisruptionBudget` is available to determine the api version automatically. |
