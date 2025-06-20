@@ -29,6 +29,19 @@
     "customManagers": [
         {
             "customType": "regex",
+            "description": "Update kyverno helm chart version",
+            "fileMatch": [
+                "^chart/Chart\\.yaml$"
+            ],
+            "matchStrings": [
+                "version:\\s+(?<currentValue>.+)-bb\\.\\d+"
+            ],
+            "depNameTemplate": "kyverno",
+            "datasourceTemplate": "helm",
+            "registryUrlTemplate": "https://kyverno.github.io/kyverno/"
+        },
+        {
+            "customType": "regex",
             "fileMatch": [
                 "^chart/Chart\\.yaml$"
             ],

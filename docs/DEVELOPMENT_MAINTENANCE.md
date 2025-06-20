@@ -1,18 +1,19 @@
 
 # How to update the Kyverno Package chart
 
-Kyverno within Big Bang is a modified version of an upstream chart. `kpt` is used to handle any automatic updates from upstream. The below details the steps required to update to a new version of the Kyverno package.
+Kyverno within Big Bang is a passthrough chart that wraps the upstream kyverno helm chart. The below details the steps required to update to a new version of the Kyverno package.
 
 1. Review the upstream [changelog](https://github.com/kyverno/kyverno/blob/main/CHANGELOG.md) for potential breaking changes.
 1. Navigate to the upstream [kyverno helm chart repo](https://github.com/kyverno/kyverno/tree/main/charts/kyverno) and find the latest chart version that works with the image update. For example, if updating to 1.9.1 I would look at the [Chart.yaml](https://github.com/kyverno/kyverno/blob/main/charts/kyverno/Chart.yaml) `appVersion` field and switch through the latest git tags until I find one that matches 1.9.1. For this example that would be [`v1.9.1`](https://github.com/kyverno/kyverno/blob/v1.9.1/charts/kyverno/Chart.yaml#L5).
 1. Check out the existing `renovate/ironbank` branch created by the renovate-runner, an MR for this branch should be linked in the Renovate issue.
-1. From the top level of the repo run `kpt pkg update chart@{GIT TAG} --strategy alpha-git-patch` replacing `{GIT TAG}` with the tag you found in step one. You may run into some merge conflicts, resolve these in the way that makes the most sense. In general, if something is a BB addition you will want to keep it, otherwise go with the upstream change.
+1. Update the kyverno dependency version in `chart/Chart.yaml` to match the upstream version found in step 2 if not already updated by renovate-runner.
 1. Append `-bb.0` to the `version` in `chart/Chart.yaml`.
 1. Check for a new version of gluon prior to running helm dependency update. <https://repo1.dso.mil/big-bang/product/packages/gluon/-/tags>. If found, update the version in Chart.yaml.
 1. Run `helm dependency update` from the `./chart` directory to regenerate dependencies.
 1. Update `CHANGELOG.md` adding an entry for the new version and noting all changes (at minimum should include `Updated Kyverno to x.x.x`).
 1. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
-1. Open an MR in "Draft" status ( or the Renovate created MR ) and validate that CI passes. This will perform a number of smoke tests against the package, but it is good to manually deploy to test some things that CI doesn't. Follow the steps below for manual testing. For automated CI testing follow the steps in [test-package-against-bb](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) and modify test-values with the following settings:
+1. Open an MR in "Draft" status ( or the Renovate created MR ) and validate that CI passes. This will perform a number of smoke tests against the package, but it is good to manually deploy to test some things that CI doesn't. Follow the steps below for manual testing. 
+1. For major updates or changes that impact istio or network policies, conduct bigbang integration testing by following the steps in [test-package-against-bb](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) and modifying test-values with the following settings:
 
   ```yaml
   kyverno:
@@ -31,11 +32,28 @@ Kyverno within Big Bang is a modified version of an upstream chart. `kpt` is use
 
 NOTE: For these testing steps it is good to do them on both a clean install and an upgrade. For clean install, point kyverno to your branch. For an upgrade do an install with kyverno pointing to the latest tag, then perform a helm upgrade with kyverno pointing to your branch.
 
-You will want to install with:
+You will want to install with the following override:
 
-- Kyverno Kyverno-Policies, and Kyverno-Reporter enabled
-- Istio enabled
-- Monitoring enabled
+  ```yaml
+  istio:
+    enabled: true
+  networkPolicies:
+    enabled: true
+  monitoring:
+    enabled: true
+  kyvernoPolicies:
+    enabled: true
+  kyvernoReporter:
+    enabled: true
+  kyverno:
+    enabled: true
+    sourceType: "git"
+    git:
+      tag: null
+      repo: "https://repo1.dso.mil/big-bang/product/packages/kyverno.git"
+      path: "./chart"
+      branch: renovate/ironbank
+  ```
 
 Checking Prometheus for Kyverno dashboards
 
@@ -208,73 +226,17 @@ Checking Prometheus for Kyverno dashboards
 
 - Add Big Bang network policy templates
 
-### chart/templates/_helpers.tpl
-
-- Add `kyverno.test-labels` definition for required helm labels
-
-### chart/templates/cleanup-controller/role.yaml
-
-- Add rule for core API group on configmaps:
-
-  ```
-  - apiGroups:
-      - ''
-    resources:
-      - configmaps
-    verbs:
-      - get
-      - list
-      - watch
-  ```
-
 ### chart/templates/tests/
 
-- In each of the upstream tests, `admission-controller-liveness`, `admission-controller-metrics`, `admission-controller-readiness`, `cleanup-controller-liveness`, `cleanup-controller-metrics`, `cleanup-controller-readiness`, and `reports-controller-metrics`:
-  - Check whether `bbtests` is enabled
-
-    ```
-    {{- if dig "bbtests" "enabled" false (merge .Values dict) }}
-      ...
-    {{- end }}
-    ```
-
-  - Add `podSecurityContext` and `imagePullSecrets`
-
-    ```
-    {{- with .Values.kyverno.test.podSecurityContext }}
-    securityContext:
-      {{- tpl (toYaml .) $ | nindent 4 }}
-    {{- end }}
-    {{- with .Values.kyverno.test.imagePullSecrets }}
-    imagePullSecrets: {{ tpl (toYaml .) $ | nindent 8 }}
-    {{- end }}
-    ```
-
-  - Replace `wget` with `curl`
+- In upstream tests: 
+`admission-controller-liveness`, `admission-controller-metrics`, `admission-controller-readiness`, `cleanup-controller-liveness`, `cleanup-controller-metrics`, `cleanup-controller-readiness`, and `reports-controller-metrics`
 
 - Add Big Bang test files `clusterrole`, `clusterrolebinding`, `configmap`, `gluon`, `serviceaccount`, and `test`
 
+- in _helpers.tpl
+  - Add `kyverno.test-labels` definition for required helm labels
+
 ## `automountServiceAccountToken`
 
-The following files have been updated to manage the auto-mounting of ServiceAccount tokens and can be disabling/enabling per SA and/or deployment
+The values.yaml has been updated to manage the auto-mounting of ServiceAccount tokens and can be disabling/enabling per SA and/or deployment
 
-```
-templates/admission-controller/deployment.yaml
-templates/admission-controller/serviceaccount.yaml
-templates/background-controller/deployment.yaml
-templates/background-controller/serviceaccount.yaml
-templates/cleanup-controller/deployment.yaml
-templates/cleanup-controller/serviceaccount.yaml
-templates/cleanup/cleanup-admission-reports.yaml
-templates/cleanup/cleanup-cluster-admission-reports.yaml
-templates/cleanup/cleanup-cluster-ephemeral-reports.yaml
-templates/cleanup/cleanup-ephemeral-reports.yaml
-templates/cleanup/cleanup-update-requests.yaml
-templates/cleanup/serviceaccount.yaml
-templates/hooks/post-upgrade-clean-reports.yaml
-templates/hooks/post-upgrade-migrate-resources.yaml
-templates/hooks/pre-delete-scale-to-zero.yaml
-templates/reports-controller/deployment.yaml
-templates/reports-controller/serviceaccount.yaml
-values.yaml
-```
