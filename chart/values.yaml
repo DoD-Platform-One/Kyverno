@@ -34,7 +34,7 @@ upstream:
         registry: ~
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno/kyvernocli
-        tag: 'v1.13.4'
+        tag: 'v1.14.2'
         pullPolicy: ~
       imagePullSecrets:
         - name: private-registry
@@ -43,7 +43,7 @@ upstream:
       image:
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno/kyvernocli
-        tag: 'v1.13.4'
+        tag: 'v1.14.2'
       imagePullSecrets:
         - name: private-registry
     # -- Security context for the pod
@@ -184,7 +184,7 @@ upstream:
     image:
       registry: registry1.dso.mil
       repository: ironbank/opensource/kubernetes/kubectl
-      tag: 'v1.30.10'
+      tag: 'v1.32.5'
       pullPolicy: ~
     imagePullSecrets:
       - name: private-registry
@@ -220,7 +220,7 @@ upstream:
     image:
       registry: registry1.dso.mil
       repository: ironbank/opensource/kubernetes/kubectl
-      tag: 'v1.30.10'
+      tag: 'v1.32.5'
     imagePullSecrets:
       - name: private-registry
     podSecurityContext:
@@ -266,7 +266,7 @@ upstream:
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.30.10'
+        tag: 'v1.32.5'
       imagePullSecrets:
         - name: private-registry
       # -- Cronjob schedule
@@ -304,7 +304,7 @@ upstream:
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.30.10'
+        tag: 'v1.32.5'
         pullPolicy: ~
       # -- Image pull secrets
       imagePullSecrets:
@@ -344,7 +344,7 @@ upstream:
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.30.10'
+        tag: 'v1.32.5'
         pullPolicy: ~
       # -- Image pull secrets
       imagePullSecrets:
@@ -376,7 +376,7 @@ upstream:
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.30.10'
+        tag: 'v1.32.5'
         pullPolicy: ~
       imagePullSecrets:
         - name: private-registry
@@ -407,7 +407,7 @@ upstream:
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.30.10'
+        tag: 'v1.32.5'
         pullPolicy: ~
       imagePullSecrets:
         - name: private-registry
@@ -485,7 +485,7 @@ upstream:
         registry: ~
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno/kyvernopre
-        tag: 'v1.13.4'
+        tag: 'v1.14.2'
         pullPolicy: ~
       resources:
         # -- Pod resource limits
@@ -513,7 +513,7 @@ upstream:
       image:
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno
-        tag: 'v1.13.4'
+        tag: 'v1.14.2'
         pullPolicy: IfNotPresent
       imagePullSecrets:
         - name: private-registry
@@ -614,7 +614,7 @@ upstream:
     image:
       defaultRegistry: registry1.dso.mil
       repository: ironbank/opensource/kyverno/kyverno/background-controller
-      tag: 'v1.13.4'
+      tag: 'v1.14.2'
     imagePullSecrets:
       - name: private-registry
     podSecurityContext:
@@ -648,7 +648,7 @@ upstream:
     image:
       defaultRegistry: registry1.dso.mil
       repository: ironbank/opensource/kyverno/kyverno/cleanup-controller
-      tag: 'v1.13.4'
+      tag: 'v1.14.2'
       pullPolicy: IfNotPresent
     imagePullSecrets:
       - name: private-registry
@@ -703,7 +703,7 @@ upstream:
     image:
       defaultRegistry: registry1.dso.mil
       repository: ironbank/opensource/kyverno/kyverno/reports-controller
-      tag: 'v1.13.4'
+      tag: 'v1.14.2'
       pullPolicy: IfNotPresent
     imagePullSecrets:
       - name: private-registry
@@ -787,7 +787,7 @@ openshift: false
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.10
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5
     additionalVolumeMounts:
       - name: "kyverno-bbtest-manifest"
         mountPath: /yaml

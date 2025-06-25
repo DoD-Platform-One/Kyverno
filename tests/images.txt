@@ -1,3 +1,4 @@
-registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.5
-registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.10
+registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.6
+registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5
+registry1.dso.mil/ironbank/frontiertechnology/cortex/busybox:v1.37.0
 

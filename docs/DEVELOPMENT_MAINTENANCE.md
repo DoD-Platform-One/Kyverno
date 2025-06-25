@@ -23,7 +23,7 @@ Kyverno within Big Bang is a passthrough chart that wraps the upstream kyverno h
       tag: null
       repo: "https://repo1.dso.mil/big-bang/product/packages/kyverno.git"
       path: "./chart"
-      branch: renovate/ironbank
+      branch: "renovate/ironbank"
   ```
 
 1. Once all manual testing is complete take your MR out of "Draft" status and add the review label.
@@ -52,13 +52,36 @@ You will want to install with the following override:
       tag: null
       repo: "https://repo1.dso.mil/big-bang/product/packages/kyverno.git"
       path: "./chart"
-      branch: renovate/ironbank
+      branch: "renovate/ironbank"
+  ```
+
+Below is a sample policy:
+
+```yaml
+kyverno:
+  enabled: true
+  sourceType: "git"
+  git:
+    tag: null
+    repo: "https://repo1.dso.mil/big-bang/product/packages/kyverno.git"
+    path: "./chart"
+    branch: "renovate/ironbank"
+istioOperator:
+  enabled: true
+istio:
+  enabled: true
+kyvernoPolicies:
+  enabled: true
+kyvernoReporter:
+  enabled: true
+monitoring:
+  enabled: true
   ```
 
 Checking Prometheus for Kyverno dashboards
 
-- Login to Prometheus, validate under `Status` -> `Targets` that all kyverno controller targets are showing as up
-- Login to Grafana, then navigate to the Kyverno daskboard ( Dashboards > Browse > Kyverno Metrics ) and validate that the dashboard displays data
+- [Login](https://docs-bigbang.dso.mil/2.53.1/docs/guides/using-bigbang/default-credentials/#packages-with-no-built-in-authentication) to Prometheus, validate under `Status` -> `Targets` that all kyverno controller targets are showing as up
+- [Login](https://docs-bigbang.dso.mil/2.53.1/docs/guides/using-bigbang/default-credentials/#packages-with-no-built-in-authentication) to Grafana, then navigate to the Kyverno daskboard ( Dashboards > Browse > Kyverno Metrics ) and validate that the dashboard displays data
 
 > 📌 __NOTE__: if using MacOS make sure that you have gnu sed installed and add it to your PATH variable [GNU SED Instructions](https://gist.github.com/andre3k1/e3a1a7133fded5de5a9ee99c87c6fa0d)
 
