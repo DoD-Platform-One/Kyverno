@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kyverno
 
-![Version: 3.4.1-bb.0](https://img.shields.io/badge/Version-3.4.1--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.14.2](https://img.shields.io/badge/AppVersion-v1.14.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 3.4.4-bb.0](https://img.shields.io/badge/Version-3.4.4--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.14.4](https://img.shields.io/badge/AppVersion-v1.14.4-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -58,13 +58,13 @@ helm install kyverno chart/
 | upstream.crds.groups.image.registry | string | `nil` |  |
 | upstream.crds.groups.image.defaultRegistry | string | `"registry1.dso.mil"` |  |
 | upstream.crds.groups.image.repository | string | `"ironbank/opensource/kyverno/kyvernocli"` |  |
-| upstream.crds.groups.image.tag | string | `"v1.14.2"` |  |
+| upstream.crds.groups.image.tag | string | `"v1.14.4"` |  |
 | upstream.crds.groups.image.pullPolicy | string | `nil` |  |
 | upstream.crds.groups.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.crds.migration.enabled | bool | `true` |  |
 | upstream.crds.migration.image.defaultRegistry | string | `"registry1.dso.mil"` |  |
 | upstream.crds.migration.image.repository | string | `"ironbank/opensource/kyverno/kyvernocli"` |  |
-| upstream.crds.migration.image.tag | string | `"v1.14.2"` |  |
+| upstream.crds.migration.image.tag | string | `"v1.14.4"` |  |
 | upstream.crds.migration.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.crds.podSecurityContext | object | `{"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000,"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534,"seccompProfile":{"type":"RuntimeDefault"}}}` | Security context for the pod |
 | upstream.config.defaultRegistry | string | `"registry1.dso.mil"` |  |
@@ -177,7 +177,7 @@ helm install kyverno chart/
 | upstream.webhooksCleanup.enabled | bool | `true` | Create a helm pre-delete hook to cleanup webhooks. |
 | upstream.webhooksCleanup.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.webhooksCleanup.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.webhooksCleanup.image.tag | string | `"v1.32.5"` |  |
+| upstream.webhooksCleanup.image.tag | string | `"v1.32.6"` |  |
 | upstream.webhooksCleanup.image.pullPolicy | string | `nil` |  |
 | upstream.webhooksCleanup.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.webhooksCleanup.automountServiceAccountToken.enabled | bool | `true` |  |
@@ -200,7 +200,7 @@ helm install kyverno chart/
 | upstream.policyReportsCleanup.automountServiceAccountToken.enabled | bool | `true` |  |
 | upstream.policyReportsCleanup.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.policyReportsCleanup.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.policyReportsCleanup.image.tag | string | `"v1.32.5"` |  |
+| upstream.policyReportsCleanup.image.tag | string | `"v1.32.6"` |  |
 | upstream.policyReportsCleanup.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.policyReportsCleanup.podSecurityContext.runAsUser | int | `1001` |  |
 | upstream.policyReportsCleanup.podSecurityContext.runAsGroup | int | `1001` |  |
@@ -223,7 +223,7 @@ helm install kyverno chart/
 | upstream.cleanupJobs.admissionReports.backoffLimit | int | `3` |  |
 | upstream.cleanupJobs.admissionReports.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.cleanupJobs.admissionReports.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.cleanupJobs.admissionReports.image.tag | string | `"v1.32.5"` |  |
+| upstream.cleanupJobs.admissionReports.image.tag | string | `"v1.32.6"` |  |
 | upstream.cleanupJobs.admissionReports.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.cleanupJobs.admissionReports.schedule | string | `"*/10 * * * *"` | Cronjob schedule |
 | upstream.cleanupJobs.admissionReports.threshold | int | `10000` | Reports threshold, if number of reports are above this value the cronjob will start deleting them |
@@ -235,7 +235,7 @@ helm install kyverno chart/
 | upstream.cleanupJobs.clusterAdmissionReports.backoffLimit | int | `3` |  |
 | upstream.cleanupJobs.clusterAdmissionReports.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.cleanupJobs.clusterAdmissionReports.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.cleanupJobs.clusterAdmissionReports.image.tag | string | `"v1.32.5"` |  |
+| upstream.cleanupJobs.clusterAdmissionReports.image.tag | string | `"v1.32.6"` |  |
 | upstream.cleanupJobs.clusterAdmissionReports.image.pullPolicy | string | `nil` |  |
 | upstream.cleanupJobs.clusterAdmissionReports.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
 | upstream.cleanupJobs.clusterAdmissionReports.schedule | string | `"*/10 * * * *"` | Cronjob schedule |
@@ -249,7 +249,7 @@ helm install kyverno chart/
 | upstream.cleanupJobs.updateRequests.ttlSecondsAfterFinished | string | `""` |  |
 | upstream.cleanupJobs.updateRequests.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.cleanupJobs.updateRequests.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.cleanupJobs.updateRequests.image.tag | string | `"v1.32.5"` |  |
+| upstream.cleanupJobs.updateRequests.image.tag | string | `"v1.32.6"` |  |
 | upstream.cleanupJobs.updateRequests.image.pullPolicy | string | `nil` |  |
 | upstream.cleanupJobs.updateRequests.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
 | upstream.cleanupJobs.updateRequests.schedule | string | `"*/10 * * * *"` | Cronjob schedule |
@@ -261,7 +261,7 @@ helm install kyverno chart/
 | upstream.cleanupJobs.ephemeralReports.ttlSecondsAfterFinished | string | `""` |  |
 | upstream.cleanupJobs.ephemeralReports.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.cleanupJobs.ephemeralReports.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.cleanupJobs.ephemeralReports.image.tag | string | `"v1.32.5"` |  |
+| upstream.cleanupJobs.ephemeralReports.image.tag | string | `"v1.32.6"` |  |
 | upstream.cleanupJobs.ephemeralReports.image.pullPolicy | string | `nil` |  |
 | upstream.cleanupJobs.ephemeralReports.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.cleanupJobs.ephemeralReports.schedule | string | `"*/10 * * * *"` |  |
@@ -274,7 +274,7 @@ helm install kyverno chart/
 | upstream.cleanupJobs.clusterEphemeralReports.ttlSecondsAfterFinished | string | `""` |  |
 | upstream.cleanupJobs.clusterEphemeralReports.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.cleanupJobs.clusterEphemeralReports.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.cleanupJobs.clusterEphemeralReports.image.tag | string | `"v1.32.5"` |  |
+| upstream.cleanupJobs.clusterEphemeralReports.image.tag | string | `"v1.32.6"` |  |
 | upstream.cleanupJobs.clusterEphemeralReports.image.pullPolicy | string | `nil` |  |
 | upstream.cleanupJobs.clusterEphemeralReports.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.cleanupJobs.clusterEphemeralReports.schedule | string | `"*/10 * * * *"` | Cronjob schedule |
@@ -300,14 +300,14 @@ helm install kyverno chart/
 | upstream.admissionController.initContainer.image.registry | string | `nil` |  |
 | upstream.admissionController.initContainer.image.defaultRegistry | string | `"registry1.dso.mil"` |  |
 | upstream.admissionController.initContainer.image.repository | string | `"ironbank/opensource/kyverno/kyvernopre"` |  |
-| upstream.admissionController.initContainer.image.tag | string | `"v1.14.2"` |  |
+| upstream.admissionController.initContainer.image.tag | string | `"v1.14.4"` |  |
 | upstream.admissionController.initContainer.image.pullPolicy | string | `nil` |  |
 | upstream.admissionController.initContainer.resources.limits | object | `{"cpu":1,"memory":"1Gi"}` | Pod resource limits |
 | upstream.admissionController.initContainer.resources.requests | object | `{"cpu":"10m","memory":"64Mi"}` | Pod resource requests |
 | upstream.admissionController.initContainer.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":10001,"runAsNonRoot":true,"runAsUser":10001,"seccompProfile":{"type":"RuntimeDefault"}}` | Container security context |
 | upstream.admissionController.container.image.defaultRegistry | string | `"registry1.dso.mil"` |  |
 | upstream.admissionController.container.image.repository | string | `"ironbank/opensource/kyverno"` |  |
-| upstream.admissionController.container.image.tag | string | `"v1.14.2"` |  |
+| upstream.admissionController.container.image.tag | string | `"v1.14.4"` |  |
 | upstream.admissionController.container.image.pullPolicy | string | `"IfNotPresent"` |  |
 | upstream.admissionController.container.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.admissionController.container.resources.limits.cpu | string | `"500m"` |  |
@@ -359,7 +359,7 @@ helm install kyverno chart/
 | upstream.backgroundController.rbac.clusterRole.extraResources | list | `[{"apiGroups":["*"],"resources":["*"],"verbs":["get","list","watch"]},{"apiGroups":["*"],"resources":["secrets"],"verbs":["create","update","delete"]}]` | Extra resource permissions to add in the cluster role |
 | upstream.backgroundController.image.defaultRegistry | string | `"registry1.dso.mil"` |  |
 | upstream.backgroundController.image.repository | string | `"ironbank/opensource/kyverno/kyverno/background-controller"` |  |
-| upstream.backgroundController.image.tag | string | `"v1.14.2"` |  |
+| upstream.backgroundController.image.tag | string | `"v1.14.4"` |  |
 | upstream.backgroundController.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.backgroundController.podSecurityContext.runAsUser | int | `1000` |  |
 | upstream.backgroundController.podSecurityContext.runAsGroup | int | `1000` |  |
@@ -378,7 +378,7 @@ helm install kyverno chart/
 | upstream.cleanupController.rbac.deployment.automountServiceAccountToken.enabled | bool | `true` |  |
 | upstream.cleanupController.image.defaultRegistry | string | `"registry1.dso.mil"` |  |
 | upstream.cleanupController.image.repository | string | `"ironbank/opensource/kyverno/kyverno/cleanup-controller"` |  |
-| upstream.cleanupController.image.tag | string | `"v1.14.2"` |  |
+| upstream.cleanupController.image.tag | string | `"v1.14.4"` |  |
 | upstream.cleanupController.image.pullPolicy | string | `"IfNotPresent"` |  |
 | upstream.cleanupController.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.cleanupController.podSecurityContext.runAsUser | int | `1000` |  |
@@ -397,7 +397,7 @@ helm install kyverno chart/
 | upstream.reportsController.rbac.clusterRole.extraResources | list | `[{"apiGroups":["*"],"resources":["*"],"verbs":["get","list","watch"]}]` | Extra resource permissions to add in the cluster role |
 | upstream.reportsController.image.defaultRegistry | string | `"registry1.dso.mil"` |  |
 | upstream.reportsController.image.repository | string | `"ironbank/opensource/kyverno/kyverno/reports-controller"` |  |
-| upstream.reportsController.image.tag | string | `"v1.14.2"` |  |
+| upstream.reportsController.image.tag | string | `"v1.14.4"` |  |
 | upstream.reportsController.image.pullPolicy | string | `"IfNotPresent"` |  |
 | upstream.reportsController.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.reportsController.podSecurityContext.runAsUser | int | `1000` |  |
@@ -430,7 +430,7 @@ helm install kyverno chart/
 | istio.enabled | bool | `false` |  |
 | openshift | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |
-| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"` |  |
+| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.6"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].name | string | `"kyverno-bbtest-manifest"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/yaml"` |  |
 | bbtests.scripts.additionalVolumes[0].name | string | `"kyverno-bbtest-manifest"` |  |
