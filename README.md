@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kyverno
 
-![Version: 3.4.4-bb.0](https://img.shields.io/badge/Version-3.4.4--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.14.4](https://img.shields.io/badge/AppVersion-v1.14.4-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 3.4.4-bb.1](https://img.shields.io/badge/Version-3.4.4--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.14.4](https://img.shields.io/badge/AppVersion-v1.14.4-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -30,7 +30,7 @@ Kubernetes: `>=1.25.0-0`
 
 Install Helm
 
-<https://helm.sh/docs/intro/install/>
+https://helm.sh/docs/intro/install/
 
 ## Deployment
 
@@ -53,7 +53,7 @@ helm install kyverno chart/
 | upstream.fullnameOverride | string | `"kyverno"` |  |
 | upstream.namespaceOverride | string | `nil` |  |
 | upstream.upgrade.fromV2 | bool | `true` | Upgrading from v2 to v3 is not allowed by default, set this to true once changes have been reviewed. |
-| upstream.apiVersionOverride.podDisruptionBudget | string | `"policy/v1"` | Override api version used to create `PodDisruptionBudget`` resources. When not specified the chart will check if`policy/v1/PodDisruptionBudget` is available to determine the api version automatically. |
+| upstream.apiVersionOverride.podDisruptionBudget | string | `"policy/v1"` | Override api version used to create `PodDisruptionBudget`` resources. When not specified the chart will check if `policy/v1/PodDisruptionBudget` is available to determine the api version automatically. |
 | upstream.crds.install | bool | `true` |  |
 | upstream.crds.groups.image.registry | string | `nil` |  |
 | upstream.crds.groups.image.defaultRegistry | string | `"registry1.dso.mil"` |  |
@@ -177,7 +177,7 @@ helm install kyverno chart/
 | upstream.webhooksCleanup.enabled | bool | `true` | Create a helm pre-delete hook to cleanup webhooks. |
 | upstream.webhooksCleanup.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.webhooksCleanup.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.webhooksCleanup.image.tag | string | `"v1.32.6"` |  |
+| upstream.webhooksCleanup.image.tag | string | `"v1.32.7"` |  |
 | upstream.webhooksCleanup.image.pullPolicy | string | `nil` |  |
 | upstream.webhooksCleanup.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.webhooksCleanup.automountServiceAccountToken.enabled | bool | `true` |  |
@@ -200,7 +200,7 @@ helm install kyverno chart/
 | upstream.policyReportsCleanup.automountServiceAccountToken.enabled | bool | `true` |  |
 | upstream.policyReportsCleanup.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.policyReportsCleanup.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.policyReportsCleanup.image.tag | string | `"v1.32.6"` |  |
+| upstream.policyReportsCleanup.image.tag | string | `"v1.32.7"` |  |
 | upstream.policyReportsCleanup.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.policyReportsCleanup.podSecurityContext.runAsUser | int | `1001` |  |
 | upstream.policyReportsCleanup.podSecurityContext.runAsGroup | int | `1001` |  |
@@ -223,7 +223,7 @@ helm install kyverno chart/
 | upstream.cleanupJobs.admissionReports.backoffLimit | int | `3` |  |
 | upstream.cleanupJobs.admissionReports.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.cleanupJobs.admissionReports.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.cleanupJobs.admissionReports.image.tag | string | `"v1.32.6"` |  |
+| upstream.cleanupJobs.admissionReports.image.tag | string | `"v1.32.7"` |  |
 | upstream.cleanupJobs.admissionReports.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.cleanupJobs.admissionReports.schedule | string | `"*/10 * * * *"` | Cronjob schedule |
 | upstream.cleanupJobs.admissionReports.threshold | int | `10000` | Reports threshold, if number of reports are above this value the cronjob will start deleting them |
@@ -235,7 +235,7 @@ helm install kyverno chart/
 | upstream.cleanupJobs.clusterAdmissionReports.backoffLimit | int | `3` |  |
 | upstream.cleanupJobs.clusterAdmissionReports.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.cleanupJobs.clusterAdmissionReports.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.cleanupJobs.clusterAdmissionReports.image.tag | string | `"v1.32.6"` |  |
+| upstream.cleanupJobs.clusterAdmissionReports.image.tag | string | `"v1.32.7"` |  |
 | upstream.cleanupJobs.clusterAdmissionReports.image.pullPolicy | string | `nil` |  |
 | upstream.cleanupJobs.clusterAdmissionReports.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
 | upstream.cleanupJobs.clusterAdmissionReports.schedule | string | `"*/10 * * * *"` | Cronjob schedule |
@@ -249,7 +249,7 @@ helm install kyverno chart/
 | upstream.cleanupJobs.updateRequests.ttlSecondsAfterFinished | string | `""` |  |
 | upstream.cleanupJobs.updateRequests.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.cleanupJobs.updateRequests.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.cleanupJobs.updateRequests.image.tag | string | `"v1.32.6"` |  |
+| upstream.cleanupJobs.updateRequests.image.tag | string | `"v1.32.7"` |  |
 | upstream.cleanupJobs.updateRequests.image.pullPolicy | string | `nil` |  |
 | upstream.cleanupJobs.updateRequests.imagePullSecrets | list | `[{"name":"private-registry"}]` | Image pull secrets |
 | upstream.cleanupJobs.updateRequests.schedule | string | `"*/10 * * * *"` | Cronjob schedule |
@@ -261,7 +261,7 @@ helm install kyverno chart/
 | upstream.cleanupJobs.ephemeralReports.ttlSecondsAfterFinished | string | `""` |  |
 | upstream.cleanupJobs.ephemeralReports.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.cleanupJobs.ephemeralReports.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.cleanupJobs.ephemeralReports.image.tag | string | `"v1.32.6"` |  |
+| upstream.cleanupJobs.ephemeralReports.image.tag | string | `"v1.32.7"` |  |
 | upstream.cleanupJobs.ephemeralReports.image.pullPolicy | string | `nil` |  |
 | upstream.cleanupJobs.ephemeralReports.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.cleanupJobs.ephemeralReports.schedule | string | `"*/10 * * * *"` |  |
@@ -274,7 +274,7 @@ helm install kyverno chart/
 | upstream.cleanupJobs.clusterEphemeralReports.ttlSecondsAfterFinished | string | `""` |  |
 | upstream.cleanupJobs.clusterEphemeralReports.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.cleanupJobs.clusterEphemeralReports.image.repository | string | `"ironbank/opensource/kubernetes/kubectl"` |  |
-| upstream.cleanupJobs.clusterEphemeralReports.image.tag | string | `"v1.32.6"` |  |
+| upstream.cleanupJobs.clusterEphemeralReports.image.tag | string | `"v1.32.7"` |  |
 | upstream.cleanupJobs.clusterEphemeralReports.image.pullPolicy | string | `nil` |  |
 | upstream.cleanupJobs.clusterEphemeralReports.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.cleanupJobs.clusterEphemeralReports.schedule | string | `"*/10 * * * *"` | Cronjob schedule |
@@ -430,7 +430,7 @@ helm install kyverno chart/
 | istio.enabled | bool | `false` |  |
 | openshift | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |
-| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.6"` |  |
+| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.7"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].name | string | `"kyverno-bbtest-manifest"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/yaml"` |  |
 | bbtests.scripts.additionalVolumes[0].name | string | `"kyverno-bbtest-manifest"` |  |
@@ -443,3 +443,4 @@ Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in 
 ---
 
 _This file is programatically generated using `helm-docs` and some BigBang-specific templates. The `gluon` repository has [instructions for regenerating package READMEs](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md)._
+

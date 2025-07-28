@@ -184,7 +184,7 @@ upstream:
     image:
       registry: registry1.dso.mil
       repository: ironbank/opensource/kubernetes/kubectl
-      tag: 'v1.32.6'
+      tag: 'v1.32.7'
       pullPolicy: ~
     imagePullSecrets:
       - name: private-registry
@@ -220,7 +220,7 @@ upstream:
     image:
       registry: registry1.dso.mil
       repository: ironbank/opensource/kubernetes/kubectl
-      tag: 'v1.32.6'
+      tag: 'v1.32.7'
     imagePullSecrets:
       - name: private-registry
     podSecurityContext:
@@ -266,7 +266,7 @@ upstream:
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.32.6'
+        tag: 'v1.32.7'
       imagePullSecrets:
         - name: private-registry
       # -- Cronjob schedule
@@ -304,7 +304,7 @@ upstream:
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.32.6'
+        tag: 'v1.32.7'
         pullPolicy: ~
       # -- Image pull secrets
       imagePullSecrets:
@@ -344,7 +344,7 @@ upstream:
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.32.6'
+        tag: 'v1.32.7'
         pullPolicy: ~
       # -- Image pull secrets
       imagePullSecrets:
@@ -376,7 +376,7 @@ upstream:
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.32.6'
+        tag: 'v1.32.7'
         pullPolicy: ~
       imagePullSecrets:
         - name: private-registry
@@ -407,7 +407,7 @@ upstream:
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.32.6'
+        tag: 'v1.32.7'
         pullPolicy: ~
       imagePullSecrets:
         - name: private-registry
@@ -787,7 +787,7 @@ openshift: false
 bbtests:
   enabled: false
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.6
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.7
     additionalVolumeMounts:
       - name: "kyverno-bbtest-manifest"
         mountPath: /yaml
