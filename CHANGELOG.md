@@ -3,6 +3,12 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.4.4-bb.1] - 2025-07-24
+
+### Changed
+
+- Updated `kubectl` from `v1.32.6` to `v1.32.7`
+
 ## [3.4.1-bb.0] - 2025-07-10
 
 ### Changed
