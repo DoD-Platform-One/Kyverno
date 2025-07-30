@@ -3,6 +3,12 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.4.4-bb.2] - 2025-07-29
+
+### Removed
+
+- Removed crds/crd-servicemonitors.yaml as this CRD is now created by the prometheus-operator-crds chart
+
 ## [3.4.4-bb.1] - 2025-07-24
 
 ### Changed
