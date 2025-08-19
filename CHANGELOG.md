@@ -3,6 +3,12 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+## [3.4.4-bb.3] - 2025-08-19
+
+### Removed
+
+- Removed promtail from test/test-values.yaml
+
 ## [3.4.4-bb.2] - 2025-07-29
 
 ### Removed
