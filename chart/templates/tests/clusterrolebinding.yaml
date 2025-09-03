@@ -13,6 +13,6 @@ roleRef:
   name: {{ include "kyverno.name" . }}-bbtest-role
 subjects:
 - kind: ServiceAccount
-  name: {{ include "kyverno.name" . }}-script-sa
+  name: {{ include "kyverno.fullname" . }}-script-sa
   namespace: {{ .Release.Namespace }}
 {{- end }}
