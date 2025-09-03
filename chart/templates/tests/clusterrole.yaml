@@ -22,4 +22,5 @@ rules:
   - delete
   - get
   - list
+  - watch
 {{- end }}

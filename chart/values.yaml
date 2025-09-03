@@ -1,4 +1,33 @@
-# -- Internal settings used with `helm template` to generate install manifest
+## Bigbang Additions
+networkPolicies:
+  enabled: false
+  # See `kubectl cluster-info` and then resolve to IP
+  controlPlaneCidr: 0.0.0.0/0
+  # Required if the container registry exists must be accessed over the internet
+  externalRegistries:
+    allowEgress: false
+    ports: []
+    # ports:
+    # - port: 1234
+    #   protocol: TCP
+  allowExternalRegistryEgress: false
+  additionalPolicies: []
+istio:
+  enabled: false
+openshift: false
+bbtests:
+  enabled: false
+  scripts:
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33.4
+    additionalVolumeMounts:
+      - name: "kyverno-bbtest-manifest"
+        mountPath: /yaml
+    additionalVolumes:
+      - name: "kyverno-bbtest-manifest"
+        configMap:
+          name: "kyverno-bbtest-manifest"
+
+# Kyverno Chart Values
 # @ignored
 templating:
   enabled: false
@@ -34,7 +63,7 @@ upstream:
         registry: ~
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno/kyvernocli
-        tag: 'v1.14.4'
+        tag: 'v1.15.1'
         pullPolicy: ~
       imagePullSecrets:
         - name: private-registry
@@ -43,7 +72,7 @@ upstream:
       image:
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno/kyvernocli
-        tag: 'v1.14.4'
+        tag: 'v1.15.1'
       imagePullSecrets:
         - name: private-registry
     # -- Security context for the pod
@@ -184,12 +213,11 @@ upstream:
     image:
       registry: registry1.dso.mil
       repository: ironbank/opensource/kubernetes/kubectl
-      tag: 'v1.32.7'
+      tag: 'v1.33.4'
       pullPolicy: ~
     imagePullSecrets:
       - name: private-registry
-    automountServiceAccountToken:
-      enabled: true
+    automountServiceAccountToken: true
     podSecurityContext:
       runAsUser: 1001
       runAsGroup: 1001
@@ -215,12 +243,11 @@ upstream:
         memory: "256Mi"
   policyReportsCleanup:
     enabled: false
-    automountServiceAccountToken:
-      enabled: true
+    automountServiceAccountToken: true
     image:
       registry: registry1.dso.mil
       repository: ironbank/opensource/kubernetes/kubectl
-      tag: 'v1.32.7'
+      tag: 'v1.33.4'
     imagePullSecrets:
       - name: private-registry
     podSecurityContext:
@@ -256,17 +283,15 @@ upstream:
   cleanupJobs:
     rbac:
       serviceAccount:
-        automountServiceAccountToken:
-          enabled: false
+        automountServiceAccountToken: false
     admissionReports:
       enabled: true
-      automountServiceAccountToken:
-        enabled: true
+      automountServiceAccountToken: true
       backoffLimit: 3
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.32.7'
+        tag: 'v1.33.4'
       imagePullSecrets:
         - name: private-registry
       # -- Cronjob schedule
@@ -298,13 +323,12 @@ upstream:
     clusterAdmissionReports:
       # -- Enable cleanup cronjob
       enabled: true
-      automountServiceAccountToken:
-        enabled: true
+      automountServiceAccountToken: true
       backoffLimit: 3
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.32.7'
+        tag: 'v1.33.4'
         pullPolicy: ~
       # -- Image pull secrets
       imagePullSecrets:
@@ -337,14 +361,13 @@ upstream:
           type: RuntimeDefault
     updateRequests:
       enabled: true
-      automountServiceAccountToken:
-        enabled: true
+      automountServiceAccountToken: true
       backoffLimit: 3
       ttlSecondsAfterFinished: ""
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.32.7'
+        tag: 'v1.33.4'
         pullPolicy: ~
       # -- Image pull secrets
       imagePullSecrets:
@@ -369,14 +392,13 @@ upstream:
           type: RuntimeDefault
     ephemeralReports:
       enabled: true
-      automountServiceAccountToken:
-        enabled: true
+      automountServiceAccountToken: true
       backoffLimit: 3
       ttlSecondsAfterFinished: ""
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.32.7'
+        tag: 'v1.33.4'
         pullPolicy: ~
       imagePullSecrets:
         - name: private-registry
@@ -400,14 +422,13 @@ upstream:
           type: RuntimeDefault
     clusterEphemeralReports:
       enabled: true
-      automountServiceAccountToken:
-        enabled: true
+      automountServiceAccountToken: true
       backoffLimit: 3
       ttlSecondsAfterFinished: ""
       image:
         registry: registry1.dso.mil
         repository: ironbank/opensource/kubernetes/kubectl
-        tag: 'v1.32.7'
+        tag: 'v1.33.4'
         pullPolicy: ~
       imagePullSecrets:
         - name: private-registry
@@ -440,11 +461,9 @@ upstream:
   admissionController:
     rbac:
       serviceAccount:
-        automountServiceAccountToken:
-          enabled: false
+        automountServiceAccountToken: true
       deployment:
-        automountServiceAccountToken:
-          enabled: true
+        automountServiceAccountToken: true
       coreClusterRole:
         extraResources:
           - apiGroups:
@@ -485,7 +504,7 @@ upstream:
         registry: ~
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno/kyvernopre
-        tag: 'v1.14.4'
+        tag: 'v1.15.1'
         pullPolicy: ~
       resources:
         # -- Pod resource limits
@@ -513,7 +532,7 @@ upstream:
       image:
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno
-        tag: 'v1.14.4'
+        tag: 'v1.15.1'
         pullPolicy: IfNotPresent
       imagePullSecrets:
         - name: private-registry
@@ -542,12 +561,10 @@ upstream:
     rbac:
       create: true
       serviceAccount:
-        automountServiceAccountToken:
-          enabled: false
+        automountServiceAccountToken: false
       deployment:
         # disable mounting serviceAccount token to the pods
-        automountServiceAccountToken:
-          enabled: true
+        automountServiceAccountToken: true
       coreClusterRole:
         extraResources:
           - apiGroups:
@@ -614,7 +631,7 @@ upstream:
     image:
       defaultRegistry: registry1.dso.mil
       repository: ironbank/opensource/kyverno/kyverno/background-controller
-      tag: 'v1.14.4'
+      tag: 'v1.15.1'
     imagePullSecrets:
       - name: private-registry
     podSecurityContext:
@@ -638,17 +655,15 @@ upstream:
     rbac:
       create: true
       serviceAccount:
-        automountServiceAccountToken:
-          enabled: false
+        automountServiceAccountToken: false
       deployment:
         # disable mounting serviceAccount token to the pods
-        automountServiceAccountToken:
-          enabled: true
+        automountServiceAccountToken: true
 
     image:
       defaultRegistry: registry1.dso.mil
       repository: ironbank/opensource/kyverno/kyverno/cleanup-controller
-      tag: 'v1.14.4'
+      tag: 'v1.15.1'
       pullPolicy: IfNotPresent
     imagePullSecrets:
       - name: private-registry
@@ -674,11 +689,9 @@ upstream:
     rbac:
       create: true
       serviceAccount:
-        automountServiceAccountToken:
-          enabled: false
+        automountServiceAccountToken: false
       deployment:
-        automountServiceAccountToken:
-          enabled: true
+        automountServiceAccountToken: true
       coreClusterRole:
         extraResources:
           - apiGroups:
@@ -703,7 +716,7 @@ upstream:
     image:
       defaultRegistry: registry1.dso.mil
       repository: ironbank/opensource/kyverno/kyverno/reports-controller
-      tag: 'v1.14.4'
+      tag: 'v1.15.1'
       pullPolicy: IfNotPresent
     imagePullSecrets:
       - name: private-registry
@@ -763,37 +776,5 @@ upstream:
       seccompProfile:
         type: RuntimeDefault
 
-## Bigbang Additions
-
-## Use serviceMonitor instead
-# monitoring:
-#   enabled: false
-networkPolicies:
-  enabled: false
-  # See `kubectl cluster-info` and then resolve to IP
-  controlPlaneCidr: 0.0.0.0/0
-  # Required if the container registry exists must be accessed over the internet
-  externalRegistries:
-    allowEgress: false
-    ports: []
-    # ports:
-    # - port: 1234
-    #   protocol: TCP
-  allowExternalRegistryEgress: false
-  additionalPolicies: []
-istio:
-  enabled: false
-openshift: false
-bbtests:
-  enabled: false
-  scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.7
-    additionalVolumeMounts:
-      - name: "kyverno-bbtest-manifest"
-        mountPath: /yaml
-    additionalVolumes:
-      - name: "kyverno-bbtest-manifest"
-        configMap:
-          name: "kyverno-bbtest-manifest"
 
 

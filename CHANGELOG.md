@@ -3,6 +3,16 @@
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
+
+## [3.5.1-bb.0] - 2025-09-01
+
+### Removed
+
+- Updated app version from `3.4.4-bb.3` to `3.5.1-bb.0`
+- Updated `background-controller`, `cleanup-controller`, `reports-controller`, `kyverno`, `kyvernocli`, `kyvernopre` from `v1.14.4` to `v1.15.1`
+- Removed value key under automountservicetoken value to be just a boolean
+- Shifted values so that bigbang values are on top to match with pass-through ADR
+
 ## [3.4.4-bb.3] - 2025-08-19
 
 ### Removed
@@ -37,6 +47,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Updated `background-controller`, `cleanup-controller`, `reports-controller`, `kyverno`, `kyvernocli`, `kyvernopre` from `v1.13.4` to `v1.14.2`
 - Updated `kubectl` from `v1.30.10` to `v1.32.5`
 - Updated `ubi9-minimal` from `9.5` to `9.6`
+
 ## [3.3.6-bb.5] - 2025-06-06
 
 ### Changed
