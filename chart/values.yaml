@@ -43,6 +43,10 @@ global:
     imagePullSecrets:
       - name: private-registry
     resyncPeriod: 15m
+
+# -- Values to pass to [the upstream kyverno chart](https://github.com/kyverno/kyverno/blob/main/charts/kyverno/values.yaml)
+# @default -- Upstream chart values
+
 upstream:
   nameOverride: kyverno
   fullnameOverride: kyverno
