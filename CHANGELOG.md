@@ -4,6 +4,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.5.2-bb.0] - 2025-10-06
+
+### Removed
+
+- Updated app version from `3.5.1-bb.0` to `3.5.2-bb.0`
+- Update gluon from `0.8.4` to `0.9.2`
+- Updated kubectl from `v1.33.4` to `v1.33.5`
+
 ## [3.5.1-bb.0] - 2025-09-01
 
 ### Removed
