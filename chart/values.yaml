@@ -27,13 +27,6 @@ bbtests:
         configMap:
           name: "kyverno-bbtest-manifest"
 
-# Kyverno Chart Values
-# @ignored
-templating:
-  enabled: false
-  debug: false
-  version: ~
-
 global:
     image:
       # -- (string) Global value that allows to set a single image registry across all deployments.
@@ -43,6 +36,10 @@ global:
     imagePullSecrets:
       - name: private-registry
     resyncPeriod: 15m
+    templating:
+      enabled: false
+      debug: false
+      version: ~
 
 # -- Values to pass to [the upstream kyverno chart](https://github.com/kyverno/kyverno/blob/main/charts/kyverno/values.yaml)
 # @default -- Upstream chart values
@@ -67,7 +64,7 @@ upstream:
         registry: ~
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno/kyvernocli
-        tag: 'v1.15.2'
+        tag: 'v1.16.0'
         pullPolicy: ~
       imagePullSecrets:
         - name: private-registry
@@ -76,7 +73,7 @@ upstream:
       image:
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno/kyvernocli
-        tag: 'v1.15.2'
+        tag: 'v1.16.0'
       imagePullSecrets:
         - name: private-registry
     # -- Security context for the pod
@@ -508,7 +505,7 @@ upstream:
         registry: ~
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno/kyvernopre
-        tag: 'v1.15.2'
+        tag: 'v1.16.0'
         pullPolicy: ~
       resources:
         # -- Pod resource limits
@@ -536,7 +533,7 @@ upstream:
       image:
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno
-        tag: 'v1.15.2'
+        tag: 'v1.16.0'
         pullPolicy: IfNotPresent
       imagePullSecrets:
         - name: private-registry
@@ -635,7 +632,7 @@ upstream:
     image:
       defaultRegistry: registry1.dso.mil
       repository: ironbank/opensource/kyverno/kyverno/background-controller
-      tag: 'v1.15.2'
+      tag: 'v1.16.0'
     imagePullSecrets:
       - name: private-registry
     podSecurityContext:
@@ -667,7 +664,7 @@ upstream:
     image:
       defaultRegistry: registry1.dso.mil
       repository: ironbank/opensource/kyverno/kyverno/cleanup-controller
-      tag: 'v1.15.2'
+      tag: 'v1.16.0'
       pullPolicy: IfNotPresent
     imagePullSecrets:
       - name: private-registry
@@ -720,7 +717,7 @@ upstream:
     image:
       defaultRegistry: registry1.dso.mil
       repository: ironbank/opensource/kyverno/kyverno/reports-controller
-      tag: 'v1.15.2'
+      tag: 'v1.16.0'
       pullPolicy: IfNotPresent
     imagePullSecrets:
       - name: private-registry
