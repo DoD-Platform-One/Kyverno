@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kyverno
 
-![Version: 3.6.0-bb.0](https://img.shields.io/badge/Version-3.6.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.16.0](https://img.shields.io/badge/AppVersion-v1.16.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 3.6.0-bb.1](https://img.shields.io/badge/Version-3.6.0--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.16.0](https://img.shields.io/badge/AppVersion-v1.16.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -30,7 +30,7 @@ Kubernetes: `>=1.25.0-0`
 
 Install Helm
 
-<https://helm.sh/docs/intro/install/>
+https://helm.sh/docs/intro/install/
 
 ## Deployment
 
@@ -47,6 +47,7 @@ helm install kyverno chart/
 |-----|------|---------|-------------|
 | networkPolicies.enabled | bool | `false` |  |
 | networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
+| networkPolicies.vpcCidr | string | `"0.0.0.0/0"` |  |
 | networkPolicies.externalRegistries.allowEgress | bool | `false` |  |
 | networkPolicies.externalRegistries.ports | list | `[]` |  |
 | networkPolicies.allowExternalRegistryEgress | bool | `false` |  |
@@ -63,9 +64,12 @@ helm install kyverno chart/
 | global.image.pullPolicy | string | `"IfNotPresent"` |  |
 | global.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | global.resyncPeriod | string | `"15m"` |  |
+| global.templating.enabled | bool | `false` |  |
+| global.templating.debug | bool | `false` |  |
+| global.templating.version | string | `nil` |  |
 | upstream | object | Upstream chart values | Values to pass to [the upstream kyverno chart](https://github.com/kyverno/kyverno/blob/main/charts/kyverno/values.yaml) |
 | upstream.upgrade.fromV2 | bool | `true` | Upgrading from v2 to v3 is not allowed by default, set this to true once changes have been reviewed. |
-| upstream.apiVersionOverride.podDisruptionBudget | string | `"policy/v1"` | Override api version used to create `PodDisruptionBudget`` resources. When not specified the chart will check if`policy/v1/PodDisruptionBudget` is available to determine the api version automatically. |
+| upstream.apiVersionOverride.podDisruptionBudget | string | `"policy/v1"` | Override api version used to create `PodDisruptionBudget` resources. When not specified the chart will check if `policy/v1/PodDisruptionBudget` is available to determine the api version automatically. |
 | upstream.crds.podSecurityContext | object | `{"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000,"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534,"seccompProfile":{"type":"RuntimeDefault"}}}` | Security context for the pod |
 | upstream.existingImagePullSecrets | list | `["private-registry"]` | Existing Image pull secrets for image verification policies, this will define the `--imagePullSecrets` argument |
 | upstream.webhooksCleanup.enabled | bool | `true` | Create a helm pre-delete hook to cleanup webhooks. |
@@ -115,3 +119,4 @@ Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in 
 ---
 
 _This file is programatically generated using `helm-docs` and some BigBang-specific templates. The `gluon` repository has [instructions for regenerating package READMEs](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md)._
+
