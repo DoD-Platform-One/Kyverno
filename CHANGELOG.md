@@ -4,6 +4,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.6.0-bb.0] (2025-11-10)
+
+### Changed
+
+- Updated app version from `3.5.2-bb.0` to `3.6.0-bb.0`
+- Updated `background-controller`, `cleanup-controller`, `reports-controller`, `kyverno`, `kyvernocli`, `kyvernopre` from  `v1.15.2` to `v1.16.0`
+- Updated gluon from `v0.9.2` to `v0.9.6`
+
 ## [3.5.2-bb.0] - 2025-10-06
 
 ### Removed
