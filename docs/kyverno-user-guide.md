@@ -10,7 +10,7 @@ This document does not address Kyverno architecture and how it works.  For more 
 
 ## What are policies
 
-A Kyverno policy is simply a collection of rules.  These rules are enforced by Kyverno - a policy engine for Kubernetes - using a kubernetes native concept called [admission control](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/).  Policies contain a match and an optional exclude declaration that can be either scoped to a namespace or cluster wide.  This [link](https://kyverno.io/docs/kyverno-policies/) provides more insight into the anatomy of a policy.
+A Kyverno policy is simply a collection of rules.  These rules are enforced by Kyverno - a policy engine for Kubernetes - using a kubernetes native concept called [admission control](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/).  Policies contain a match and an optional exclude declaration that can be either scoped to a namespace or cluster wide.  This [link](https://kyverno.io/docs/policy-types/cluster-policy/policy-rules/) provides more insight into the anatomy of a policy.
 
 ## Bigbang implementation of policies
 
@@ -96,4 +96,3 @@ These are some helpful links in gathering more information about Kyverno
 - [Kubernetes-Native Policy Management With Kyverno](https://www.youtube.com/watch?v=DREjzfTzNpA)
 - [Kyverno in Production (use cases and best practices)](https://www.youtube.com/watch?v=QR-iBeh9Vy0)
 - [Replacing PSPs? Keep Bad Pods out of your cluster using Kyverno!- Shuting Zhao, Nirmata](https://www.youtube.com/watch?v=AmJUFH7n33c&t=27s)
-- [Policy As Code on Kubernetes With Kyverno](https://betterprogramming.pub/policy-as-code-on-kubernetes-with-kyverno-b144749f144)
