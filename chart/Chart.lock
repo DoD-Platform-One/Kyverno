@@ -1,9 +1,9 @@
 dependencies:
 - name: kyverno
   repository: https://kyverno.github.io/kyverno/
-  version: 3.6.0
+  version: 3.6.1
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
-  version: 0.9.6
-digest: sha256:df54d49aa0c0ee3c30ccbfd4f4148def5a59133b34c79a8c1b340b6a94479840
-generated: "2025-11-12T15:01:06.305163-05:00"
+  version: 0.9.7
+digest: sha256:4aa747a1c32366841fd5c096326e2b4e7047436c99ef3a5c3b429863d7134b27
+generated: "2025-12-08T12:06:02.931224667-05:00"
