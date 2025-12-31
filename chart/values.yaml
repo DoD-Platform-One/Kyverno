@@ -1,17 +1,69 @@
 ## Bigbang Additions
 networkPolicies:
   enabled: false
-  # See `kubectl cluster-info` and then resolve to IP
-  controlPlaneCidr: 0.0.0.0/0
-  vpcCidr: 0.0.0.0/0
-  # Required if the container registry exists must be accessed over the internet
+  ingress:
+    defaults:
+      allowPrometheusToIstioSidecar:
+        enabled: false # Disabled as Kyverno is not in the service mesh
+    definitions:
+      kubeAPI:
+        from:
+          - ipBlock:
+              cidr: 192.168.0.0/16
+          - ipBlock:
+              cidr: 172.16.0.0/12
+          - ipBlock:
+              cidr: 10.0.0.0/8
+    to:
+      kyverno-admission-controller:9443:
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/component: admission-controller
+        from:
+          definition:
+            kubeAPI: true
+      kyverno:8000:
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/instance: kyverno-kyverno
+        from:
+          k8s:
+            monitoring/prometheus: true
+  egress:
+    defaults:
+      allowIstiod:
+        enabled: false  # Disabled as Kyverno is not in the service mesh
+    definitions:
+      private-registry:
+        to:
+          - ipBlock:
+              cidr: "15.205.173.153/32"
+        ports:
+          - port: 443
+            protocol: TCP
+    from:
+      kyverno-admission-controller:
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/component: admission-controller
+        to:
+          definition:
+            private-registry: true
+            kubeAPI: true
+      kyverno-migrate-resources:
+        podSelector:
+          matchLabels:
+            batch.kubernetes.io/job-name: kyverno-kyverno-migrate-resources
+        to:
+          definition:
+            kubeAPI: true
+  # -- This section will be deprecated in the next major release in favor of the bb-common definition
   externalRegistries:
     allowEgress: false
     ports: []
     # ports:
     # - port: 1234
     #   protocol: TCP
-  allowExternalRegistryEgress: false
   additionalPolicies: []
 istio:
   enabled: false
@@ -53,7 +105,7 @@ upstream:
     # -- Upgrading from v2 to v3 is not allowed by default, set this to true once changes have been reviewed.
     fromV2: true
   apiVersionOverride:
-    # -- (string) Override api version used to create `PodDisruptionBudget`` resources.
+    # -- (string) Override api version used to create `PodDisruptionBudget` resources.
     # When not specified the chart will check if `policy/v1/PodDisruptionBudget` is available to
     # determine the api version automatically.
     podDisruptionBudget: policy/v1
