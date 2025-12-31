@@ -80,8 +80,8 @@ monitoring:
 
 Checking Prometheus for Kyverno dashboards
 
-- [Login](https://docs-bigbang.dso.mil/2.53.1/docs/guides/using-bigbang/default-credentials/#packages-with-no-built-in-authentication) to Prometheus, validate under `Status` -> `Targets` that all kyverno controller targets are showing as up
-- [Login](https://docs-bigbang.dso.mil/2.53.1/docs/guides/using-bigbang/default-credentials/#packages-with-no-built-in-authentication) to Grafana, then navigate to the Kyverno daskboard ( Dashboards > Browse > Kyverno Metrics ) and validate that the dashboard displays data
+- [Login](https://docs-bigbang.dso.mil/latest/docs/configuration/default-credentials/#packages-with-no-built-in-authentication) to Prometheus, validate under `Status` -> `Targets` that all kyverno controller targets are showing as up
+- [Login](https://docs-bigbang.dso.mil/latest/docs/configuration/default-credentials/#packages-with-built-in-authentication) to Grafana, then navigate to the Kyverno daskboard ( Dashboards > Browse > Kyverno Metrics ) and validate that the dashboard displays data
 
 > 📌 __NOTE__: if using MacOS make sure that you have gnu sed installed and add it to your PATH variable [GNU SED Instructions](https://gist.github.com/andre3k1/e3a1a7133fded5de5a9ee99c87c6fa0d)
 

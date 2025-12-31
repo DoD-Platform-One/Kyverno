@@ -4,12 +4,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.6.1-bb.1] (2025-12-19)
+### Changed
+
+- Added bb-common 0.12.0 as a helm dependency
+- Replaced all network policies with bb-common generated network policies
+
 ## [3.6.1-bb.0] (2025-12-05)
 ### Changed
 
 - Updated chart version `3.6.0` -> `3.6.1` and app version from `v1.16.0` -> `v1.16.1`
 - Updated gluon from `v0.9.6` to `v0.9.7`
-- Updated ironbank/opensource/kyverno `v1.16.0` -> `v1.16.1` 
+- Updated ironbank/opensource/kyverno `v1.16.0` -> `v1.16.1`
 - Updated ironbank/opensource/kyverno/kyverno/background-controller `v1.16.0` -> `v1.16.1`
 - Updated ironbank/opensource/kyverno/kyverno/cleanup-controller `v1.16.0` -> `v1.16.1`
 - Updated ironbank/opensource/kyverno/kyverno/reports-controller `v1.16.0` -> `v1.16.1`
@@ -18,7 +24,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Updated ironbank/opensource/kubernetes/kubectl `v1.33.5` -> `v1.34.2`
 - Updated ironbank/opensource/kyverno `v1.16.0` -> `v1.16.1`
 - Updated ironbank/opensource/kyverno/kyverno/background-controller `v1.16.0` -> `v1.16.1`
-- Updated ironbank/opensource/kyverno/kyverno/cleanup-controller `v1.16.0` -> `v1.16.1` 
+- Updated ironbank/opensource/kyverno/kyverno/cleanup-controller `v1.16.0` -> `v1.16.1`
 - Updated dead links in docs
 
 ## [3.6.0-bb.1] (2025-11-13)

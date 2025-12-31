@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kyverno
 
-![Version: 3.6.1-bb.0](https://img.shields.io/badge/Version-3.6.1--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.16.1](https://img.shields.io/badge/AppVersion-v1.16.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 3.6.1-bb.1](https://img.shields.io/badge/Version-3.6.1--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.16.1](https://img.shields.io/badge/AppVersion-v1.16.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -46,11 +46,22 @@ helm install kyverno chart/
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | networkPolicies.enabled | bool | `false` |  |
-| networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
-| networkPolicies.vpcCidr | string | `"0.0.0.0/0"` |  |
-| networkPolicies.externalRegistries.allowEgress | bool | `false` |  |
-| networkPolicies.externalRegistries.ports | list | `[]` |  |
-| networkPolicies.allowExternalRegistryEgress | bool | `false` |  |
+| networkPolicies.ingress.defaults.allowPrometheusToIstioSidecar.enabled | bool | `false` |  |
+| networkPolicies.ingress.definitions.kubeAPI.from[0].ipBlock.cidr | string | `"192.168.0.0/16"` |  |
+| networkPolicies.ingress.definitions.kubeAPI.from[1].ipBlock.cidr | string | `"172.16.0.0/12"` |  |
+| networkPolicies.ingress.definitions.kubeAPI.from[2].ipBlock.cidr | string | `"10.0.0.0/8"` |  |
+| networkPolicies.ingress.to.kyverno-admission-controller:9443.podSelector.matchLabels."app.kubernetes.io/component" | string | `"admission-controller"` |  |
+| networkPolicies.ingress.to.kyverno-admission-controller:9443.from.definition.kubeAPI | bool | `true` |  |
+| networkPolicies.ingress.to.kyverno:8000.podSelector.matchLabels."app.kubernetes.io/instance" | string | `"kyverno-kyverno"` |  |
+| networkPolicies.ingress.to.kyverno:8000.from.k8s.monitoring/prometheus | bool | `true` |  |
+| networkPolicies.egress.defaults.allowIstiod.enabled | bool | `false` |  |
+| networkPolicies.egress.definitions.private-registry.to[0].ipBlock.cidr | string | `"15.205.173.153/32"` |  |
+| networkPolicies.egress.definitions.private-registry.ports[0].port | int | `443` |  |
+| networkPolicies.egress.definitions.private-registry.ports[0].protocol | string | `"TCP"` |  |
+| networkPolicies.egress.from.kyverno-admission-controller.podSelector.matchLabels."app.kubernetes.io/component" | string | `"admission-controller"` |  |
+| networkPolicies.egress.from.kyverno-admission-controller.to.definition.private-registry | bool | `true` |  |
+| networkPolicies.egress.from.kyverno-admission-controller.to.definition.kubeAPI | bool | `true` |  |
+| networkPolicies.externalRegistries | object | `{"allowEgress":false,"ports":[]}` | This section will be deprecated in the next major release in favor of the bb-common definition |
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | istio.enabled | bool | `false` |  |
 | openshift | bool | `false` |  |
@@ -69,7 +80,7 @@ helm install kyverno chart/
 | global.templating.version | string | `nil` |  |
 | upstream | object | Upstream chart values | Values to pass to [the upstream kyverno chart](https://github.com/kyverno/kyverno/blob/main/charts/kyverno/values.yaml) |
 | upstream.upgrade.fromV2 | bool | `true` | Upgrading from v2 to v3 is not allowed by default, set this to true once changes have been reviewed. |
-| upstream.apiVersionOverride.podDisruptionBudget | string | `"policy/v1"` | Override api version used to create `PodDisruptionBudget`` resources. When not specified the chart will check if `policy/v1/PodDisruptionBudget` is available to determine the api version automatically. |
+| upstream.apiVersionOverride.podDisruptionBudget | string | `"policy/v1"` | Override api version used to create `PodDisruptionBudget` resources. When not specified the chart will check if `policy/v1/PodDisruptionBudget` is available to determine the api version automatically. |
 | upstream.crds.podSecurityContext | object | `{"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000,"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":true,"runAsGroup":65534,"runAsNonRoot":true,"runAsUser":65534,"seccompProfile":{"type":"RuntimeDefault"}}}` | Security context for the pod |
 | upstream.existingImagePullSecrets | list | `["private-registry"]` | Existing Image pull secrets for image verification policies, this will define the `--imagePullSecrets` argument |
 | upstream.webhooksCleanup.enabled | bool | `true` | Create a helm pre-delete hook to cleanup webhooks. |
