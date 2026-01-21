@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kyverno
 
-![Version: 3.6.1-bb.1](https://img.shields.io/badge/Version-3.6.1--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.16.1](https://img.shields.io/badge/AppVersion-v1.16.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 3.6.2-bb.0](https://img.shields.io/badge/Version-3.6.2--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.16.2](https://img.shields.io/badge/AppVersion-v1.16.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kubernetes Native Policy Management
 
@@ -61,12 +61,14 @@ helm install kyverno chart/
 | networkPolicies.egress.from.kyverno-admission-controller.podSelector.matchLabels."app.kubernetes.io/component" | string | `"admission-controller"` |  |
 | networkPolicies.egress.from.kyverno-admission-controller.to.definition.private-registry | bool | `true` |  |
 | networkPolicies.egress.from.kyverno-admission-controller.to.definition.kubeAPI | bool | `true` |  |
+| networkPolicies.egress.from.kyverno-migrate-resources.podSelector.matchLabels."batch.kubernetes.io/job-name" | string | `"kyverno-kyverno-migrate-resources"` |  |
+| networkPolicies.egress.from.kyverno-migrate-resources.to.definition.kubeAPI | bool | `true` |  |
 | networkPolicies.externalRegistries | object | `{"allowEgress":false,"ports":[]}` | This section will be deprecated in the next major release in favor of the bb-common definition |
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | istio.enabled | bool | `false` |  |
 | openshift | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |
-| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.34.2"` |  |
+| bbtests.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.34.3"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].name | string | `"kyverno-bbtest-manifest"` |  |
 | bbtests.scripts.additionalVolumeMounts[0].mountPath | string | `"/yaml"` |  |
 | bbtests.scripts.additionalVolumes[0].name | string | `"kyverno-bbtest-manifest"` |  |
