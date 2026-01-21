@@ -38,9 +38,6 @@ Apply helm upgrade using the following BigBang Helm Chart values:
 ```
 gatekeeper:
   enabled: false
-
-clusterAuditor:
-  enabled: false
 ```
 
 Note that when gatekeeper is disabled using the helm upgrade process, the Gatekeeper webhook (gatekeeper-validating-webhook-configuration), Gatekeeper CRDs, Gatekeeper Constraint CRDs along with any constraint resources are also removed automatically.
