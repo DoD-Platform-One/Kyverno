@@ -76,7 +76,7 @@ policies:
     parameters: {}
 ```
 
-> In Big Bang, you would set these values using `kyverno-policies.values.policies`
+> In Big Bang, you would set these values using `kyvernoPolicies.values.policies`
 
 ## Workflow on adoption
 
