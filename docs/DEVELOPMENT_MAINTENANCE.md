@@ -13,7 +13,7 @@ Kyverno within Big Bang is a passthrough chart that wraps the upstream kyverno h
 1. Update `CHANGELOG.md` adding an entry for the new version and noting all changes (at minimum should include `Updated Kyverno to x.x.x`).
 1. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
 1. Open an MR in "Draft" status ( or the Renovate created MR ) and validate that CI passes. This will perform a number of smoke tests against the package, but it is good to manually deploy to test some things that CI doesn't. Follow the steps below for manual testing. 
-1. For major updates or changes that impact istio or network policies, conduct bigbang integration testing by following the steps in [test-package-against-bb](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) and modifying test-values with the following settings:
+1. For major updates or changes that impact istio or network policies, conduct bigbang integration testing by following the steps in [test-package-against-bb](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/community/development/test-package-against-bb.md) and modifying test-values with the following settings:
 
   ```yaml
   kyverno:
