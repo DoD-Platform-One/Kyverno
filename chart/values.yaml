@@ -117,7 +117,7 @@ upstream:
         registry: ~
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno/kyvernocli
-        tag: 'v1.16.2'
+        tag: 'v1.16.3'
         pullPolicy: ~
       imagePullSecrets:
         - name: private-registry
@@ -126,7 +126,7 @@ upstream:
       image:
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno/kyvernocli
-        tag: 'v1.16.2'
+        tag: 'v1.16.3'
       imagePullSecrets:
         - name: private-registry
     # -- Security context for the pod
@@ -558,7 +558,7 @@ upstream:
         registry: ~
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno/kyvernopre
-        tag: 'v1.16.2'
+        tag: 'v1.16.3'
         pullPolicy: ~
       resources:
         # -- Pod resource limits
@@ -586,7 +586,7 @@ upstream:
       image:
         defaultRegistry: registry1.dso.mil
         repository: ironbank/opensource/kyverno
-        tag: 'v1.16.2'
+        tag: 'v1.16.3'
         pullPolicy: IfNotPresent
       imagePullSecrets:
         - name: private-registry
@@ -685,7 +685,7 @@ upstream:
     image:
       defaultRegistry: registry1.dso.mil
       repository: ironbank/opensource/kyverno/kyverno/background-controller
-      tag: 'v1.16.2'
+      tag: 'v1.16.3'
     imagePullSecrets:
       - name: private-registry
     podSecurityContext:
@@ -717,7 +717,7 @@ upstream:
     image:
       defaultRegistry: registry1.dso.mil
       repository: ironbank/opensource/kyverno/kyverno/cleanup-controller
-      tag: 'v1.16.2'
+      tag: 'v1.16.3'
       pullPolicy: IfNotPresent
     imagePullSecrets:
       - name: private-registry
@@ -770,7 +770,7 @@ upstream:
     image:
       defaultRegistry: registry1.dso.mil
       repository: ironbank/opensource/kyverno/kyverno/reports-controller
-      tag: 'v1.16.2'
+      tag: 'v1.16.3'
       pullPolicy: IfNotPresent
     imagePullSecrets:
       - name: private-registry

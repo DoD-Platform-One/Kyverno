@@ -1,8 +1,8 @@
 apiVersion: v2
 type: application
 name: kyverno
-version: 3.6.2-bb.0
-appVersion: v1.16.2
+version: 3.6.2-bb.1
+appVersion: v1.16.3
 icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
 description: Kubernetes Native Policy Management
 keywords:
@@ -31,23 +31,23 @@ annotations:
       - [and our upstream application release notes here](https://github.com/kyverno/kyverno/releases)
   bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/applicationVersions: |
-    - Kyverno: v1.16.2
+    - Kyverno: v1.16.3
   # Kubectl image is used if webhooksCleanup.enable or bbtests.enabled
   helm.sh/images: |
     - name: kyverno
-      image: registry1.dso.mil/ironbank/opensource/kyverno:v1.16.2
+      image: registry1.dso.mil/ironbank/opensource/kyverno:v1.16.3
     - name: kyvernopre
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.16.2
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.16.3
     - name: kubectl
       image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.34.3
     - name: reports-controller
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.16.2
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.16.3
     - name: background-controller
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.16.2
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.16.3
     - name: cleanup-controller
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.16.2
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.16.3
     - name: kyvernocli
-      image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernocli:v1.16.2
+      image: registry1.dso.mil/ironbank/opensource/kyverno/kyvernocli:v1.16.3
     - name: busybox
       image: registry1.dso.mil/ironbank/frontiertechnology/cortex/busybox:v1.37.0
   artifacthub.io/operator: "false"
