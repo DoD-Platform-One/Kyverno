@@ -4,6 +4,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.7.0-bb.0] (2026-02-04)
+### Changed
+
+- Updated chart version `3.6.2` -> `3.7.0` and app version from `v1.16.3` -> `v1.17.0`
+- Updated bb-common from `0.12.0` -> `0.14.0`
+- Updated ironbank/opensource/kyverno `v1.16.3` -> `v1.17.0`
+- Updated ironbank/opensource/kyverno/kyverno/background-controller `v1.16.3` -> `v1.17.0`
+- Updated ironbank/opensource/kyverno/kyverno/cleanup-controller `v1.16.3` -> `v1.17.0`
+- Updated ironbank/opensource/kyverno/kyverno/reports-controller `v1.16.3` -> `v1.17.0`
+- Updated ironbank/opensource/kyverno/kyvernocli `v1.16.3` -> `v1.17.0`
+- Updated ironbank/opensource/kyverno/kyvernopre `v1.16.3` -> `v1.17.0`
+
 ## [3.6.2-bb.1] (2026-01-27)
 ### Changed
 
