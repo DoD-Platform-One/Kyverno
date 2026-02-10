@@ -4,6 +4,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.7.0-bb.1] (2026-02-10)
+### Changed
+
+- Use kyverno's new readiness-checker image for helm tests.
+
 ## [3.7.0-bb.0] (2026-02-04)
 ### Changed
 

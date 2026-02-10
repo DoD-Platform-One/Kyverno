@@ -797,8 +797,8 @@ upstream:
     sleep: 20
     image:
       registry: registry1.dso.mil
-      repository: ironbank/frontiertechnology/cortex/busybox
-      tag: 'v1.37.0'
+      repository: ironbank/opensource/kyverno/kyverno/readiness-checker
+      tag: 'v0.1.0'
       pullPolicy: ~
     imagePullSecrets:
       - name: private-registry
