@@ -1,85 +1,107 @@
 {
-    "baseBranches": [
-        "main"
-    ],
-    "configWarningReuseIssue": false,
-    "dependencyDashboard": true,
-    "dependencyDashboardTitle": "Renovate: Upgrade Kyverno Images",
-    "draftPR": true,
-    "enabledManagers": [
-        "helm-values",
-        "custom.regex"
-    ],
-    "ignorePaths": [
-        "chart/charts/**"
-    ],
-    "labels": [
-        "kyverno",
-        "renovate"
-    ],
-    "commitMessagePrefix": "SKIP UPDATE CHECK",
-    "packageRules": [
-        {
-            "matchDatasources": [
-                "docker"
-            ],
-            "groupName": "Ironbank",
-            "registryUrls": [
-                "https://registry1.dso.mil"
-            ],
-            "postUpgradeTasks": {
-                "commands": [
-                    "bump-chart-yaml",
-                    "regenerate-helm-docs",
-                    "bump-changelog '- {{{replace 'registry1.dso.mil/' '' depName}}} updated from {{{currentVersion}}} to {{{newVersion}}}'"
-                    ],
-                    "fileFilters": [
-                    "chart/Chart.yaml",
-                    "README.md",
-                    "CHANGELOG.md"
-                ]
-            }
-        }
-    ],
-    "customManagers": [
-        {
-            "customType": "regex",
-            "description": "Update kyverno helm chart version",
-            "managerFilePatterns": [
-                "/^chart/Chart\\.yaml$/"
-            ],
-            "matchStrings": [
-                "version:\\s+(?<currentValue>.+)-bb\\.\\d+"
-            ],
-            "depNameTemplate": "kyverno",
-            "datasourceTemplate": "helm",
-            "registryUrlTemplate": "https://kyverno.github.io/kyverno/"
-        },
-        {
-            "customType": "regex",
-            "managerFilePatterns": [
-                "/^chart/Chart\\.yaml$/"
-            ],
-            "matchStrings": [
-                "appVersion:\\s+(?<currentValue>.+)",
-                "- Kyverno:\\s+(?<currentValue>.+)"
-            ],
-            "depNameTemplate": "registry1.dso.mil/ironbank/opensource/kyverno",
-            "datasourceTemplate": "docker"
-        },
-        {
-            "customType": "regex",
-            "managerFilePatterns": [
-                "/^chart/Chart\\.yaml$/"
-            ],
-            "matchStrings": [
-                "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
-            ],
-            "datasourceTemplate": "docker"
-        }
-    ],
-    "separateMajorMinor": false,
-    "postUpdateOptions": [
-        "helmUpdateSubChartArchives"
-    ]
+  "baseBranches": [
+    "main"
+  ],
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate: Update Kyverno Dependencies",
+  "draftPR": true,
+  "labels": [
+    "kyverno",
+    "renovate",
+    "kind::maintenance"
+  ],
+  "enabledManagers": [
+    "custom.regex",
+    "helmv3"
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "docker",
+        "helm"
+      ],
+      "groupName": "Kyverno",
+      "postUpgradeTasks": {
+        "commands": [
+          "bump-chart-yaml",
+          "bump-changelog '{{#each upgrades}}- {{depName}} {{currentVersion}} -> {{newVersion}}\\n{{/each}}'",
+          "regenerate-helm-docs"
+        ],
+        "fileFilters": [
+          "chart/Chart.yaml",
+          "README.md",
+          "CHANGELOG.md"
+        ],
+        "executionMode": "branch"
+      }
+    }
+  ],
+  "separateMajorMinor": false,
+  "postUpdateOptions": [
+    "helmUpdateSubChartArchives"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update kyverno helm chart version in Chart.yaml",
+      "managerFilePatterns": [
+        "/^chart/Chart\\.yaml$/"
+      ],
+      "matchStrings": [
+        "version:\\s+(?<currentValue>.+)-bb\\.\\d+"
+      ],
+      "autoReplaceStringTemplate": "version: {{{newValue}}}-bb.0",
+      "depNameTemplate": "kyverno",
+      "datasourceTemplate": "helm",
+      "registryUrlTemplate": "https://kyverno.github.io/kyverno/"
+    },
+    {
+      "customType": "regex",
+      "description": "Update kyverno app version in Chart.yaml",
+      "managerFilePatterns": [
+        "/^chart/Chart\\.yaml$/"
+      ],
+      "matchStrings": [
+        "appVersion:\\s+(?<currentValue>.+)",
+        "- Kyverno:\\s+(?<currentValue>.+)"
+      ],
+      "depNameTemplate": "registry1.dso.mil/ironbank/opensource/kyverno",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update images list in Chart.yaml",
+      "managerFilePatterns": [
+        "/^chart/Chart\\.yaml$/"
+      ],
+      "matchStrings": [
+        "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
+      ],
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update image tags in values.yaml (registry/repository/tag pattern)",
+      "managerFilePatterns": [
+        "/^chart/values\\.yaml$/"
+      ],
+      "matchStrings": [
+        "registry:\\s+(?<registry>[^\\s#~][^\\s#]*)\\n\\s+repository:\\s+(?<repository>[^\\s#]+)\\n\\s+tag:\\s+'?(?<currentValue>[^'\\s]+)'?",
+        "defaultRegistry:\\s+(?<registry>[^\\s#~][^\\s#]*)\\n\\s+repository:\\s+(?<repository>[^\\s#]+)\\n\\s+tag:\\s+'?(?<currentValue>[^'\\s]+)'?"
+      ],
+      "depNameTemplate": "{{{registry}}}/{{{repository}}}",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update inline image references in values.yaml (image: registry/repo:tag)",
+      "managerFilePatterns": [
+        "/^chart/values\\.yaml$/"
+      ],
+      "matchStrings": [
+        "image:\\s+(?<depName>[^\\s:]+):(?<currentValue>[^\\s]+)"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ]
 }
