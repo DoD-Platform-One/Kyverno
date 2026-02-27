@@ -4,6 +4,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [3.7.1-bb.0] (2026-02-25)
+### Changed
+- bb-common 0.14.0 -> 0.14.1
+- gluon 0.9.7 -> 0.9.8
+- kyverno 3.7.0 -> 3.7.1
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.34.3 -> v1.34.4
+- registry1.dso.mil/ironbank/opensource/kyverno v1.17.0 -> v1.17.1
+- registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller v1.17.0 -> v1.17.1
+- registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller v1.17.0 -> v1.17.1
+- registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller v1.17.0 -> v1.17.1
+- registry1.dso.mil/ironbank/opensource/kyverno/kyvernocli v1.17.0 -> v1.17.1
+- registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre v1.17.0 -> v1.17.1
+
 ## [3.7.0-bb.1] (2026-02-10)
 ### Changed
 
